@@ -1,5 +1,5 @@
 //LOGIN VIEW
-package login.view;
+package view;
 
 import java.awt.EventQueue;
 import java.awt.Image;
@@ -57,6 +57,7 @@ public class LoginView extends JFrame {
 		setSize(1040, 740);
 		Image logo = new ImageIcon(LoginView.class.getResource("/assets/tea-logo.png")).getImage();
 		this.setIconImage(logo);
+		
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
@@ -79,6 +80,7 @@ public class LoginView extends JFrame {
 		lblNewLabel_2.setFont(new Font("SansSerif", Font.BOLD, 24));
 		lblNewLabel_2.setBounds(545, 34, 448, 86);
 		contentPane.add(lblNewLabel_2);
+		
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(null);
@@ -86,7 +88,8 @@ public class LoginView extends JFrame {
 		panel_1.setBounds(545, 156, 448, 433);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
-
+		
+		// text dang nhap 
 		JLabel lblNewLabel_3 = new JLabel("ĐĂNG NHẬP");
 		lblNewLabel_3.setBounds(0, 0, 448, 156);
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
@@ -143,6 +146,8 @@ public class LoginView extends JFrame {
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_4.setBounds(754, 668, 262, 25);
 		contentPane.add(lblNewLabel_4);
+		
+	
 
 	}
 }

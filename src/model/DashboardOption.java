@@ -34,10 +34,8 @@ public class DashboardOption {
 		ImageIcon scaledIcon = new ImageIcon(scaledImage);
 
 		// Sử dụng biểu tượng mới để hiển thị hình ảnh đã thay đổi kích thước
-		JLabel label = new JLabel(scaledIcon);
 		
 		this.jLabelOption = new JLabel(text, scaledIcon, JLabel.LEFT);
-		
 		this.jPanelOption = jPanelOption; 
 
 	}

@@ -11,7 +11,7 @@ public class CustomerView extends JPanel {
 	 * Create the panel.
 	 */
 	public CustomerView() {
-		JLabel customerLabel = new JLabel("CUSTOMER");
+		JLabel customerLabel = new JLabel("CUSTOMER VIEW");
 		add(customerLabel); 
 	}
 

@@ -20,7 +20,7 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
 import model.InventoryModel;
-import test.ItemDetail;
+import view.ItemDetail;
 
 import javax.swing.border.EmptyBorder;
 import javax.swing.JDesktopPane;
@@ -44,10 +44,7 @@ public class InvetoryView extends JPanel {
 		add(jLabel_inventory);
 		// Tạo nút thêm
 		JButton jbutton_addItem = new JButton("+");
-		jbutton_addItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		
 		jbutton_addItem.setBorder(null);
 		jbutton_addItem.setBackground(new Color(205, 133, 63));
 		jbutton_addItem.setForeground(new Color(248, 248, 255));
@@ -77,15 +74,15 @@ public class InvetoryView extends JPanel {
 		// đổi màu chữ và nền cho cột bảng
 		JTableHeader head = jtable_Item.getTableHeader();
 		head.setBackground(new Color(245, 222, 179));
-		head.setForeground(new Color(248, 248, 255));
+		head.setForeground(Color.BLACK);
 		head.setFont(new Font("Tahome", Font.BOLD, 15));
 
 		// tạo trang Thêm mặt hàng
 		JDesktopPane desktopPane = new JDesktopPane();
-		desktopPane.setBounds(212, 259, 420, 520);
+		desktopPane.setBounds(227, 259, 420, 434);
+		desktopPane.setBackground(new Color(245, 222, 179));
 		add(desktopPane);
 		jbutton_addItem.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub

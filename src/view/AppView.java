@@ -11,7 +11,6 @@ import model.DashboardOption;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
@@ -21,14 +20,12 @@ import javax.swing.SwingConstants;
 
 import constant.ConstantValueView;
 
-import javax.swing.JTextField;
-
 public class AppView extends JFrame {
 
 	private JPanel contentPane;
 	ArrayList<DashboardOption> optionList = new ArrayList<>();
 	public AppController appController;
-	public static JPanel root;
+	JPanel root;
 
 	/**
 	 * Launch the application.
@@ -38,6 +35,8 @@ public class AppView extends JFrame {
 			public void run() {
 				try {
 					AppView frame = new AppView();
+					AppController.appJFrame = frame;
+					AppController.root = frame.root; 
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,7 +48,7 @@ public class AppView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-
+	
 	public AppView() {
 		getContentPane().setLayout(new BorderLayout(0, 0));
 
@@ -92,7 +91,7 @@ public class AppView extends JFrame {
 
 		DashboardOption homeOption = new DashboardOption("HOME", "/assets/home.png", new HomeView(this));
 		DashboardOption menuOption = new DashboardOption("MENU", "/assets/menu.png", new CustomerView());
-		DashboardOption invetoryOption = new DashboardOption("INVETORY", "/assets/collection.png", new CustomerView());
+		DashboardOption invetoryOption = new DashboardOption("INVETORY", "/assets/collection.png", new InventoryView());
 		DashboardOption ordersOption = new DashboardOption("ORDERS", "/assets/shopping-cart.png", new CustomerView());
 		DashboardOption customerOption = new DashboardOption("CUSTOMER", "/assets/customer.png", new CustomerView());
 		DashboardOption employeeOption = new DashboardOption("EMPLOYEE", "/assets/users.png", new CustomerView());
@@ -111,6 +110,7 @@ public class AppView extends JFrame {
 		optionList.add(discountOption);
 
 		appController = new AppController(root);
+		root.setLayout(new GridLayout()); 
 
 		appController.setView(homeOption);
 		appController.setEvent(optionList);
@@ -124,6 +124,7 @@ public class AppView extends JFrame {
 		panel_options.add(statisticReportOption.getjLabelOption());
 		panel_options.add(discountOption.getjLabelOption());
 
+		
 		// Logout
 		JPanel panel_logout = new JPanel();
 		panel_logout.setBounds(10, 585, 180, 95);
@@ -139,4 +140,6 @@ public class AppView extends JFrame {
 		
 
 	}
+
+	
 }

@@ -1,17 +1,19 @@
 package controller;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import java.util.List;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import model.DashboardOption;
 
 public class AppController {
-	private JPanel root;
+	public static JFrame appJFrame; 
+	public static  JPanel root;
 	private String optionSelectedText;
 	private List<DashboardOption> listItem = null;
 
@@ -59,8 +61,11 @@ public class AppController {
 			node = optionItem.getjPanelOption();
 			optionSelectedText = optionText;
 			root.removeAll();
+			root.setLayout(new GridLayout());
 			setView(optionItem);
 			setChangeBackground(optionText);
+			root.validate();
+			root.repaint();
 		}
 
 		@Override

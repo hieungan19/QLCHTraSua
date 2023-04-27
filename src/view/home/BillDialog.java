@@ -1,4 +1,4 @@
-package diaglog;
+package view.home;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -9,7 +9,6 @@ import javax.swing.border.EmptyBorder;
 
 import globalComponent.AppButton;
 import globalComponent.AppLabel;
-import view.home.DrinkScrollPaneTable;
 
 import java.awt.GridLayout;
 import javax.swing.SwingConstants;

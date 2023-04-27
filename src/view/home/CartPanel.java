@@ -3,8 +3,6 @@ package view.home;
 import javax.swing.JPanel;
 
 import constant.ConstantValueView;
-import diaglog.BillDialog;
-import diaglog.ChooseDrinkDialog;
 import globalComponent.AppButton;
 import globalComponent.AppLabel;
 import globalComponent.AppTextField;

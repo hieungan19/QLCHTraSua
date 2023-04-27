@@ -1,4 +1,4 @@
-package diaglog;
+package view.home;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;

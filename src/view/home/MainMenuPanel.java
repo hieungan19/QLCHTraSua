@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import constant.ConstantValueView;
-import diaglog.ChooseDrinkDialog;
 import model.DrinkModel;
 
 import javax.swing.ScrollPaneConstants;

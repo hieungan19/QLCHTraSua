@@ -1,4 +1,4 @@
-package diaglog;
+package view.home;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -15,7 +15,6 @@ import javax.swing.border.EmptyBorder;
 import globalComponent.AppButton;
 import globalComponent.AppTextField;
 import model.DrinkModel;
-import view.home.DrinkCardComponent;
 
 public class ChooseDrinkDialog extends JDialog {
 

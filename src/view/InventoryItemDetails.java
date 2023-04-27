@@ -221,7 +221,7 @@ public class InventoryItemDetails extends JPanel {
 				panel_dialog.add(label_dialog);
 				panel_dialog.add(panel_buttons);
 
-				dialog.add(panel_dialog);
+				dialog.getContentPane().add(panel_dialog);
 				dialog.pack();
 				dialog.setVisible(true);
 			}

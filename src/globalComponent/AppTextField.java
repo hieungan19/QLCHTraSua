@@ -1,19 +1,14 @@
 package globalComponent;
 
-import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 
 import constant.ConstantValueView;
 
 public class AppTextField extends JTextField{
-	
-	
-   
 	public AppTextField(String text) {
 	
 		Font font = new Font("Arial", Font.PLAIN, 16);

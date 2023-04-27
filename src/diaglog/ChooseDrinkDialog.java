@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-import component.DrinkCardComponentView;
+import component.DrinkCardComponent;
 import globalComponent.AppButton;
 import globalComponent.AppTextField;
 import model.DrinkModel;
@@ -39,7 +39,7 @@ public class ChooseDrinkDialog extends JDialog {
 			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 			lblNewLabel.setBounds(203, 135, 68, 15);
 			getContentPane().add(lblNewLabel);
-			DrinkCardComponentView drinkImageCard = new DrinkCardComponentView(drinkModel);
+			DrinkCardComponent drinkImageCard = new DrinkCardComponent(drinkModel);
 			drinkImageCard.setBounds(10, 10, 166, 223);
 			
 			getContentPane().add(drinkImageCard); 

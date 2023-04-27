@@ -82,14 +82,14 @@ public class AppView extends JFrame {
 
 		// HOME Option
 
-		DashboardOption homeOption = new DashboardOption("HOME", "/assets/home.png", new HomeView(this));
+		DashboardOption homeOption = new DashboardOption("HOME", "/assets/home.png", new HomePageView());
 		DashboardOption menuOption = new DashboardOption("MENU", "/assets/menu.png", new CustomerView());
 		DashboardOption invetoryOption = new DashboardOption("INVETORY", "/assets/collection.png", new InventoryView());
 		DashboardOption ordersOption = new DashboardOption("ORDERS", "/assets/shopping-cart.png", new CustomerView());
 		DashboardOption customerOption = new DashboardOption("CUSTOMER", "/assets/customer.png", new CustomerView());
-		DashboardOption employeeOption = new DashboardOption("EMPLOYEE", "/assets/users.png", new CustomerView());
+		DashboardOption employeeOption = new DashboardOption("EMPLOYEE", "/assets/users.png", new EmployeePageView());
 		DashboardOption statisticReportOption = new DashboardOption("STATISTIC REPORT", "/assets/chart-pie.png",
-				new HomeView(this));
+				new HomePageView());
 		DashboardOption discountOption = new DashboardOption("DISCOUNT", "/assets/ticket.png", new CustomerView());
 
 		optionList.add(homeOption);
@@ -122,7 +122,7 @@ public class AppView extends JFrame {
 		JPanel panel_logout = new JPanel();
 		panel_logout.setBounds(10, 585, 180, 95);
 		panel_dashboard.add(panel_logout);
-		JLabel jLabel_logoutOption = new DashboardOption("LOG OUT", "/assets/logout.png", new HomeView(this))
+		JLabel jLabel_logoutOption = new DashboardOption("LOG OUT", "/assets/logout.png", new HomePageView())
 				.getjLabelOption();
 		panel_dashboard.add(jLabel_logoutOption);
 		panel_logout.add(jLabel_logoutOption);

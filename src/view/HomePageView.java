@@ -8,7 +8,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JFrame;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import component.DrinkCardComponentView;
+import component.DrinkCardComponent;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -26,17 +26,17 @@ import java.awt.BorderLayout;
 import java.awt.Rectangle;
 import java.awt.Color;
 
-public class HomeView extends JPanel {
+public class HomePageView extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public HomeView(JFrame root) {
+	public HomePageView() {
 		this.setPreferredSize(new Dimension(840, 740));
 		this.setBackground(ConstantValueView.background);
 		//cart 
 		JPanel panel_bill = new JPanel();
-		CartPanel cart = new CartPanel(root); 
+		CartPanel cart = new CartPanel(); 
 		cart.setBounds(0, 0, 351, 730);
 		panel_bill.setBackground(ConstantValueView.primaryColor);
 		

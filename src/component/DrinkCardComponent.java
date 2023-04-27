@@ -4,32 +4,28 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import model.DrinkModel;
 import javax.swing.SwingConstants;
-
 import constant.ConstantValueView;
-
 import java.awt.GridLayout;
 import java.awt.SystemColor;
 import java.awt.Font;
 
-public class DrinkCardComponentView extends JPanel {
+public class DrinkCardComponent extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
 	private DrinkModel data; 
-	public DrinkCardComponentView(DrinkModel drink) {
+	public DrinkCardComponent(DrinkModel drink) {
 		this.data = drink; 
 		this.setPreferredSize(new Dimension(150, 180));
 		this.setLayout(new BorderLayout(10,10));
 		this.setBackground(ConstantValueView.primaryColor);
 		
-		ImageIcon imgIcon = new ImageIcon(DrinkCardComponentView.class.getResource(drink.getImageUri()));
+		ImageIcon imgIcon = new ImageIcon(DrinkCardComponent.class.getResource(drink.getImageUri()));
 		Image image = imgIcon.getImage();
 		Image scaledImage = image.getScaledInstance(130,150 , Image.SCALE_SMOOTH);
 		ImageIcon scaledIcon = new ImageIcon(scaledImage);
@@ -60,14 +56,4 @@ public class DrinkCardComponentView extends JPanel {
 		
 	}
 	
-	
-	public static void main(String[] args) {
-        JFrame frame = new JFrame("My Panel");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        DrinkModel dummy = new DrinkModel("D01", "Tra sua Olong",20000 , "Tra sua","/assets/bg-login.png", null, null); 
-        frame.getContentPane().add(new DrinkCardComponentView(dummy));
-        frame.pack();
-        frame.setVisible(true);
-    }
-
 }

@@ -1,12 +1,15 @@
 package view;
 
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import component.DrinkCardComponentView;
+import component.DrinkCardComponent;
 import constant.ConstantValueView;
+import diaglog.ChooseDrinkDialog;
 import model.DrinkModel;
 import javax.swing.ScrollPaneConstants;
 
@@ -27,7 +30,43 @@ public class MainMenuPanel extends JPanel {
 		panel.setOpaque(false);
 		DrinkModel dummy = new DrinkModel("D01", "Tra sua Olong",20000 ,false,"/assets/bg-login.png", null,"Trà sữa", null);
 		for (int i =0; i<10; ++i) {
-			panel.add(new DrinkCardComponentView(dummy));
+			DrinkCardComponent drinkCardComponent = new DrinkCardComponent(dummy);
+			drinkCardComponent.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					// TODO Auto-generated method stub
+					ChooseDrinkDialog dialog = new ChooseDrinkDialog(dummy);
+					dialog.setVisible(true);
+					
+				}
+			}); 
+			panel.add(drinkCardComponent);
+			
 		}
 
 		panel.revalidate();

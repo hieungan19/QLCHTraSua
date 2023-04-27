@@ -30,7 +30,7 @@ public class CartPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public CartPanel(JFrame root) {
+	public CartPanel() {
 		this.setOpaque(false);
 		
 		JPanel panel = new JPanel();

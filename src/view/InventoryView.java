@@ -2,37 +2,35 @@ package view;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
-import java.awt.Component;
-import javax.swing.Box;
-import javax.swing.table.DefaultTableCellRenderer;
+
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
 
+import controller.AppController;
 import model.InventoryModel;
-import view.ItemDetail;
 
-import javax.swing.border.EmptyBorder;
 import javax.swing.JDesktopPane;
 
-public class InvetoryView extends JPanel {
+
+public class InventoryView extends JPanel {
 	private JTable jtable_Item;
 	private InventoryModel inventoryModel;
 
 	/**
 	 * Create the panel.
 	 */
-	public InvetoryView() {
+	public InventoryView(JPanel root) {
 		setForeground(new Color(0, 0, 0));
 		setBackground(new Color(245, 222, 179));
 		setLayout(null);
@@ -86,9 +84,26 @@ public class InvetoryView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				ItemDetail itemDetail = new ItemDetail();
-				desktopPane.add(itemDetail);
-				itemDetail.setVisible(true);
+//				ItemDetail itemDetail = new ItemDetail();
+//				desktopPane.add(itemDetail);
+				
+				InventoryItemDetails addItemPanel = new InventoryItemDetails();
+				
+				AppController.root.removeAll();
+				root.setLayout(new GridBagLayout()); 
+				GridBagConstraints gbc = new GridBagConstraints();
+
+		        // Set the constraints to center the child panel
+		        gbc.gridx = 0;
+		        gbc.gridy = 0;
+		        gbc.fill = GridBagConstraints.WEST;
+
+		        // Add the child panel to the parent panel
+		        AppController.root.add(addItemPanel, gbc);
+				
+				AppController.root.revalidate();
+				AppController.root.repaint();
+				addItemPanel.setVisible(true);
 			}
 		});
 

@@ -19,14 +19,12 @@ import java.awt.Font;
 
 import javax.swing.SwingConstants;
 
-import javax.swing.JTextField;
-
 public class AppView extends JFrame {
 
 	private JPanel contentPane;
 	ArrayList<DashboardOption> optionList = new ArrayList<>();
 	public AppController appController;
-	private JPanel root;
+	 JPanel root;
 
 	/**
 	 * Launch the application.
@@ -36,6 +34,8 @@ public class AppView extends JFrame {
 			public void run() {
 				try {
 					AppView frame = new AppView();
+					AppController.appJFrame = frame;
+					AppController.root = frame.root; 
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,7 +47,7 @@ public class AppView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-
+	
 	public AppView() {
 		getContentPane().setLayout(new BorderLayout(0, 0));
 
@@ -84,22 +84,20 @@ public class AppView extends JFrame {
 
 		panel_dashboard.setLayout(new BorderLayout());
 		root = new JPanel();
-		// thêm panel invetoryview vào root
-//		InvetoryView invetoryView = new InvetoryView();
-//		root.add(invetoryView);
 		contentPane.add(root, BorderLayout.CENTER);
 
 		// HOME Option
 
 		DashboardOption homeOption = new DashboardOption("HOME", "/assets/home.png", new HomeView());
 		DashboardOption menuOption = new DashboardOption("MENU", "/assets/menu.png", new HomeView());
-		DashboardOption invetoryOption = new DashboardOption("INVENTORY", "/assets/collection.png", new InvetoryView());
+		DashboardOption invetoryOption = new DashboardOption("INVENTORY", "/assets/collection.png", new InventoryView(root));
 		DashboardOption ordersOption = new DashboardOption("ORDERS", "/assets/shopping-cart.png", new HomeView());
 		DashboardOption customerOption = new DashboardOption("CUSTOMER", "/assets/customer.png", new CustomerView());
 		DashboardOption employeeOption = new DashboardOption("EMPLOYEE", "/assets/users.png", new HomeView());
 		DashboardOption statisticReportOption = new DashboardOption("STATISTIC REPORT", "/assets/chart-pie.png", new HomeView());
 		DashboardOption discountOption = new DashboardOption("DISCOUNT", "/assets/ticket.png", new HomeView());
-
+		
+		
 		optionList.add(homeOption);
 		optionList.add(menuOption);
 		optionList.add(invetoryOption);
@@ -111,7 +109,7 @@ public class AppView extends JFrame {
 		optionList.add(discountOption);
 
 		appController = new AppController(root);
-		root.setLayout(null);
+		root.setLayout(new GridLayout()); 
 
 		appController.setView(homeOption);
 		appController.setEvent(optionList);
@@ -137,5 +135,13 @@ public class AppView extends JFrame {
 		panel_logout.setOpaque(false);
 		panel_logout.setLayout(new GridLayout(1, 0, 0, 0));
 
+	}
+
+	public JPanel getRoot() {
+		return root;
+	}
+
+	public void setRoot(JPanel root) {
+		this.root = root;
 	}
 }

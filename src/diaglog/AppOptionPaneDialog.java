@@ -1,11 +1,11 @@
-package optionPaneDialog;
+package diaglog;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-public class AppOptionPane extends JOptionPane {
+public class AppOptionPaneDialog extends JOptionPane {
 
-    public AppOptionPane(String message) {
+    public AppOptionPaneDialog(String message) {
         super(message, JOptionPane.INFORMATION_MESSAGE);
         JDialog dialog = createDialog(null, "Thông báo");
         // Tạo một luồng mới để đóng thông báo sau 1 giây

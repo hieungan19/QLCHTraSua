@@ -13,8 +13,8 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import component.DrinkCardComponentView;
-import component.TextFieldComponent;
 import globalComponent.AppButton;
+import globalComponent.AppTextField;
 import model.DrinkCardModel;
 
 public class ChooseDrinkDialog extends JDialog {
@@ -55,7 +55,7 @@ public class ChooseDrinkDialog extends JDialog {
 			getContentPane().add(btnSave); 
 			
 			//Enter amount text field (number) 
-			TextFieldComponent textfieldAmount = new TextFieldComponent("Nhập số lượng"); 
+			AppTextField textfieldAmount = new AppTextField("Nhập số lượng"); 
 			textfieldAmount.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			textfieldAmount.setText("1");
 			textfieldAmount.setBounds(203, 10, 119, 45); 
@@ -63,7 +63,7 @@ public class ChooseDrinkDialog extends JDialog {
 			
 			//Note text field
 			
-			TextFieldComponent textfieldNote = new TextFieldComponent("Ghi chú"); 
+			AppTextField textfieldNote = new AppTextField("Ghi chú"); 
 			textfieldNote.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			textfieldNote.setBounds(203, 80, 237, 45); 
 			getContentPane().add(textfieldNote);

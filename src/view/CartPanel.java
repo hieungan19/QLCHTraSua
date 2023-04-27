@@ -7,6 +7,7 @@ import diaglog.BillDialog;
 import diaglog.ChooseDrinkDialog;
 import globalComponent.AppButton;
 import globalComponent.AppLabel;
+import globalComponent.AppTextField;
 import model.DrinkCardModel;
 
 import java.awt.GridLayout;
@@ -19,7 +20,6 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 
 import component.DrinkScrollPaneTable;
-import component.TextFieldComponent;
 
 import javax.swing.JFrame;
 
@@ -46,9 +46,9 @@ public class CartPanel extends JPanel {
 		table_scrollPane.setBounds(7, 196, 324, 205);
 		
 		// text field thông tin khách hàng
-		TextFieldComponent customerName = new TextFieldComponent("Tên khách hàng");
+		AppTextField customerName = new AppTextField("Tên khách hàng");
 		panel.setLayout(new GridLayout(2, 1, 10, 0));
-		TextFieldComponent customerPhoneNumber = new TextFieldComponent("Số điện thoại");
+		AppTextField customerPhoneNumber = new AppTextField("Số điện thoại");
 		panel.add(customerPhoneNumber);
 		panel.add(customerName);
 		setLayout(null);
@@ -68,7 +68,7 @@ public class CartPanel extends JPanel {
 		lblNewLabel.setBounds(9, 411, 123, 20);
 		add(lblNewLabel);
 		
-		TextFieldComponent customerGaveMoney = new TextFieldComponent("Tiền khách đưa");
+		AppTextField customerGaveMoney = new AppTextField("Tiền khách đưa");
 		customerGaveMoney.setToolTipText("");
 		customerGaveMoney.setBounds(9, 494, 322, 57);
 		add(customerGaveMoney);

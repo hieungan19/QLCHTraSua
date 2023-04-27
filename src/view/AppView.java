@@ -1,23 +1,16 @@
 package view;
-
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import controller.AppController;
 import model.DashboardOption;
-
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-
 import javax.swing.JLabel;
 import java.awt.Font;
-
 import javax.swing.SwingConstants;
-
 import constant.ConstantValueView;
 
 public class AppView extends JFrame {

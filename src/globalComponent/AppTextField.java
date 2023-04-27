@@ -1,17 +1,24 @@
-package component;
+package globalComponent;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 
+import javax.swing.BorderFactory;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 
 import constant.ConstantValueView;
 
-public class TextFieldComponent extends JTextField{
-	public TextFieldComponent(String text) {
+public class AppTextField extends JTextField{
+	
+	
+   
+	public AppTextField(String text) {
+	
 		Font font = new Font("Arial", Font.PLAIN, 16);
 		this.setOpaque(false);
 		this.setColumns(10);

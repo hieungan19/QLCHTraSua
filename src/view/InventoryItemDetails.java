@@ -15,27 +15,24 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.border.MatteBorder;
-import javax.swing.border.TitledBorder;
 
-import model.CustomTextField;
-import optionPaneDialog.AppOptionPane;
+import diaglog.AppOptionPaneDialog;
+import globalComponent.AppTextField;
 
 public class InventoryItemDetails extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	private CustomTextField textField_soluongItem;
-	private CustomTextField textField_giaItem;
-	private CustomTextField textField_ngaynhapItem;
-	private CustomTextField textField_motaItem;
-	private CustomTextField textField_plItem;
-	private CustomTextField textField_nameItem;
+//	private CustomTextField textField_soluongItem;
+//	private CustomTextField textField_giaItem;
+//	private CustomTextField textField_ngaynhapItem;
+//	private CustomTextField textField_motaItem;
+//	private CustomTextField textField_plItem;
+//	private CustomTextField textField_nameItem;
 	private JButton jbutton_saveItem;
 	private JButton jbutton_deleteItem;
 	public InventoryItemDetails() {
@@ -44,94 +41,97 @@ public class InventoryItemDetails extends JPanel {
 		
 		Font font = new Font("Arial", Font.PLAIN, 18);
 		// tao cac textfield nhập thông tin
-		textField_ngaynhapItem = new CustomTextField(10);
-		textField_ngaynhapItem.setBounds(10, 244, 147, 46);
-		textField_ngaynhapItem.setToolTipText("Ngày nhập kho");
-		textField_ngaynhapItem.setSelectionColor(Color.BLACK);
-		textField_ngaynhapItem.setFont(new Font("Arial", Font.BOLD, 20));
-		textField_ngaynhapItem.setColumns(5);
-		textField_ngaynhapItem.setBorder(new TitledBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(139, 69, 19)),
-				"Ngày nhập kho", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		((TitledBorder) textField_ngaynhapItem.getBorder()).setTitleFont(font);
-		textField_ngaynhapItem.setPlaceholder("dd/mm/yyyy");
-		textField_ngaynhapItem.setPlaceholderFont(new Font("Arial", Font.ITALIC, 12));
-		textField_ngaynhapItem.setPlaceholderColor(Color.GRAY);
-		this.add(textField_ngaynhapItem);
-
-		textField_plItem = new CustomTextField(10);
-		textField_plItem.setBounds(216, 97, 165, 46);
-		textField_plItem.setToolTipText("Phân loại");
-		textField_plItem.setSelectionColor(Color.BLACK);
-		textField_plItem.setFont(new Font("Arial", Font.BOLD, 20));
-		textField_plItem.setColumns(5);
-		textField_plItem.setBorder(new TitledBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(139, 69, 19)),
-				"Phân loại", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		((TitledBorder) textField_ngaynhapItem.getBorder()).setTitleFont(font);
-		textField_plItem.setPlaceholder("nguyên liệu/hương vị...");
-		textField_plItem.setPlaceholderFont(new Font("Arial", Font.ITALIC, 12));
-		textField_plItem.setPlaceholderColor(Color.GRAY);
-		this.setLayout(null);
-		this.add(textField_plItem);
-
-		textField_giaItem = new CustomTextField(10);
-		textField_giaItem.setBounds(10, 176, 147, 46);
-		textField_giaItem.setToolTipText("Giá");
-		textField_giaItem.setSelectionColor(Color.BLACK);
-		textField_giaItem.setFont(new Font("Arial", Font.BOLD, 20));
-		textField_giaItem.setColumns(5);
-		textField_giaItem.setBorder(new TitledBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(139, 69, 19)), "Giá",
-				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		((TitledBorder) textField_giaItem.getBorder()).setTitleFont(font);
-		textField_giaItem.setPlaceholder("vnđ");
-		textField_giaItem.setPlaceholderFont(new Font("Arial", Font.ITALIC, 12));
-		textField_giaItem.setPlaceholderColor(Color.GRAY);
-		this.setLayout(null);
-		this.add(textField_giaItem);
-
-		textField_soluongItem = new CustomTextField(10);
-		textField_soluongItem.setBounds(216, 176, 165, 46);
-		textField_soluongItem.setToolTipText("Số lượng");
-		textField_soluongItem.setSelectionColor(Color.BLACK);
-		textField_soluongItem.setFont(new Font("Arial", Font.BOLD, 20));
-		textField_soluongItem.setColumns(5);
-		textField_soluongItem.setBorder(new TitledBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(139, 69, 19)),
-				"Số lượng", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		((TitledBorder) textField_soluongItem.getBorder()).setTitleFont(font);
-		textField_soluongItem.setPlaceholder("10,20,30,...");
-		textField_soluongItem.setPlaceholderFont(new Font("Arial", Font.ITALIC, 12));
-		textField_soluongItem.setPlaceholderColor(Color.GRAY);
-		this.setLayout(null);
-		this.add(textField_soluongItem);
-
-		textField_nameItem = new CustomTextField(10);
-		textField_nameItem.setBounds(216, 10, 165, 46);
-		textField_nameItem.setToolTipText("Tên nguyên liệu");
-		textField_nameItem.setSelectionColor(Color.BLACK);
-		textField_nameItem.setFont(new Font("Arial", Font.BOLD, 20));
-		textField_nameItem.setColumns(5);
-		textField_nameItem.setBorder(new TitledBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(139, 69, 19)),
-				"Tên nguyên liệu", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		((TitledBorder) textField_nameItem.getBorder()).setTitleFont(font);
-		textField_nameItem.setPlaceholder("Tên");
-		textField_nameItem.setPlaceholderFont(new Font("Arial", Font.ITALIC, 12));
-		textField_nameItem.setPlaceholderColor(Color.GRAY);
-		this.setLayout(null);
-		this.add(textField_nameItem);
-
-		textField_motaItem = new CustomTextField(10);
-		textField_motaItem.setBounds(10, 314, 198, 46);
-		textField_motaItem.setToolTipText("Mô tả");
-		textField_motaItem.setSelectionColor(Color.BLACK);
-		textField_motaItem.setFont(new Font("Arial", Font.BOLD, 20));
-		textField_motaItem.setColumns(5);
-		textField_motaItem.setBorder(new TitledBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(139, 69, 19)),
-				"Mô tả", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		((TitledBorder) textField_motaItem.getBorder()).setTitleFont(font);
-		textField_motaItem.setPlaceholder("option");
-		textField_motaItem.setPlaceholderFont(new Font("Arial", Font.ITALIC, 12));
-		textField_motaItem.setPlaceholderColor(Color.GRAY);
-		this.setLayout(null);
-		this.add(textField_motaItem);
+		AppTextField jTextField_inputDate = new AppTextField("Ngày nhập"); 
+		jTextField_inputDate.setBounds(10, 244, 147, 46);
+		jTextField_inputDate.setToolTipText("dd/mm/yyyy");
+		this.add(jTextField_inputDate); 
+		
+//		textField_ngaynhapItem.setToolTipText("Ngày nhập kho");
+//		textField_ngaynhapItem.setSelectionColor(Color.BLACK);
+//		textField_ngaynhapItem.setFont(new Font("Arial", Font.BOLD, 20));
+//		textField_ngaynhapItem.setColumns(5);
+//		textField_ngaynhapItem.setBorder(new TitledBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(139, 69, 19)),
+//				"Ngày nhập kho", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+//		((TitledBorder) textField_ngaynhapItem.getBorder()).setTitleFont(font);
+//		textField_ngaynhapItem.setPlaceholder("dd/mm/yyyy");
+//		textField_ngaynhapItem.setPlaceholderFont(new Font("Arial", Font.ITALIC, 12));
+//		textField_ngaynhapItem.setPlaceholderColor(Color.GRAY);
+//		this.add(textField_ngaynhapItem);
+//
+//		textField_plItem = new CustomTextField(10);
+//		textField_plItem.setBounds(216, 97, 165, 46);
+//		textField_plItem.setToolTipText("Phân loại");
+//		textField_plItem.setSelectionColor(Color.BLACK);
+//		textField_plItem.setFont(new Font("Arial", Font.BOLD, 20));
+//		textField_plItem.setColumns(5);
+//		textField_plItem.setBorder(new TitledBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(139, 69, 19)),
+//				"Phân loại", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+//		((TitledBorder) textField_ngaynhapItem.getBorder()).setTitleFont(font);
+//		textField_plItem.setPlaceholder("nguyên liệu/hương vị...");
+//		textField_plItem.setPlaceholderFont(new Font("Arial", Font.ITALIC, 12));
+//		textField_plItem.setPlaceholderColor(Color.GRAY);
+//		this.setLayout(null);
+//		this.add(textField_plItem);
+//
+//		textField_giaItem = new CustomTextField(10);
+//		textField_giaItem.setBounds(10, 176, 147, 46);
+//		textField_giaItem.setToolTipText("Giá");
+//		textField_giaItem.setSelectionColor(Color.BLACK);
+//		textField_giaItem.setFont(new Font("Arial", Font.BOLD, 20));
+//		textField_giaItem.setColumns(5);
+//		textField_giaItem.setBorder(new TitledBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(139, 69, 19)), "Giá",
+//				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+//		((TitledBorder) textField_giaItem.getBorder()).setTitleFont(font);
+//		textField_giaItem.setPlaceholder("vnđ");
+//		textField_giaItem.setPlaceholderFont(new Font("Arial", Font.ITALIC, 12));
+//		textField_giaItem.setPlaceholderColor(Color.GRAY);
+//		this.setLayout(null);
+//		this.add(textField_giaItem);
+//
+//		textField_soluongItem = new CustomTextField(10);
+//		textField_soluongItem.setBounds(216, 176, 165, 46);
+//		textField_soluongItem.setToolTipText("Số lượng");
+//		textField_soluongItem.setSelectionColor(Color.BLACK);
+//		textField_soluongItem.setFont(new Font("Arial", Font.BOLD, 20));
+//		textField_soluongItem.setColumns(5);
+//		textField_soluongItem.setBorder(new TitledBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(139, 69, 19)),
+//				"Số lượng", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+//		((TitledBorder) textField_soluongItem.getBorder()).setTitleFont(font);
+//		textField_soluongItem.setPlaceholder("10,20,30,...");
+//		textField_soluongItem.setPlaceholderFont(new Font("Arial", Font.ITALIC, 12));
+//		textField_soluongItem.setPlaceholderColor(Color.GRAY);
+//		this.setLayout(null);
+//		this.add(textField_soluongItem);
+//
+//		textField_nameItem = new CustomTextField(10);
+//		textField_nameItem.setBounds(216, 10, 165, 46);
+//		textField_nameItem.setToolTipText("Tên nguyên liệu");
+//		textField_nameItem.setSelectionColor(Color.BLACK);
+//		textField_nameItem.setFont(new Font("Arial", Font.BOLD, 20));
+//		textField_nameItem.setColumns(5);
+//		textField_nameItem.setBorder(new TitledBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(139, 69, 19)),
+//				"Tên nguyên liệu", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+//		((TitledBorder) textField_nameItem.getBorder()).setTitleFont(font);
+//		textField_nameItem.setPlaceholder("Tên");
+//		textField_nameItem.setPlaceholderFont(new Font("Arial", Font.ITALIC, 12));
+//		textField_nameItem.setPlaceholderColor(Color.GRAY);
+//		this.setLayout(null);
+//		this.add(textField_nameItem);
+//
+//		textField_motaItem = new CustomTextField(10);
+//		textField_motaItem.setBounds(10, 314, 198, 46);
+//		textField_motaItem.setToolTipText("Mô tả");
+//		textField_motaItem.setSelectionColor(Color.BLACK);
+//		textField_motaItem.setFont(new Font("Arial", Font.BOLD, 20));
+//		textField_motaItem.setColumns(5);
+//		textField_motaItem.setBorder(new TitledBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(139, 69, 19)),
+//				"Mô tả", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+//		((TitledBorder) textField_motaItem.getBorder()).setTitleFont(font);
+//		textField_motaItem.setPlaceholder("option");
+//		textField_motaItem.setPlaceholderFont(new Font("Arial", Font.ITALIC, 12));
+//		textField_motaItem.setPlaceholderColor(Color.GRAY);
+//		this.setLayout(null);
+//		this.add(textField_motaItem);
 
 		// chèn ảnh vô khung
 		JEditorPane jeditorPane_image = new JEditorPane();
@@ -201,7 +201,7 @@ public class InventoryItemDetails extends JPanel {
 						Window window = SwingUtilities.getWindowAncestor(panel_dialog);
 				        window.dispose(); 
 				        
-						AppOptionPane dialog = new AppOptionPane("Xóa thành công"); 
+						AppOptionPaneDialog dialog = new AppOptionPaneDialog("Xóa thành công"); 
 						
 						
 					}

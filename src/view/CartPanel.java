@@ -8,7 +8,7 @@ import diaglog.ChooseDrinkDialog;
 import globalComponent.AppButton;
 import globalComponent.AppLabel;
 import globalComponent.AppTextField;
-import model.DrinkCardModel;
+import model.DrinkModel;
 
 import java.awt.GridLayout;
 

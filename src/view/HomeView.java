@@ -16,7 +16,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 
 import constant.ConstantValueView;
-import model.DrinkCardModel;
+import model.DrinkModel;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -111,7 +111,7 @@ public class HomeView extends JPanel {
 		FilterMenuButton filterBtn = new FilterMenuButton("MILK TEA");
 		filterBtn.setPreferredSize(new Dimension(100,50));
 		panel_filter.add(filterBtn);
-		DrinkCardModel dummy = new DrinkCardModel("D01", "Tra sua Olong",20000 , "Tra sua","/assets/bg-login.png", null, null);
+		DrinkModel dummy = new DrinkModel("D01", "Tra sua Olong",20000 ,false,"/assets/bg-login.png", null,"Trà sữa", null);
 		GroupLayout gl_panel_menu = new GroupLayout(panel_menu);
 		gl_panel_menu.setHorizontalGroup(
 			gl_panel_menu.createParallelGroup(Alignment.LEADING)

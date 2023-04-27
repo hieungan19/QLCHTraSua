@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import model.DrinkCardModel;
+import model.DrinkModel;
 import javax.swing.SwingConstants;
 
 import constant.ConstantValueView;
@@ -22,8 +22,8 @@ public class DrinkCardComponentView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	private DrinkCardModel data; 
-	public DrinkCardComponentView(DrinkCardModel drink) {
+	private DrinkModel data; 
+	public DrinkCardComponentView(DrinkModel drink) {
 		this.data = drink; 
 		this.setPreferredSize(new Dimension(150, 180));
 		this.setLayout(new BorderLayout(10,10));
@@ -64,7 +64,7 @@ public class DrinkCardComponentView extends JPanel {
 	public static void main(String[] args) {
         JFrame frame = new JFrame("My Panel");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        DrinkCardModel dummy = new DrinkCardModel("D01", "Tra sua Olong",20000 , "Tra sua","/assets/bg-login.png", null, null); 
+        DrinkModel dummy = new DrinkModel("D01", "Tra sua Olong",20000 , "Tra sua","/assets/bg-login.png", null, null); 
         frame.getContentPane().add(new DrinkCardComponentView(dummy));
         frame.pack();
         frame.setVisible(true);

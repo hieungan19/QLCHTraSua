@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 import component.DrinkCardComponentView;
 import globalComponent.AppButton;
 import globalComponent.AppTextField;
-import model.DrinkCardModel;
+import model.DrinkModel;
 
 public class ChooseDrinkDialog extends JDialog {
 
@@ -26,7 +26,7 @@ public class ChooseDrinkDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ChooseDrinkDialog(DrinkCardModel drinkModel) {
+	public ChooseDrinkDialog(DrinkModel drinkModel) {
 		setBounds(0, 0, 480, 350);
 		this.setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());

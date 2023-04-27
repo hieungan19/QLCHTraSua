@@ -7,7 +7,7 @@ import javax.swing.JScrollPane;
 
 import component.DrinkCardComponentView;
 import constant.ConstantValueView;
-import model.DrinkCardModel;
+import model.DrinkModel;
 import javax.swing.ScrollPaneConstants;
 
 public class MainMenuPanel extends JPanel {
@@ -25,7 +25,7 @@ public class MainMenuPanel extends JPanel {
 		gl_panel.setHgap(10);
 		panel.setLayout(gl_panel);
 		panel.setOpaque(false);
-		DrinkCardModel dummy = new DrinkCardModel("D01", "Tra sua Olong",20000 , "Tra sua","/assets/bg-login.png", null, null);
+		DrinkModel dummy = new DrinkModel("D01", "Tra sua Olong",20000 ,false,"/assets/bg-login.png", null,"Trà sữa", null);
 		for (int i =0; i<10; ++i) {
 			panel.add(new DrinkCardComponentView(dummy));
 		}

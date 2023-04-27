@@ -21,6 +21,7 @@ import javax.swing.SwingUtilities;
 
 import diaglog.AppOptionPaneDialog;
 import globalComponent.AppTextField;
+import javax.swing.JComboBox;
 
 public class InventoryItemDetails extends JPanel {
 
@@ -33,6 +34,8 @@ public class InventoryItemDetails extends JPanel {
 	public InventoryItemDetails() {
 		this.setLayout(null);
 		this.setPreferredSize(new Dimension(420,420));
+		this.setBackground(new Color(245, 222, 179));
+
 		
 		Font font = new Font("Arial", Font.PLAIN, 18);
 		// tao cac textfield nhập thông tin
@@ -41,10 +44,21 @@ public class InventoryItemDetails extends JPanel {
 		jTextField_inputDate.setToolTipText("dd/mm/yyyy");
 		this.add(jTextField_inputDate); 
 			
-		AppTextField jTextField_unitItem = new AppTextField("Đơn vị tính");
-		jTextField_unitItem.setBounds(216, 97, 165, 46);
-		jTextField_unitItem.setToolTipText("Cái/Kg");
-		this.add(jTextField_unitItem);
+		JComboBox<String> comboBox_unitItem = new JComboBox<String>();
+		comboBox_unitItem.addItem("Cái");
+		comboBox_unitItem.addItem("Kg");
+		comboBox_unitItem.setName("Đơn vị tính");
+		comboBox_unitItem.setBounds(216, 97, 165, 46);
+		this.add(comboBox_unitItem);
+		// Lấy giá trị đơn vị tính được chọn
+		String unitItem = comboBox_unitItem.getSelectedItem().toString();
+
+
+
+//		AppTextField jTextField_unitItem = new AppTextField("Đơn vị tính");
+//		jTextField_unitItem.setBounds(216, 97, 165, 46);
+//		jTextField_unitItem.setToolTipText("Cái/Kg");
+//		this.add(jTextField_unitItem);
 
 		AppTextField jTextField_priceItem = new AppTextField("Giá");
 		jTextField_priceItem.setBounds(10, 176, 147, 46);
@@ -162,6 +176,4 @@ public class InventoryItemDetails extends JPanel {
 
 		this.setVisible(true); 
 	}
-	
-
 }

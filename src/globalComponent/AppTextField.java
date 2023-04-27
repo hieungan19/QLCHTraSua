@@ -1,11 +1,8 @@
 package globalComponent;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
 
-import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;

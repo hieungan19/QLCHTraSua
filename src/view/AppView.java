@@ -11,7 +11,6 @@ import model.DashboardOption;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
@@ -19,12 +18,14 @@ import java.awt.Font;
 
 import javax.swing.SwingConstants;
 
+import constant.ConstantValueView;
+
 public class AppView extends JFrame {
 
 	private JPanel contentPane;
 	ArrayList<DashboardOption> optionList = new ArrayList<>();
 	public AppController appController;
-	 JPanel root;
+	JPanel root;
 
 	/**
 	 * Launch the application.
@@ -64,7 +65,7 @@ public class AppView extends JFrame {
 
 		JPanel panel_dashboard = new JPanel();
 		panel_dashboard.setPreferredSize(new Dimension(200, 0));
-		panel_dashboard.setBackground(new Color(183, 150, 107));
+		panel_dashboard.setBackground(ConstantValueView.primaryColor);
 		contentPane.add(panel_dashboard, BorderLayout.WEST);
 
 		// Ten nhom
@@ -88,16 +89,16 @@ public class AppView extends JFrame {
 
 		// HOME Option
 
-		DashboardOption homeOption = new DashboardOption("HOME", "/assets/home.png", new HomeView());
-		DashboardOption menuOption = new DashboardOption("MENU", "/assets/menu.png", new HomeView());
-		DashboardOption invetoryOption = new DashboardOption("INVENTORY", "/assets/collection.png", new InventoryView(root));
-		DashboardOption ordersOption = new DashboardOption("ORDERS", "/assets/shopping-cart.png", new HomeView());
+		DashboardOption homeOption = new DashboardOption("HOME", "/assets/home.png", new HomeView(this));
+		DashboardOption menuOption = new DashboardOption("MENU", "/assets/menu.png", new CustomerView());
+		DashboardOption invetoryOption = new DashboardOption("INVETORY", "/assets/collection.png", new InventoryView());
+		DashboardOption ordersOption = new DashboardOption("ORDERS", "/assets/shopping-cart.png", new CustomerView());
 		DashboardOption customerOption = new DashboardOption("CUSTOMER", "/assets/customer.png", new CustomerView());
-		DashboardOption employeeOption = new DashboardOption("EMPLOYEE", "/assets/users.png", new HomeView());
-		DashboardOption statisticReportOption = new DashboardOption("STATISTIC REPORT", "/assets/chart-pie.png", new HomeView());
-		DashboardOption discountOption = new DashboardOption("DISCOUNT", "/assets/ticket.png", new HomeView());
-		
-		
+		DashboardOption employeeOption = new DashboardOption("EMPLOYEE", "/assets/users.png", new CustomerView());
+		DashboardOption statisticReportOption = new DashboardOption("STATISTIC REPORT", "/assets/chart-pie.png",
+				new HomeView(this));
+		DashboardOption discountOption = new DashboardOption("DISCOUNT", "/assets/ticket.png", new CustomerView());
+
 		optionList.add(homeOption);
 		optionList.add(menuOption);
 		optionList.add(invetoryOption);
@@ -128,20 +129,17 @@ public class AppView extends JFrame {
 		JPanel panel_logout = new JPanel();
 		panel_logout.setBounds(10, 585, 180, 95);
 		panel_dashboard.add(panel_logout);
-		JLabel jLabel_logoutOption = new DashboardOption("LOG OUT", "/assets/logout.png", new HomeView())
+		JLabel jLabel_logoutOption = new DashboardOption("LOG OUT", "/assets/logout.png", new HomeView(this))
 				.getjLabelOption();
 		panel_dashboard.add(jLabel_logoutOption);
 		panel_logout.add(jLabel_logoutOption);
 		panel_logout.setOpaque(false);
 		panel_logout.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		
+		
 
 	}
 
-	public JPanel getRoot() {
-		return root;
-	}
-
-	public void setRoot(JPanel root) {
-		this.root = root;
-	}
+	
 }

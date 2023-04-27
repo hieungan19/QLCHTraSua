@@ -30,7 +30,7 @@ public class InventoryView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public InventoryView(JPanel root) {
+	public InventoryView() {
 		setForeground(new Color(0, 0, 0));
 		setBackground(new Color(245, 222, 179));
 		setLayout(null);
@@ -90,7 +90,7 @@ public class InventoryView extends JPanel {
 				InventoryItemDetails addItemPanel = new InventoryItemDetails();
 				
 				AppController.root.removeAll();
-				root.setLayout(new GridBagLayout()); 
+				AppController.root.setLayout(new GridBagLayout()); 
 				GridBagConstraints gbc = new GridBagConstraints();
 
 		        // Set the constraints to center the child panel

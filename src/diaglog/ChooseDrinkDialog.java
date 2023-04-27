@@ -12,10 +12,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-import component.DrinkCardComponent;
 import globalComponent.AppButton;
 import globalComponent.AppTextField;
 import model.DrinkModel;
+import view.home.DrinkCardComponent;
 
 public class ChooseDrinkDialog extends JDialog {
 

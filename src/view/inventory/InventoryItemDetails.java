@@ -1,4 +1,4 @@
-package view;
+package view.inventory;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -35,43 +35,22 @@ public class InventoryItemDetails extends JPanel {
 //	private CustomTextField textField_nameItem;
 	private JButton jbutton_saveItem;
 	private JButton jbutton_deleteItem;
+	private AppTextField jTextField_type;
 	public InventoryItemDetails() {
 		this.setLayout(null);
 		this.setPreferredSize(new Dimension(420,420));
-		
-		Font font = new Font("Arial", Font.PLAIN, 18);
+
 		// tao cac textfield nhập thông tin
 		AppTextField jTextField_inputDate = new AppTextField("Ngày nhập"); 
 		jTextField_inputDate.setBounds(10, 244, 147, 46);
 		jTextField_inputDate.setToolTipText("dd/mm/yyyy");
 		this.add(jTextField_inputDate); 
 		
-//		textField_ngaynhapItem.setToolTipText("Ngày nhập kho");
-//		textField_ngaynhapItem.setSelectionColor(Color.BLACK);
-//		textField_ngaynhapItem.setFont(new Font("Arial", Font.BOLD, 20));
-//		textField_ngaynhapItem.setColumns(5);
-//		textField_ngaynhapItem.setBorder(new TitledBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(139, 69, 19)),
-//				"Ngày nhập kho", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-//		((TitledBorder) textField_ngaynhapItem.getBorder()).setTitleFont(font);
-//		textField_ngaynhapItem.setPlaceholder("dd/mm/yyyy");
-//		textField_ngaynhapItem.setPlaceholderFont(new Font("Arial", Font.ITALIC, 12));
-//		textField_ngaynhapItem.setPlaceholderColor(Color.GRAY);
-//		this.add(textField_ngaynhapItem);
-//
-//		textField_plItem = new CustomTextField(10);
-//		textField_plItem.setBounds(216, 97, 165, 46);
-//		textField_plItem.setToolTipText("Phân loại");
-//		textField_plItem.setSelectionColor(Color.BLACK);
-//		textField_plItem.setFont(new Font("Arial", Font.BOLD, 20));
-//		textField_plItem.setColumns(5);
-//		textField_plItem.setBorder(new TitledBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(139, 69, 19)),
-//				"Phân loại", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-//		((TitledBorder) textField_ngaynhapItem.getBorder()).setTitleFont(font);
-//		textField_plItem.setPlaceholder("nguyên liệu/hương vị...");
-//		textField_plItem.setPlaceholderFont(new Font("Arial", Font.ITALIC, 12));
-//		textField_plItem.setPlaceholderColor(Color.GRAY);
-//		this.setLayout(null);
-//		this.add(textField_plItem);
+
+		jTextField_type=  new AppTextField("TYPE");
+		jTextField_type.setBounds(216, 97, 165, 46);
+		jTextField_type.setToolTipText("Phân loại");
+		this.add(jTextField_type);
 //
 //		textField_giaItem = new CustomTextField(10);
 //		textField_giaItem.setBounds(10, 176, 147, 46);

@@ -1,4 +1,4 @@
-package view;
+package view.home;
 
 import javax.swing.JPanel;
 
@@ -18,9 +18,6 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
-
-import component.DrinkScrollPaneTable;
-
 import javax.swing.JFrame;
 
 

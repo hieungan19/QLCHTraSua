@@ -1,4 +1,4 @@
-package view;
+package view.home;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -8,14 +8,13 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JFrame;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import component.DrinkCardComponent;
-
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
 import constant.ConstantValueView;
+import globalComponent.SearchBar;
 import model.DrinkModel;
 
 import java.awt.GridBagLayout;
@@ -93,7 +92,7 @@ public class HomePageView extends JPanel {
 		JPanel panel_search = new JPanel();
 		FlowLayout fl_panel_search = new FlowLayout(FlowLayout.LEFT, 30, 5);
 		panel_search.setLayout(fl_panel_search);
-		SearchBarView searchBarView = new SearchBarView();
+		SearchBar searchBarView = new SearchBar();
 		BorderLayout borderLayout = (BorderLayout) searchBarView.getLayout();
 		borderLayout.setHgap(10);
 		borderLayout.setVgap(10);

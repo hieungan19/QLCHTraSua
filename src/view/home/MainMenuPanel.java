@@ -1,4 +1,4 @@
-package view;
+package view.home;
 
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
@@ -7,10 +7,10 @@ import java.awt.event.MouseListener;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import component.DrinkCardComponent;
 import constant.ConstantValueView;
 import diaglog.ChooseDrinkDialog;
 import model.DrinkModel;
+
 import javax.swing.ScrollPaneConstants;
 
 public class MainMenuPanel extends JPanel {

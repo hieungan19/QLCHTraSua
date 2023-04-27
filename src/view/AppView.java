@@ -4,6 +4,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import controller.AppController;
 import model.DashboardOption;
+import view.employee.EmployeePageView;
+import view.home.HomePageView;
+import view.inventory.InventoryView;
+
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.awt.BorderLayout;
@@ -128,7 +132,6 @@ public class AppView extends JFrame {
 		panel_logout.add(jLabel_logoutOption);
 		panel_logout.setOpaque(false);
 		panel_logout.setLayout(new GridLayout(1, 0, 0, 0));
-		
 		
 		
 

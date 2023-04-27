@@ -1,4 +1,4 @@
-package view;
+package globalComponent;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,14 +15,14 @@ import javax.swing.border.LineBorder;
 
 import constant.ConstantValueView;
 
-public class SearchBarView extends JPanel {
+public class SearchBar extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
 	JTextField searchField; 
 	
-	public SearchBarView() {
+	public SearchBar() {
 		this.setPreferredSize(new Dimension(370,40));
 		this.setBorder(new LineBorder(ConstantValueView.primaryColor, 3));
 		this.setLayout(new BorderLayout());
@@ -50,7 +50,7 @@ public class SearchBarView extends JPanel {
 		
 
 		this.add(searchField, BorderLayout.CENTER);
-		ImageIcon imageIcon = new ImageIcon(SearchBarView.class.getResource("/assets/search-icon.png"));
+		ImageIcon imageIcon = new ImageIcon(SearchBar.class.getResource("/assets/search-icon.png"));
 		JLabel label = new JLabel(imageIcon);
 		label.setPreferredSize(new Dimension(24, 24));
 		this.add(label, BorderLayout.EAST);
@@ -64,7 +64,7 @@ public class SearchBarView extends JPanel {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("My Panel");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new SearchBarView());
+        frame.getContentPane().add(new SearchBar());
         frame.pack();
         frame.setVisible(true);
 	}

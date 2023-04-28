@@ -21,6 +21,7 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import constant.ConstantValueView;
 import controller.AppController;
 import model.InventoryModel;
 
@@ -38,12 +39,12 @@ public class InventoryView extends JPanel {
 	 */
 	public InventoryView() {
 		setForeground(new Color(0, 0, 0));
-		setBackground(new Color(245, 222, 179));
+		setBackground(ConstantValueView.background);
 		setLayout(null);
 		// Tạo label INVENTORY
 		JLabel jLabel_inventory = new JLabel("INVENTORY");
 		jLabel_inventory.setBounds(20, 20, 180, 60);
-		jLabel_inventory.setForeground(new Color(139, 69, 19));
+		jLabel_inventory.setForeground(ConstantValueView.primaryDark);
 		jLabel_inventory.setFont(new Font("Tahoma", Font.BOLD, 29));
 		add(jLabel_inventory);
 		// Tạo nút thêm
@@ -58,14 +59,14 @@ public class InventoryView extends JPanel {
 
 		// Tạo bảng
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setSize(752, 123);
-		scrollPane.setLocation(45, 126);;
-		add(scrollPane);
+		JScrollPane scrollPane_inventory = new JScrollPane();
+		scrollPane_inventory.setSize(752, 123);
+		scrollPane_inventory.setLocation(45, 126);;
+		add(scrollPane_inventory);
 
 		jtable_Item = new JTable();
-		scrollPane.setViewportView(jtable_Item);
-		jtable_Item.setBackground(new Color(245, 222, 179));
+		scrollPane_inventory.setViewportView(jtable_Item);
+		jtable_Item.setBackground(ConstantValueView.background);
 		jtable_Item.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		jtable_Item.setForeground(new Color(0, 0, 0));
 		jtable_Item.setModel(new DefaultTableModel(
@@ -77,7 +78,7 @@ public class InventoryView extends JPanel {
 		jtable_Item.setFillsViewportHeight(true);
 		// đổi màu chữ và nền cho cột bảng
 		JTableHeader head = jtable_Item.getTableHeader();
-		head.setBackground(new Color(245, 222, 179));
+		head.setBackground(ConstantValueView.background);
 		head.setForeground(Color.BLACK);
 		head.setFont(new Font("Tahome", Font.BOLD, 15));
 
@@ -109,6 +110,8 @@ public class InventoryView extends JPanel {
 				addItemPanel.setVisible(true);
 			}
 		});
+		
+		//add searchbar vào
 		SearchBar searchBarPanel = new SearchBar();
 	    add(searchBarPanel);
 
@@ -126,7 +129,7 @@ public class InventoryView extends JPanel {
 	    			.addGap(20))
 	    		.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
 	    			.addContainerGap()
-	    			.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 924, Short.MAX_VALUE)
+	    			.addComponent(scrollPane_inventory, GroupLayout.DEFAULT_SIZE, 924, Short.MAX_VALUE)
 	    			.addContainerGap())
 	    );
 	    layout.setVerticalGroup(
@@ -141,7 +144,7 @@ public class InventoryView extends JPanel {
 	    					.addComponent(jLabel_inventory, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE))
 	    				.addComponent(jbutton_addItem, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE))
 	    			.addGap(71)
-	    			.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+	    			.addComponent(scrollPane_inventory, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
 	    			.addGap(40))
 	    );
 	    setLayout(layout);

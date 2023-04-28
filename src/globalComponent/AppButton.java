@@ -12,6 +12,8 @@ public class AppButton extends JButton{
 	public AppButton(String text) {
 		this.setText(text);
 		this.setBorderPainted(false);
+		this.setAlignmentX(CENTER_ALIGNMENT);
+		this.setAlignmentY(CENTER_ALIGNMENT);
 		this.setPreferredSize(new Dimension(100,30));
 		this.setForeground(ConstantValueView.background);
 		this.setFont(new Font("SansSerif", Font.BOLD, 16));

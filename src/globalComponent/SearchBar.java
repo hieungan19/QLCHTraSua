@@ -23,7 +23,7 @@ public class SearchBar extends JPanel {
 	JTextField searchField; 
 	
 	public SearchBar() {
-		this.setPreferredSize(new Dimension(370,40));
+		this.setPreferredSize(new Dimension(370,45));
 		this.setBorder(new LineBorder(ConstantValueView.primaryColor, 3));
 		this.setLayout(new BorderLayout());
 		searchField = new JTextField();

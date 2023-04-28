@@ -14,6 +14,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 
 import constant.ConstantValueView;
+import globalComponent.AppLabel;
 import globalComponent.SearchBar;
 import model.DrinkModel;
 
@@ -135,11 +136,8 @@ public class HomePageView extends JPanel {
 		mainMenu.setBounds(new Rectangle(0, 120, 490, 520));
 		panel_menu.add(mainMenu);
 		
-		JLabel lblNewLabel = new JLabel("MENU");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 32));
-		lblNewLabel.setForeground(ConstantValueView.primaryDark);
-		panel_header.add(lblNewLabel);
+		AppLabel lblNewLabel_menu = new AppLabel("MENU",32,true);
+		panel_header.add(lblNewLabel_menu);
 		
 		JPanel panel_info = new JPanel();
 		panel_info.setOpaque(false);;

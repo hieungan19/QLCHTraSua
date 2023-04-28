@@ -3,12 +3,14 @@ package view.inventory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -24,8 +26,8 @@ import javax.swing.table.JTableHeader;
 import constant.ConstantValueView;
 import controller.AppController;
 import model.InventoryModel;
+import view.AppView;
 
-import javax.swing.JDesktopPane;
 import java.awt.BorderLayout;
 import globalComponent.SearchBar;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -40,12 +42,13 @@ public class InventoryView extends JPanel {
 	public InventoryView() {
 		setForeground(new Color(0, 0, 0));
 		setBackground(ConstantValueView.background);
-		setLayout(null);
+		setPreferredSize(new Dimension(840, 740));
+
 		// Tạo label INVENTORY
 		JLabel jLabel_inventory = new JLabel("INVENTORY");
 		jLabel_inventory.setBounds(20, 20, 180, 60);
 		jLabel_inventory.setForeground(ConstantValueView.primaryDark);
-		jLabel_inventory.setFont(new Font("Tahoma", Font.BOLD, 29));
+		jLabel_inventory.setFont(new Font("Tahoma", Font.BOLD, 25));
 		add(jLabel_inventory);
 		// Tạo nút thêm
 		JButton jbutton_addItem = new JButton("+");
@@ -61,7 +64,7 @@ public class InventoryView extends JPanel {
 
 		JScrollPane scrollPane_inventory = new JScrollPane();
 		scrollPane_inventory.setSize(752, 123);
-		scrollPane_inventory.setLocation(45, 126);;
+		scrollPane_inventory.setLocation(45, 126);
 		add(scrollPane_inventory);
 
 		jtable_Item = new JTable();
@@ -94,16 +97,10 @@ public class InventoryView extends JPanel {
 				InventoryItemDetails addItemPanel = new InventoryItemDetails();
 				
 				AppController.root.removeAll();
-				AppController.root.setLayout(new GridBagLayout()); 
-				GridBagConstraints gbc = new GridBagConstraints();
-
-		        // Set the constraints to center the child panel
-		        gbc.gridx = 0;
-		        gbc.gridy = 0;
-		        gbc.fill = GridBagConstraints.WEST;
+				AppController.root.setLayout(new GridLayout()); 
 
 		        // Add the child panel to the parent panel
-		        AppController.root.add(addItemPanel, gbc);
+		        AppController.root.add(addItemPanel);
 				
 				AppController.root.revalidate();
 				AppController.root.repaint();
@@ -120,32 +117,30 @@ public class InventoryView extends JPanel {
 	    layout.setHorizontalGroup(
 	    	layout.createParallelGroup(Alignment.LEADING)
 	    		.addGroup(layout.createSequentialGroup()
-	    			.addGap(4)
-	    			.addComponent(jLabel_inventory, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
-	    			.addPreferredGap(ComponentPlacement.UNRELATED)
-	    			.addComponent(searchBarPanel, GroupLayout.PREFERRED_SIZE, 523, GroupLayout.PREFERRED_SIZE)
-	    			.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-	    			.addComponent(jbutton_addItem, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
-	    			.addGap(20))
-	    		.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-	    			.addContainerGap()
-	    			.addComponent(scrollPane_inventory, GroupLayout.DEFAULT_SIZE, 924, Short.MAX_VALUE)
-	    			.addContainerGap())
+	    			.addGroup(layout.createParallelGroup(Alignment.TRAILING, false)
+	    				.addGroup(Alignment.LEADING, layout.createSequentialGroup()
+	    					.addContainerGap()
+	    					.addComponent(scrollPane_inventory))
+	    				.addGroup(Alignment.LEADING, layout.createSequentialGroup()
+	    					.addGap(4)
+	    					.addComponent(jLabel_inventory)
+	    					.addPreferredGap(ComponentPlacement.UNRELATED)
+	    					.addComponent(searchBarPanel, GroupLayout.PREFERRED_SIZE, 470, GroupLayout.PREFERRED_SIZE)
+	    					.addGap(18)
+	    					.addComponent(jbutton_addItem, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)))
+	    			.addContainerGap(18, Short.MAX_VALUE))
 	    );
 	    layout.setVerticalGroup(
 	    	layout.createParallelGroup(Alignment.LEADING)
 	    		.addGroup(layout.createSequentialGroup()
 	    			.addGap(27)
 	    			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-	    				.addGroup(layout.createParallelGroup(Alignment.TRAILING, false)
-	    					.addGroup(Alignment.LEADING, layout.createSequentialGroup()
-	    						.addPreferredGap(ComponentPlacement.RELATED)
-	    						.addComponent(searchBarPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-	    					.addComponent(jLabel_inventory, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE))
-	    				.addComponent(jbutton_addItem, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE))
+	    				.addComponent(jbutton_addItem, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+	    				.addComponent(searchBarPanel, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+	    				.addComponent(jLabel_inventory, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE))
 	    			.addGap(71)
-	    			.addComponent(scrollPane_inventory, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-	    			.addGap(40))
+	    			.addComponent(scrollPane_inventory, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
+	    			.addGap(469))
 	    );
 	    setLayout(layout);
 	}

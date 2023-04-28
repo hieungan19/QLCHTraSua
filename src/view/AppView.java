@@ -1,5 +1,7 @@
 package view;
 import java.awt.EventQueue;
+
+import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import controller.AppController;
@@ -107,7 +109,7 @@ public class AppView extends JFrame {
 		optionList.add(discountOption);
 
 		appController = new AppController(root);
-		root.setLayout(new GridLayout()); 
+		root.setLayout(new GridLayout());		
 
 		appController.setView(homeOption);
 		appController.setEvent(optionList);

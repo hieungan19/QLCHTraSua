@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -38,7 +39,7 @@ public class OrdersView extends JPanel{
 	public OrdersView() {
 		setForeground(new Color(0, 0, 0));
 		setBackground(ConstantValueView.background);
-		setLayout(null);
+		setPreferredSize(new Dimension(840, 740));
 		// Tạo label INVENTORY
 		JLabel jLabel_inventory = new JLabel("ORDERS");
 		jLabel_inventory.setBounds(20, 20, 180, 60);
@@ -57,14 +58,14 @@ public class OrdersView extends JPanel{
 		
 		// Tạo nút xóa đơn hàng
 		AppButton jbutton_deleteOrders = new AppButton("Xóa đơn hàng");
-		jbutton_deleteOrders.setBounds(800, 500, 148, 51);
+		jbutton_deleteOrders.setBounds(660, 500, 148, 51);
 		add(jbutton_deleteOrders);
 		
 		 // Tạo bảng
 
 		JScrollPane scrollPane_orders = new JScrollPane();
 		scrollPane_orders.setSize(752, 123);
-		scrollPane_orders.setLocation(45, 126);;
+		scrollPane_orders.setLocation(45, 126);
 		add(scrollPane_orders);
 
 		jtable_orders = new JTable();
@@ -93,34 +94,32 @@ public class OrdersView extends JPanel{
 			    // use GroupLayout to position the components
 			    GroupLayout layout = new GroupLayout(this);
 			    layout.setHorizontalGroup(
-			    	layout.createParallelGroup(Alignment.TRAILING)
-			    		.addGroup(layout.createSequentialGroup()
-			    			.addGap(4)
-			    			.addComponent(jLabel_inventory, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
-			    			.addPreferredGap(ComponentPlacement.UNRELATED)
-			    			.addComponent(searchBarPanel, GroupLayout.PREFERRED_SIZE, 523, GroupLayout.PREFERRED_SIZE)
-			    			.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-			    			.addComponent(jbutton_addItem, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
+			    	layout.createParallelGroup(Alignment.LEADING)
+			    		.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+			    			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+			    				.addGroup(Alignment.LEADING, layout.createSequentialGroup()
+			    					.addContainerGap()
+			    					.addComponent(scrollPane_orders, GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE))
+			    				.addGroup(layout.createSequentialGroup()
+			    					.addGap(4)
+			    					.addComponent(jLabel_inventory, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)
+			    					.addPreferredGap(ComponentPlacement.UNRELATED)
+			    					.addComponent(searchBarPanel, GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
+			    					.addGap(18)
+			    					.addComponent(jbutton_addItem, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)))
 			    			.addGap(20))
-			    		.addGroup(Alignment.LEADING, layout.createSequentialGroup()
-			    			.addContainerGap()
-			    			.addComponent(scrollPane_orders, GroupLayout.DEFAULT_SIZE, 883, Short.MAX_VALUE)
-			    			.addContainerGap())
 			    );
 			    layout.setVerticalGroup(
 			    	layout.createParallelGroup(Alignment.LEADING)
 			    		.addGroup(layout.createSequentialGroup()
-			    			.addGap(27)
+			    			.addGap(54)
 			    			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-			    				.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
-			    					.addGroup(layout.createSequentialGroup()
-			    						.addPreferredGap(ComponentPlacement.RELATED)
-			    						.addComponent(searchBarPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-			    					.addComponent(jLabel_inventory, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE))
-			    				.addComponent(jbutton_addItem, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE))
-			    			.addGap(38)
-			    			.addComponent(scrollPane_orders, GroupLayout.PREFERRED_SIZE, 313, GroupLayout.PREFERRED_SIZE)
-			    			.addContainerGap(137, Short.MAX_VALUE))
+			    				.addComponent(searchBarPanel, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+			    				.addComponent(jLabel_inventory, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+			    				.addComponent(jbutton_addItem, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE))
+			    			.addGap(73)
+			    			.addComponent(scrollPane_orders, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE)
+			    			.addGap(456))
 			    );
 			    setLayout(layout);
 			    

@@ -10,6 +10,10 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import model.DashboardOption;
+import javax.swing.GroupLayout;
+import javax.swing.*;
+
+
 
 public class AppController {
 	public static JFrame appJFrame; 
@@ -20,6 +24,8 @@ public class AppController {
 	public AppController(JPanel root) {
 		// TODO Auto-generated constructor stub
 		this.root = root;
+		root.setLayout(new GroupLayout(root));
+
 
 	}
 
@@ -29,7 +35,7 @@ public class AppController {
 		optionItem.getjLabelOption().setBackground(Color.white);
 		optionItem.getjLabelOption().setOpaque(true);
 		root.removeAll();
-		root.add(jpnItem);
+		root.add(jpnItem);		
 		root.validate();
 		root.repaint();
 

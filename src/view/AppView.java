@@ -90,13 +90,12 @@ public class AppView extends JFrame {
 		// HOME Option
 
 		DashboardOption homeOption = new DashboardOption("HOME", "/assets/home.png", new HomePageView());
-		DashboardOption menuOption = new DashboardOption("MENU", "/assets/menu.png", new CustomerView());
+		DashboardOption menuOption = new DashboardOption("MENU", "/assets/menu.png", new ProductView());
 		DashboardOption invetoryOption = new DashboardOption("INVETORY", "/assets/collection.png", new InventoryView());
 		DashboardOption ordersOption = new DashboardOption("ORDERS", "/assets/shopping-cart.png", new OrdersView());
 		DashboardOption customerOption = new DashboardOption("CUSTOMER", "/assets/customer.png", new CustomerView());
 		DashboardOption employeeOption = new DashboardOption("EMPLOYEE", "/assets/users.png", new EmployeeInfoFormPanel());
-		DashboardOption statisticReportOption = new DashboardOption("STATISTIC REPORT", "/assets/chart-pie.png",
-				new HomePageView());
+		DashboardOption statisticReportOption = new DashboardOption("STATISTIC REPORT", "/assets/chart-pie.png", new HomePageView());
 		DashboardOption discountOption = new DashboardOption("DISCOUNT", "/assets/ticket.png", new CustomerView());
 
 		optionList.add(homeOption);

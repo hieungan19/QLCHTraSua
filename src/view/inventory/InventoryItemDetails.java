@@ -47,11 +47,13 @@ public class InventoryItemDetails extends JPanel {
 		this.add(jTextField_inputDate); 
 			
 		JComboBox<String> comboBox_unitItem = new JComboBox<String>();
+		comboBox_unitItem.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		comboBox_unitItem.addItem("Cái");
 		comboBox_unitItem.addItem("Kg");
 		comboBox_unitItem.setName("Đơn vị tính");
 		comboBox_unitItem.setBounds(515, 196, 165, 46);
-		this.add(comboBox_unitItem);
+		comboBox_unitItem.setBackground(new Color(245, 222, 179));
+		add(comboBox_unitItem);
 		// Lấy giá trị đơn vị tính được chọn
 		String unitItem = comboBox_unitItem.getSelectedItem().toString();
 		JLabel jLabel_unitItem = new JLabel("Đơn vị tính");

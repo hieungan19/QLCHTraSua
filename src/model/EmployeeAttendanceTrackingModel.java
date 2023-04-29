@@ -8,8 +8,7 @@ public class EmployeeAttendanceTrackingModel {
 	private LocalTime startTime; 
 	private LocalTime endTime;
 	private LocalDate workingDate; 
-	private double penaltyForMisconduct; 
-	
+	private double penaltyForMisconduct; // tiền phạt cho ca làm
 	
 	
 }

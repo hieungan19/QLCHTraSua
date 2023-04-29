@@ -1,6 +1,7 @@
 package view.home;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
@@ -10,9 +11,14 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
 
+import constant.ConstantValueView;
 import globalComponent.AppButton;
+import globalComponent.AppLabel;
 import globalComponent.AppTextField;
 import model.DrinkModel;
 
@@ -28,15 +34,16 @@ public class ChooseDrinkDialog extends JDialog {
 	public ChooseDrinkDialog(DrinkModel drinkModel) {
 		setBounds(0, 0, 480, 350);
 		this.setLocationRelativeTo(null);
-		getContentPane().setLayout(new BorderLayout());
+		getContentPane().setLayout(null);
+		contentPanel.setBounds(0, 0, 0, 0);
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		getContentPane().add(contentPanel);
 		{
 			// bên trong dialog
-			JLabel lblNewLabel = new JLabel("Chọn topping");
+			AppLabel lblNewLabel = new AppLabel("Chọn topping");
 			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-			lblNewLabel.setBounds(203, 135, 68, 15);
+			lblNewLabel.setBounds(203, 125, 68, 15);
 			getContentPane().add(lblNewLabel);
 			DrinkCardComponent drinkImageCard = new DrinkCardComponent(drinkModel);
 			drinkImageCard.setBounds(10, 10, 166, 223);
@@ -54,30 +61,41 @@ public class ChooseDrinkDialog extends JDialog {
 			getContentPane().add(btnSave); 
 			
 			//Enter amount text field (number) 
-			AppTextField textfieldAmount = new AppTextField("Nhập số lượng"); 
-			textfieldAmount.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			textfieldAmount.setText("1");
-			textfieldAmount.setBounds(203, 10, 119, 45); 
-			getContentPane().add(textfieldAmount); 
+			SpinnerModel model = new SpinnerNumberModel(0, 0, 100, 1);
+			
 			
 			//Note text field
 			
 			AppTextField textfieldNote = new AppTextField("Ghi chú"); 
 			textfieldNote.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			textfieldNote.setBounds(203, 80, 237, 45); 
+			textfieldNote.setBounds(203, 66, 253, 45); 
 			getContentPane().add(textfieldNote);
 			
 			//ScrollPane Topping
 			
 			JScrollPane scrollPane_topping = new JScrollPane();
-			scrollPane_topping.setBounds(203, 160, 237, 73);
+			scrollPane_topping.setBounds(203, 150, 253, 97);
 			getContentPane().add(scrollPane_topping);
 		
-			String[] toppingList = { "item1", "item2", "item3" };
-			JList<String> jListTopping = new JList<String>(toppingList);
-			add(jListTopping);
-			scrollPane_topping.setViewportView(jListTopping);
+//			String[] toppingList = { "item1", "item2", "item3" };
+//			JList<String> jListTopping = new JList<String>(toppingList);
+//			add(jListTopping);
+//			scrollPane_topping.setViewportView(jListTopping);
+			
+			
+			
+			
+			
 		}
+		
+		AppLabel lblNewLabel_1 = new AppLabel("Nhập số lượng");
+		lblNewLabel_1.setBounds(203, 21, 106, 33);
+		getContentPane().add(lblNewLabel_1);
+		
+		JSpinner spinner = new JSpinner((SpinnerModel) null);
+		spinner.setFont(new Font("Arial", Font.PLAIN, 16));
+		spinner.setBounds(313, 21, 113, 33);
+		getContentPane().add(spinner);
 	}
 
 }

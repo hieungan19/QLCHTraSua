@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import controller.AppController;
 import model.DashboardOption;
+import view.employee.EmployeeInfoFormPanel;
 import view.employee.EmployeePageView;
 import view.home.HomePageView;
 import view.inventory.InventoryView;
@@ -91,7 +92,7 @@ public class AppView extends JFrame {
 		DashboardOption invetoryOption = new DashboardOption("INVETORY", "/assets/collection.png", new InventoryView());
 		DashboardOption ordersOption = new DashboardOption("ORDERS", "/assets/shopping-cart.png", new CustomerView());
 		DashboardOption customerOption = new DashboardOption("CUSTOMER", "/assets/customer.png", new CustomerView());
-		DashboardOption employeeOption = new DashboardOption("EMPLOYEE", "/assets/users.png", new EmployeePageView());
+		DashboardOption employeeOption = new DashboardOption("EMPLOYEE", "/assets/users.png", new EmployeeInfoFormPanel());
 		DashboardOption statisticReportOption = new DashboardOption("STATISTIC REPORT", "/assets/chart-pie.png",
 				new HomePageView());
 		DashboardOption discountOption = new DashboardOption("DISCOUNT", "/assets/ticket.png", new CustomerView());

@@ -10,5 +10,6 @@ public class ConstantValueView {
 	public static Color btnColor = new Color (148,109,67); 
 	
 	public static Font h1 = new Font("Arial", Font.BOLD, 32); 
+	public static Font normalText = new Font("Arial",Font.PLAIN,16 ); 
 	
 }

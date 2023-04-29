@@ -5,5 +5,5 @@ public class CustomerModel {
 	private String name;
 	private String phoneNumber;
 	private String point;
-	
+	private CUSTOMER type; 
 }

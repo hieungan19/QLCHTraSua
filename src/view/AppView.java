@@ -1,5 +1,7 @@
 package view;
 import java.awt.EventQueue;
+
+import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import controller.AppController;
@@ -90,7 +92,7 @@ public class AppView extends JFrame {
 		DashboardOption homeOption = new DashboardOption("HOME", "/assets/home.png", new HomePageView());
 		DashboardOption menuOption = new DashboardOption("MENU", "/assets/menu.png", new CustomerView());
 		DashboardOption invetoryOption = new DashboardOption("INVETORY", "/assets/collection.png", new InventoryView());
-		DashboardOption ordersOption = new DashboardOption("ORDERS", "/assets/shopping-cart.png", new CustomerView());
+		DashboardOption ordersOption = new DashboardOption("ORDERS", "/assets/shopping-cart.png", new OrdersView());
 		DashboardOption customerOption = new DashboardOption("CUSTOMER", "/assets/customer.png", new CustomerView());
 		DashboardOption employeeOption = new DashboardOption("EMPLOYEE", "/assets/users.png", new EmployeeInfoFormPanel());
 		DashboardOption statisticReportOption = new DashboardOption("STATISTIC REPORT", "/assets/chart-pie.png",
@@ -108,7 +110,7 @@ public class AppView extends JFrame {
 		optionList.add(discountOption);
 
 		appController = new AppController(root);
-		root.setLayout(new GridLayout()); 
+		root.setLayout(new GridLayout());		
 
 		appController.setView(homeOption);
 		appController.setEvent(optionList);

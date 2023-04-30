@@ -1,15 +1,20 @@
 package view;
 import java.awt.EventQueue;
 
-import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import controller.AppController;
 import model.DashboardOption;
+import view.bill.BillPageView;
+import view.customer.CustomerInfoForm;
+import view.customer.CustomerPageView;
+import view.discount.DiscountInfoForm;
+import view.discount.DiscountPageView;
 import view.employee.EmployeeInfoFormPanel;
 import view.employee.EmployeePageView;
 import view.home.HomePageView;
 import view.inventory.InventoryView;
+import view.report.StatisticalReportPageView;
 
 import java.awt.GridLayout;
 import java.util.ArrayList;
@@ -90,14 +95,14 @@ public class AppView extends JFrame {
 		// HOME Option
 
 		DashboardOption homeOption = new DashboardOption("HOME", "/assets/home.png", new HomePageView());
-		DashboardOption menuOption = new DashboardOption("MENU", "/assets/menu.png", new CustomerView());
+		DashboardOption menuOption = new DashboardOption("MENU", "/assets/menu.png", new CustomerPageView());
 		DashboardOption invetoryOption = new DashboardOption("INVETORY", "/assets/collection.png", new InventoryView());
-		DashboardOption ordersOption = new DashboardOption("ORDERS", "/assets/shopping-cart.png", new OrdersView());
-		DashboardOption customerOption = new DashboardOption("CUSTOMER", "/assets/customer.png", new CustomerView());
-		DashboardOption employeeOption = new DashboardOption("EMPLOYEE", "/assets/users.png", new EmployeeInfoFormPanel());
+		DashboardOption ordersOption = new DashboardOption("ORDERS", "/assets/shopping-cart.png", new BillPageView());
+		DashboardOption customerOption = new DashboardOption("CUSTOMER", "/assets/customer.png", new CustomerPageView());
+		DashboardOption employeeOption = new DashboardOption("EMPLOYEE", "/assets/users.png", new EmployeePageView());
 		DashboardOption statisticReportOption = new DashboardOption("STATISTIC REPORT", "/assets/chart-pie.png",
-				new HomePageView());
-		DashboardOption discountOption = new DashboardOption("DISCOUNT", "/assets/ticket.png", new CustomerView());
+				new StatisticalReportPageView());
+		DashboardOption discountOption = new DashboardOption("DISCOUNT", "/assets/ticket.png", new DiscountPageView());
 
 		optionList.add(homeOption);
 		optionList.add(menuOption);

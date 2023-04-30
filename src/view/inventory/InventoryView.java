@@ -15,8 +15,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
-import javax.swing.LayoutStyle;
-import javax.swing.border.Border;
+
 import javax.swing.JScrollPane;
 
 
@@ -26,9 +25,6 @@ import javax.swing.table.JTableHeader;
 import constant.ConstantValueView;
 import controller.AppController;
 import model.InventoryModel;
-import view.AppView;
-
-import java.awt.BorderLayout;
 import globalComponent.SearchBar;
 import javax.swing.LayoutStyle.ComponentPlacement;
 

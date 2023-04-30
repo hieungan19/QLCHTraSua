@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 
 import java.awt.GridBagConstraints;
 import javax.swing.SwingConstants;
@@ -34,18 +35,17 @@ public class EmployeeInfoFormPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public EmployeeInfoFormPanel() {
-		setLayout(null);
-		
-		
-		
-		JPanel panel_info = new JPanel();
-		panel_info.setBounds(54, 22, 552, 475);
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWeights = new double[]{1.0};
-		gridBagLayout.rowWeights = new double[]{0.0, 1.0, 1.0};
-		panel_info.setLayout(gridBagLayout);
-		this.add(panel_info); 
-		
+		JPanel contentPanel = new JPanel();
+		contentPanel.setSize(790, 630);
+		contentPanel.setLocation(20, 20);
+		this.setLayout(null);
+		this.add(contentPanel);
+		GridBagLayout gbl_contentPanel = new GridBagLayout();
+		gbl_contentPanel.columnWidths = new int[]{0, 0};
+		gbl_contentPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
+		gbl_contentPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[]{1.0, 0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
+		contentPanel.setLayout(gbl_contentPanel);
 		
 		AppLabel lblNewLabel = new AppLabel("THÔNG TIN NHÂN VIÊN",24,true);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -55,16 +55,16 @@ public class EmployeeInfoFormPanel extends JPanel {
 		gbc_lblNewLabel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblNewLabel.gridx = 0;
 		gbc_lblNewLabel.gridy = 0;
-		panel_info.add(lblNewLabel, gbc_lblNewLabel);
+		contentPanel.add(lblNewLabel, gbc_lblNewLabel);
 		
 		JPanel panel_form = new JPanel();
 		GridBagConstraints gbc_panel_form = new GridBagConstraints();
-		gbc_panel_form.weighty = 10.0;
+		gbc_panel_form.weighty = 8.0;
 		gbc_panel_form.insets = new Insets(0, 0, 5, 0);
 		gbc_panel_form.fill = GridBagConstraints.BOTH;
 		gbc_panel_form.gridx = 0;
 		gbc_panel_form.gridy = 1;
-		panel_info.add(panel_form, gbc_panel_form);
+		contentPanel.add(panel_form, gbc_panel_form);
 		panel_form.setLayout(new GridLayout(9, 2, 0, 5));
 		
 		AppLabel lblNewLabel_1 = new AppLabel("New label");
@@ -148,10 +148,6 @@ public class EmployeeInfoFormPanel extends JPanel {
 	   lblNewLabel_1_1.setText("Chức vụ");
 	   panel_form.add(lblNewLabel_1_1);
 	   
-	   JPanel panel_2 = new JPanel();
-	   panel_form.add(panel_2);
-	   panel_2.setLayout(new GridLayout(0, 3, 10, 0));
-	   
 	   
 	   JPanel panel_3 = new JPanel();
 	   FlowLayout flowLayout = (FlowLayout) panel_3.getLayout();
@@ -161,7 +157,7 @@ public class EmployeeInfoFormPanel extends JPanel {
 	   gbc_panel_3.fill = GridBagConstraints.BOTH;
 	   gbc_panel_3.gridx = 0;
 	   gbc_panel_3.gridy = 2;
-	   panel_info.add(panel_3, gbc_panel_3);
+	   contentPanel.add(panel_3, gbc_panel_3);
 	   
 	   AppButton btnNewButton_delete = new AppButton("New button");
 	   btnNewButton_delete.setText("SỬA");
@@ -178,27 +174,10 @@ public class EmployeeInfoFormPanel extends JPanel {
 	   String[] options = {"Option 1", "Option 2", "Option 3"};
 
        // Tạo dropdown list và đặt giá trị mặc định
-       JComboBox<String> comboBox = new JComboBox<>(options);
+       JComboBox<String> comboBox = new JComboBox<String>(options);
        comboBox.setSelectedIndex(0);
+       panel_form.add(comboBox); 
 
-       // Tạo trường văn bản để cho phép thêm tùy chọn mới
-       textField = new AppLineBorderTextField();
-
-       // Tạo nút để thêm tùy chọn mới
-       JButton addButton = new JButton("Add");
-       addButton.addActionListener(new ActionListener() {
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			String newOption = textField.getText();
-            if (!newOption.isEmpty()) {
-                comboBox.addItem(newOption);
-                comboBox.setSelectedIndex(comboBox.getItemCount()-1);
-                textField.setText("");
-            }
-		}
-       }); 
 	}
 
 }

@@ -61,7 +61,7 @@ public class ChooseDrinkDialog extends JDialog {
 			getContentPane().add(btnSave); 
 			
 			//Enter amount text field (number) 
-			SpinnerModel model = new SpinnerNumberModel(0, 0, 100, 1);
+		
 			
 			
 			//Note text field
@@ -92,7 +92,8 @@ public class ChooseDrinkDialog extends JDialog {
 		lblNewLabel_1.setBounds(203, 21, 106, 33);
 		getContentPane().add(lblNewLabel_1);
 		
-		JSpinner spinner = new JSpinner((SpinnerModel) null);
+		SpinnerModel model = new SpinnerNumberModel(0, 0, 100, 1);
+		JSpinner spinner = new JSpinner(model);
 		spinner.setFont(new Font("Arial", Font.PLAIN, 16));
 		spinner.setBounds(313, 21, 113, 33);
 		getContentPane().add(spinner);

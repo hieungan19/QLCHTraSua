@@ -18,7 +18,7 @@ public class DatePickerComponent extends JDateChooser {
         this.setBorder(new LineBorder(ConstantValueView.primaryColor, 2));
         this.setFont(ConstantValueView.normalText);
         this.setDateFormatString("dd-MM-yyyy");
-
+        this.setSize(new Dimension(100,40));
         // Set default date to today
         this.setDate(new Date());
     }

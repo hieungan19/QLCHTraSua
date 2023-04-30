@@ -1,35 +1,31 @@
-package view.discount;
+package view.product;
+
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Insets;
+
 
 import javax.swing.JPanel;
+
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.ImageIcon;
+
 import globalComponent.AppButton;
 import globalComponent.AppLabel;
 import globalComponent.AppScrollTable;
 import globalComponent.SearchBar;
+import view.ImageTableCellRenderer;
 
+public class ProductPageView extends JPanel{
 
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
-
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-
-
-public class DiscountPageView extends JPanel {
-
-	/**
-	 * Create the panel.
-	 */
-	public DiscountPageView() {
-		Object[][] object = new Object[][] {
-			{"", null, null, null, null, null},
-			{"", null, null, null, null, null},
-		};
-		
+	public ProductPageView() {
 		String[] titleList  = new String[] {
-				"Mã khuyến mãi", "Tên khuyến mãi","Chi tiết","Số tiền KM", "Phần trăm KM","Áp dụng"
-			}; 
+				"Mã món", "Ảnh", "Tên sản phẩm", "Phân loại", "Đơn giá", "Nguyên liệu"
+			};
 		JPanel contentPanel = new JPanel();
 		contentPanel.setBounds(20, 20, 790, 630);
 		this.setLayout(null);
@@ -56,7 +52,7 @@ public class DiscountPageView extends JPanel {
 		panel_1.setLayout(gbl_panel_1);
 		
 		AppLabel lblNewLabel = new AppLabel("QUẢN LÝ KHUYẾN MÃI", 32, true);
-		lblNewLabel.setText("KHUYẾN MÃI");
+		lblNewLabel.setText("SẢN PHẨM");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.gridx = 0;
 		gbc_lblNewLabel.gridy = 0;
@@ -91,15 +87,33 @@ public class DiscountPageView extends JPanel {
 		contentPanel.add(panel, gbc_panel);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-
+		Object[][] object = new Object[][] {
+			 { "001", null, "Trà sữa hoa lài-L", "Trà sữa", "38000", null },
+		};
 		
-		AppScrollTable scrollPane_discount = new AppScrollTable(new DefaultTableModel(
+ 
+		
+		AppScrollTable scrollPane_product = new AppScrollTable(new DefaultTableModel(
 				object, titleList
 		));
+	
+		panel.add(scrollPane_product);
 		
 		
-		panel.add(scrollPane_discount);
+	scrollPane_product.jTable.setRowHeight(100);
+	// Set the cell renderer for the "Ảnh" column
+	TableColumn imageColumn = scrollPane_product.jTable.getColumnModel().getColumn(1); // "Ảnh" column
+	imageColumn.setCellRenderer(new ImageTableCellRenderer());
+
+	// Set an image for a specific row and column
+	
+	ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/assets/tamthoitea.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+	scrollPane_product.jTable.getModel().setValueAt(imageIcon, 0, 1); // row and column indices start from 0
+	
+
+
 		
+	    
 	}
 
 }

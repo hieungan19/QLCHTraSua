@@ -40,6 +40,14 @@ public class BillPageView extends JPanel{
 	 * Create the panel.
 	 */
 	public BillPageView() {
+		Object[][] object = new Object[][] {
+			
+		};
+		
+		String[] titleList  = new String[] {
+				"Mã hóa đơn","Ngày hóa đơn", "Mã nhân viên","Tên nhân viên","Mã khách hàng","Tên khách hàng","Trị giá hóa đơn"
+			}; 
+		
 		JPanel contentPanel = new JPanel();
 		contentPanel.setBounds(20, 20, 790, 630);
 		this.setLayout(null);
@@ -72,7 +80,7 @@ public class BillPageView extends JPanel{
 		gbc_lblNewLabel.gridy = 0;
 		panel_1.add(lblNewLabel, gbc_lblNewLabel);
 		
-		SearchBar searchBar = new SearchBar();
+		SearchBar searchBar = new SearchBar(titleList);
 
 		GridBagConstraints gbc_searchBar = new GridBagConstraints();
 		gbc_searchBar.insets = new Insets(0, 20, 0, 20);
@@ -101,16 +109,10 @@ public class BillPageView extends JPanel{
 		contentPanel.add(panel, gbc_panel);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		Object[][] object = new Object[][] {
-			
-		};
-		
-		String[] title  = new String[] {
-				"Mã hóa đơn","Ngày hóa đơn", "Mã nhân viên","Tên nhân viên","Mã khách hàng","Tên khách hàng","Trị giá hóa đơn"
-			}; 
+
 		
 		AppScrollTable scrollPane_bill = new AppScrollTable(new DefaultTableModel(
-				object, title
+				object, titleList
 		));
 	
 		panel.add(scrollPane_bill);

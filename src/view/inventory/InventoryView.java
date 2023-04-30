@@ -3,7 +3,10 @@ package view.inventory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -25,120 +28,88 @@ import javax.swing.table.JTableHeader;
 import constant.ConstantValueView;
 import controller.AppController;
 import model.InventoryModel;
+import globalComponent.AppButton;
+import globalComponent.AppLabel;
+import globalComponent.AppScrollTable;
 import globalComponent.SearchBar;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class InventoryView extends JPanel {
-	private JTable jtable_Item;
-	private InventoryModel inventoryModel;
+
 
 	/**
 	 * Create the panel.
 	 */
 	public InventoryView() {
-		setForeground(new Color(0, 0, 0));
-		setBackground(ConstantValueView.background);
-		setPreferredSize(new Dimension(840, 740));
-
-		// Tạo label INVENTORY
-		JLabel jLabel_inventory = new JLabel("INVENTORY");
-		jLabel_inventory.setBounds(20, 20, 180, 60);
-		jLabel_inventory.setForeground(ConstantValueView.primaryDark);
-		jLabel_inventory.setFont(new Font("Tahoma", Font.BOLD, 25));
-		add(jLabel_inventory);
-		// Tạo nút thêm
-		JButton jbutton_addItem = new JButton("+");
-		jbutton_addItem.setBounds(647, 24, 173, 51);
+		String[] titleList = { "Mã hàng", "Ngày nhập", "Tên mặt hàng", "Đơn vị tính", "Số lượng", "Giá(VNĐ)" };
+		Object[][] object = { { "001", null, null, null, null, null }, { "", null, null, null, null, null },
+				 };
+		JPanel contentPanel = new JPanel();
+		contentPanel.setBounds(20, 20, 790, 630);
+		this.setLayout(null);
+		this.add(contentPanel);
+		GridBagLayout gbl_contentPanel = new GridBagLayout();
+		gbl_contentPanel.columnWidths = new int[]{0, 0};
+		gbl_contentPanel.rowHeights = new int[]{0, 0, 0};
+		gbl_contentPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
+		contentPanel.setLayout(gbl_contentPanel);
 		
-		jbutton_addItem.setBorder(null);
-		jbutton_addItem.setBackground(new Color(205, 133, 63));
-		jbutton_addItem.setForeground(new Color(248, 248, 255));
-		jbutton_addItem.setFont(new Font("Tahoma", Font.PLAIN, 33));
-		add(jbutton_addItem);
-
-		// Tạo bảng
-
-		JScrollPane scrollPane_inventory = new JScrollPane();
-		scrollPane_inventory.setSize(752, 123);
-		scrollPane_inventory.setLocation(45, 126);
-		add(scrollPane_inventory);
-
-		jtable_Item = new JTable();
-		scrollPane_inventory.setViewportView(jtable_Item);
-		jtable_Item.setBackground(ConstantValueView.background);
-		jtable_Item.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		jtable_Item.setForeground(new Color(0, 0, 0));
-		jtable_Item.setModel(new DefaultTableModel(
-				new Object[][] { { "001", null, null, null, null, null }, { "", null, null, null, null, null },
-						{ "", null, null, null, null, null }, { "", null, null, null, null, null },
-						{ null, null, null, null, null, null }, { null, null, null, null, null, null }, },
-				new String[] { "Mã hàng", "Ngày nhập", "Tên mặt hàng", "Phân loại", "Số lượng", "Giá(VNĐ)" }));
-
-		jtable_Item.setFillsViewportHeight(true);
-		// đổi màu chữ và nền cho cột bảng
-		JTableHeader head = jtable_Item.getTableHeader();
-		head.setBackground(ConstantValueView.background);
-		head.setForeground(Color.BLACK);
-		head.setFont(new Font("Tahome", Font.BOLD, 15));
-
-		// tạo trang Thêm mặt hàng
+		JPanel panel_1 = new JPanel();
+		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_1.fill = GridBagConstraints.BOTH;
+		gbc_panel_1.gridx = 0;
+		gbc_panel_1.gridy = 0;
+		contentPanel.add(panel_1, gbc_panel_1);
+		GridBagLayout gbl_panel_1 = new GridBagLayout();
+		gbl_panel_1.columnWidths = new int[]{0, 0};
+		gbl_panel_1.rowHeights = new int[]{0, 0};
+		gbl_panel_1.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_panel_1.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		panel_1.setLayout(gbl_panel_1);
 		
-		jbutton_addItem.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-//				ItemDetail itemDetail = new ItemDetail();
-//				desktopPane.add(itemDetail);
-				
-				InventoryItemDetails addItemPanel = new InventoryItemDetails();
-				
-				AppController.root.removeAll();
-				AppController.root.setLayout(new GridLayout()); 
-
-		        // Add the child panel to the parent panel
-		        AppController.root.add(addItemPanel);
-				
-				AppController.root.revalidate();
-				AppController.root.repaint();
-				addItemPanel.setVisible(true);
-			}
-		});
+		AppLabel lblNewLabel = new AppLabel("KHO HÀNG", 32, true);
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.gridx = 0;
+		gbc_lblNewLabel.gridy = 0;
+		panel_1.add(lblNewLabel, gbc_lblNewLabel);
 		
-		//add searchbar vào
-		SearchBar searchBarPanel = new SearchBar();
-	    add(searchBarPanel);
+		SearchBar searchBar = new SearchBar(titleList);
 
-	    // use GroupLayout to position the components
-	    GroupLayout layout = new GroupLayout(this);
-	    layout.setHorizontalGroup(
-	    	layout.createParallelGroup(Alignment.LEADING)
-	    		.addGroup(layout.createSequentialGroup()
-	    			.addGroup(layout.createParallelGroup(Alignment.TRAILING, false)
-	    				.addGroup(Alignment.LEADING, layout.createSequentialGroup()
-	    					.addContainerGap()
-	    					.addComponent(scrollPane_inventory))
-	    				.addGroup(Alignment.LEADING, layout.createSequentialGroup()
-	    					.addGap(4)
-	    					.addComponent(jLabel_inventory)
-	    					.addPreferredGap(ComponentPlacement.UNRELATED)
-	    					.addComponent(searchBarPanel, GroupLayout.PREFERRED_SIZE, 470, GroupLayout.PREFERRED_SIZE)
-	    					.addGap(18)
-	    					.addComponent(jbutton_addItem, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)))
-	    			.addContainerGap(18, Short.MAX_VALUE))
-	    );
-	    layout.setVerticalGroup(
-	    	layout.createParallelGroup(Alignment.LEADING)
-	    		.addGroup(layout.createSequentialGroup()
-	    			.addGap(27)
-	    			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-	    				.addComponent(jbutton_addItem, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-	    				.addComponent(searchBarPanel, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-	    				.addComponent(jLabel_inventory, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE))
-	    			.addGap(71)
-	    			.addComponent(scrollPane_inventory, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
-	    			.addGap(469))
-	    );
-	    setLayout(layout);
+		GridBagConstraints gbc_searchBar = new GridBagConstraints();
+		gbc_searchBar.insets = new Insets(0, 20, 0, 20);
+		gbc_searchBar.anchor = GridBagConstraints.NORTH;
+		gbc_searchBar.fill = GridBagConstraints.HORIZONTAL;
+		gbc_searchBar.gridx = 1;
+		gbc_searchBar.gridy = 0;
+		gbc_searchBar.weightx = 3.0;
+		panel_1.add(searchBar, gbc_searchBar); 
+		
+		AppButton btnNewButton = new AppButton("+");
+		btnNewButton.setFont(new Font("SansSerif", Font.BOLD, 32));
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.fill = GridBagConstraints.VERTICAL;
+		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton.gridx = 2;
+		gbc_btnNewButton.gridy = 0;
+		panel_1.add(btnNewButton, gbc_btnNewButton);
+		
+		JPanel panel = new JPanel();
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.weighty = 20.0;
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 1;
+		contentPanel.add(panel, gbc_panel);
+		panel.setLayout(new GridLayout(0, 1, 0, 0));
+
+		AppScrollTable scrollPane_inventoryItem = new AppScrollTable(new DefaultTableModel(
+				object, titleList
+		));
+	
+		panel.add(scrollPane_inventoryItem);
+		
 	}
 	
 }

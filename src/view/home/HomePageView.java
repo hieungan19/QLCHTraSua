@@ -14,6 +14,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 
 import constant.ConstantValueView;
+import globalComponent.AppButton;
 import globalComponent.AppLabel;
 import globalComponent.SearchBar;
 import model.DrinkModel;
@@ -25,6 +26,9 @@ import java.awt.Component;
 import java.awt.BorderLayout;
 import java.awt.Rectangle;
 import java.awt.Color;
+import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import javax.swing.ScrollPaneConstants;
 
 public class HomePageView extends JPanel {
 
@@ -34,34 +38,23 @@ public class HomePageView extends JPanel {
 	public HomePageView() {
 		this.setPreferredSize(new Dimension(840, 740));
 		this.setBackground(ConstantValueView.background);
-		//cart 
-		JPanel panel_bill = new JPanel();
-		CartPanel cart = new CartPanel(); 
-		cart.setBounds(0, 0, 351, 730);
-		panel_bill.setBackground(ConstantValueView.primaryColor);
+		DrinkModel dummy = new DrinkModel("D01", "Tra sua Olong",20000 ,false,"/assets/bg-login.png", null,"Trà sữa", null);;
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{420, 420, 0};
+		gridBagLayout.rowHeights = new int[]{740, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
 		
 		// Menu tổng thể 
 		JPanel panel_menuOder = new JPanel();
 		panel_menuOder.setOpaque(false);
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(panel_menuOder, GroupLayout.PREFERRED_SIZE, 481, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addComponent(panel_bill, GroupLayout.PREFERRED_SIZE, 351, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panel_bill, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
-						.addComponent(panel_menuOder, GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE))
-					.addContainerGap())
-		);
-		panel_bill.setLayout(null);
-		panel_bill.add(cart);
+		GridBagLayout gbl_panel_menuOder = new GridBagLayout();
+		gbl_panel_menuOder.columnWidths = new int[] {600, 0};
+		gbl_panel_menuOder.rowHeights = new int[] {60, 0, 0, 0};
+		gbl_panel_menuOder.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_panel_menuOder.rowWeights = new double[]{0.0, 1.0, 0.0, 1.0};
+		panel_menuOder.setLayout(gbl_panel_menuOder);
 		
 		//header bao gồm: MENU và user name, Date now
 		
@@ -72,75 +65,11 @@ public class HomePageView extends JPanel {
 		flowLayout.setVgap(10);
 		flowLayout.setHgap(20);
 		
-		// menu bao gồm thanh search, filter và main menu
-		JPanel panel_menu = new JPanel();
-		panel_menu.setOpaque(false);
-		GroupLayout gl_panel_menuOder = new GroupLayout(panel_menuOder);
-		gl_panel_menuOder.setHorizontalGroup(
-			gl_panel_menuOder.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel_header, GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
-				.addComponent(panel_menu, GroupLayout.PREFERRED_SIZE, 491, Short.MAX_VALUE)
-		);
-		gl_panel_menuOder.setVerticalGroup(
-			gl_panel_menuOder.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel_menuOder.createSequentialGroup()
-					.addComponent(panel_header, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_menu, GroupLayout.PREFERRED_SIZE, 654, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
-		
-		JPanel panel_search = new JPanel();
-		FlowLayout fl_panel_search = new FlowLayout(FlowLayout.LEFT, 30, 5);
-		panel_search.setLayout(fl_panel_search);
-		SearchBar searchBarView = new SearchBar();
-		BorderLayout borderLayout = (BorderLayout) searchBarView.getLayout();
-		borderLayout.setHgap(10);
-		borderLayout.setVgap(10);
-		searchBarView.setPreferredSize(new Dimension(450, 40));
-		panel_search.add(searchBarView); 
-		
-		panel_search.setOpaque(false);
-		
-		//filter menu 
-		JPanel panel_filter = new JPanel();
-		FlowLayout flowLayout_1 = (FlowLayout) panel_filter.getLayout();
-		flowLayout_1.setHgap(30);
-		flowLayout_1.setAlignment(FlowLayout.LEFT);
-		panel_filter.setOpaque(false);
-		FilterMenuButton filterBtn = new FilterMenuButton("MILK TEA");
-		filterBtn.setPreferredSize(new Dimension(100,50));
-		panel_filter.add(filterBtn);
-		DrinkModel dummy = new DrinkModel("D01", "Tra sua Olong",20000 ,false,"/assets/bg-login.png", null,"Trà sữa", null);
-		GroupLayout gl_panel_menu = new GroupLayout(panel_menu);
-		gl_panel_menu.setHorizontalGroup(
-			gl_panel_menu.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel_filter, GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
-				.addGroup(gl_panel_menu.createSequentialGroup()
-					.addComponent(panel_search, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(11, Short.MAX_VALUE))
-		);
-		gl_panel_menu.setVerticalGroup(
-			gl_panel_menu.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_menu.createSequentialGroup()
-					.addComponent(panel_search, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(panel_filter, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(534, Short.MAX_VALUE))
-		);
-		panel_menu.setLayout(gl_panel_menu);
-		
-		//Main menu 
-		MainMenuPanel mainMenu  = new MainMenuPanel();
-		mainMenu.setOpaque(false); 
-		mainMenu.setBounds(new Rectangle(0, 120, 490, 520));
-		panel_menu.add(mainMenu);
-		
 		AppLabel lblNewLabel_menu = new AppLabel("MENU",32,true);
 		panel_header.add(lblNewLabel_menu);
 		
 		JPanel panel_info = new JPanel();
-		panel_info.setOpaque(false);;
+		panel_info.setOpaque(false);
 		panel_header.add(panel_info);
 		panel_info.setLayout(new GridLayout(2, 1, 0, 0));
 		
@@ -149,15 +78,88 @@ public class HomePageView extends JPanel {
 		lblNewLabel_userName.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNewLabel_userName.setForeground(ConstantValueView.primaryColor);
 		panel_info.add(lblNewLabel_userName);
-	
 		
-		//date
-		JLabel lblNewLabel_dateNow = new JLabel("Date");
-		lblNewLabel_dateNow.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_dateNow.setForeground(ConstantValueView.primaryColor); 
-		panel_info.add(lblNewLabel_dateNow);
-		panel_menuOder.setLayout(gl_panel_menuOder);
-		setLayout(groupLayout);
+			
+			//date
+			JLabel lblNewLabel_dateNow = new JLabel("Date");
+			lblNewLabel_dateNow.setFont(new Font("Tahoma", Font.BOLD, 16));
+			lblNewLabel_dateNow.setForeground(ConstantValueView.primaryColor); 
+			panel_info.add(lblNewLabel_dateNow);
+			GridBagConstraints gbc_panel_header = new GridBagConstraints();
+			gbc_panel_header.anchor = GridBagConstraints.NORTH;
+			gbc_panel_header.fill = GridBagConstraints.HORIZONTAL;
+			gbc_panel_header.insets = new Insets(0, 0, 5, 0);
+			gbc_panel_header.gridx = 0;
+			gbc_panel_header.gridy = 0;
+			panel_menuOder.add(panel_header, gbc_panel_header);
+			
+			SearchBar searchBarView = new SearchBar(new String[] {"Tên sản phẩm", "Mã sản phẩm"});
+			GridBagConstraints gbc_searchBarView = new GridBagConstraints();
+			gbc_searchBarView.insets = new Insets(0, 20, 5, 20);
+			gbc_searchBarView.fill = GridBagConstraints.BOTH;
+			gbc_searchBarView.gridx = 0;
+			gbc_searchBarView.gridy = 1;
+			panel_menuOder.add(searchBarView, gbc_searchBarView);
+			
+			JPanel panel = new JPanel();
+			panel.setBackground(ConstantValueView.background);
+			GridBagConstraints gbc_panel = new GridBagConstraints();
+			gbc_panel.weighty = 1.0;
+			gbc_panel.insets = new Insets(10, 20, 0, 20);
+			gbc_panel.fill = GridBagConstraints.BOTH;
+			gbc_panel.gridx = 0;
+			gbc_panel.gridy = 2;
+			panel_menuOder.add(panel, gbc_panel);
+			panel.setLayout(new GridLayout(0, 1, 0, 0));
+			
+			JPanel panel_filterButton = new JPanel();
+			
+			
+			JScrollPane scrollPane = new JScrollPane(panel_filterButton);
+			scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+			panel.add(scrollPane);
+			panel_filterButton.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 0));
+			
+			
+			
+			AppButton btnTrSa = new AppButton("TRÀ SỮA");
+			panel_filterButton.add(btnTrSa);
+			
+			
+			JPanel panel_menu = new JPanel();
+			panel_menu.setOpaque(false);
+			GridBagConstraints gbc_panel_menu = new GridBagConstraints();
+			gbc_panel_menu.insets = new Insets(0, 0, 5, 0);
+			gbc_panel_menu.weighty = 30.0;
+			gbc_panel_menu.fill = GridBagConstraints.BOTH;
+			gbc_panel_menu.gridx = 0;
+			gbc_panel_menu.gridy = 3;
+			panel_menuOder.add(panel_menu, gbc_panel_menu);
+			panel_menu.setLayout(new GridLayout(0, 1, 0, 0));
+			
+			MainMenuPanel mainMenu = new MainMenuPanel();
+			mainMenu.setOpaque(false);
+			mainMenu.setBounds(new Rectangle(0, 120, 490, 520));
+			panel_menu.add(mainMenu);
+			GridBagConstraints gbc_panel_menuOder = new GridBagConstraints();
+			gbc_panel_menuOder.weightx = 3.0;
+			gbc_panel_menuOder.fill = GridBagConstraints.BOTH;
+			gbc_panel_menuOder.insets = new Insets(0, 0, 0, 5);
+			gbc_panel_menuOder.gridx = 0;
+			gbc_panel_menuOder.gridy = 0;
+			add(panel_menuOder, gbc_panel_menuOder);
+		//cart 
+		JPanel panel_bill = new JPanel();
+		CartPanel cart = new CartPanel();
+		panel_bill.setBackground(ConstantValueView.primaryColor);
+		panel_bill.setLayout(new GridLayout(0, 1, 0, 0));
+		panel_bill.add(cart);
+		GridBagConstraints gbc_panel_bill = new GridBagConstraints();
+		gbc_panel_bill.weightx = 1.0;
+		gbc_panel_bill.fill = GridBagConstraints.BOTH;
+		gbc_panel_bill.gridx = 1;
+		gbc_panel_bill.gridy = 0;
+		add(panel_bill, gbc_panel_bill);
 		
 		
 	}

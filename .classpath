@@ -8,5 +8,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
 	<classpathentry kind="lib" path="jgoodies-forms-1.8.0.jar" sourcepath="jgoodies-forms-1.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DELL/Downloads/jgoodies-looks-2_5_3/jgoodies-looks-2.5.3/jgoodies-looks-2.5.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

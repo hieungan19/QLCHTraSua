@@ -6,9 +6,11 @@ import java.awt.FlowLayout;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import globalComponent.AppButton;
 import globalComponent.AppLabel;
+import globalComponent.AppScrollTable;
 
 import java.awt.GridLayout;
 import javax.swing.SwingConstants;
@@ -18,6 +20,13 @@ public class BillDialog extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 
 	public BillDialog() {
+		String[] titleList = {
+				"M\u00E3 \u0111\u1ED3 u\u1ED1ng", "T\u00EAn \u0111\u1ED3 u\u1ED1ng", "Topping", "S\u1ED1 l\u01B0\u1EE3ng", "T\u1ED5ng gi\u00E1"
+			, "Ghi chú"};
+		Object[][] object = new Object[][] {
+			{"1", null, "abcababababababababa", null, null,null},
+			
+		}; 
 		
 		setBounds(0,0, 550, 719);
 		setLocationRelativeTo(null);
@@ -85,7 +94,7 @@ public class BillDialog extends JDialog {
 		{
 			JPanel panel_tableDrink = new JPanel();
 			panel_tableDrink.setLayout(new GridLayout(0, 1, 0, 0));
-			DrinkScrollPaneTable table_scrollPane = new DrinkScrollPaneTable();
+			AppScrollTable table_scrollPane = new AppScrollTable(new DefaultTableModel(object, titleList));
 			table_scrollPane.setEnabled(false);
 			panel_tableDrink.add(table_scrollPane); 
 			contentPanel.add(panel_tableDrink);

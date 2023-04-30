@@ -31,6 +31,11 @@ public class EmployeePageView extends JPanel {
 	 * Create the panel.
 	 */
 	public EmployeePageView() {
+		
+		String[] titleList  = new String[] {
+				"Mã nhân viên", "Tên Nhân viên","Ngày vào làm","Ngày sinh", "Số CCCD","Chức vụ","Lương cơ bản","SĐT","Email","Địa chỉ"
+			}; 
+		
 		JPanel contentPanel = new JPanel();
 		contentPanel.setBounds(20, 20, 790, 630);
 		this.setLayout(null);
@@ -63,7 +68,7 @@ public class EmployeePageView extends JPanel {
 		gbc_lblNewLabel.gridy = 0;
 		panel_1.add(lblNewLabel, gbc_lblNewLabel);
 		
-		SearchBar searchBar = new SearchBar();
+		SearchBar searchBar = new SearchBar(titleList);
 
 		GridBagConstraints gbc_searchBar = new GridBagConstraints();
 		gbc_searchBar.insets = new Insets(0, 20, 0, 20);
@@ -96,12 +101,10 @@ public class EmployeePageView extends JPanel {
 			
 		};
 		
-		String[] title  = new String[] {
-				"Mã nhân viên", "Tên Nhân viên","Ngày vào làm","Ngày sinh", "Số CCCD","Chức vụ","Lương cơ bản","SĐT","Email","Địa chỉ"
-			}; 
+
 		
 		AppScrollTable scrollPane_employee = new AppScrollTable(new DefaultTableModel(
-				object, title
+				object, titleList
 		));
 	
 		panel.add(scrollPane_employee);

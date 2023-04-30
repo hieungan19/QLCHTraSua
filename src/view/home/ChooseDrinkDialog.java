@@ -20,6 +20,7 @@ import constant.ConstantValueView;
 import globalComponent.AppButton;
 import globalComponent.AppLabel;
 import globalComponent.AppTextField;
+import globalComponent.NumberSpinner;
 import model.DrinkModel;
 
 public class ChooseDrinkDialog extends JDialog {
@@ -42,8 +43,8 @@ public class ChooseDrinkDialog extends JDialog {
 		{
 			// bên trong dialog
 			AppLabel lblNewLabel = new AppLabel("Chọn topping");
-			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-			lblNewLabel.setBounds(203, 125, 68, 15);
+			lblNewLabel.setFont(ConstantValueView.normalText);
+			lblNewLabel.setBounds(203, 64, 92, 19);
 			getContentPane().add(lblNewLabel);
 			DrinkCardComponent drinkImageCard = new DrinkCardComponent(drinkModel);
 			drinkImageCard.setBounds(10, 10, 166, 223);
@@ -68,13 +69,13 @@ public class ChooseDrinkDialog extends JDialog {
 			
 			AppTextField textfieldNote = new AppTextField("Ghi chú"); 
 			textfieldNote.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			textfieldNote.setBounds(203, 66, 253, 45); 
+			textfieldNote.setBounds(203, 191, 253, 45); 
 			getContentPane().add(textfieldNote);
 			
 			//ScrollPane Topping
 			
 			JScrollPane scrollPane_topping = new JScrollPane();
-			scrollPane_topping.setBounds(203, 150, 253, 97);
+			scrollPane_topping.setBounds(203, 98, 253, 83);
 			getContentPane().add(scrollPane_topping);
 		
 //			String[] toppingList = { "item1", "item2", "item3" };
@@ -92,10 +93,9 @@ public class ChooseDrinkDialog extends JDialog {
 		lblNewLabel_1.setBounds(203, 21, 106, 33);
 		getContentPane().add(lblNewLabel_1);
 		
-		SpinnerModel model = new SpinnerNumberModel(0, 0, 100, 1);
-		JSpinner spinner = new JSpinner(model);
-		spinner.setFont(new Font("Arial", Font.PLAIN, 16));
-		spinner.setBounds(313, 21, 113, 33);
+		SpinnerNumberModel model = new SpinnerNumberModel(0, 0, 100, 1);
+		NumberSpinner spinner = new NumberSpinner(model);
+		spinner.setLocation(319, 18);
 		getContentPane().add(spinner);
 	}
 

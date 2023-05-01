@@ -16,6 +16,12 @@ import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import java.awt.Dimension;
+import javax.swing.JComboBox;
+import javax.swing.border.LineBorder;
+
+import constant.ConstantValueView;
+
+import java.awt.Color;
 
 public class CustomerInfoForm extends JPanel {
 	private AppLineBorderTextField textField;
@@ -26,6 +32,7 @@ public class CustomerInfoForm extends JPanel {
 	 * Create the panel.
 	 */
 	public CustomerInfoForm() {
+		String[] options = {"MEMBERSHIP","VIP"}; 
 		JPanel contentPanel = new JPanel();
 		contentPanel.setSize(790, 630);
 		contentPanel.setLocation(20, 20);
@@ -63,7 +70,7 @@ public class CustomerInfoForm extends JPanel {
 		gbc_panel_info.gridx = 0;
 		gbc_panel_info.gridy = 1;
 		contentPanel.add(panel_info, gbc_panel_info);
-		panel_info.setLayout(new GridLayout(4, 0, 0, 10));
+		panel_info.setLayout(new GridLayout(5, 0, 0, 10));
 		
 		AppLabel lblNewLabel_1 = new AppLabel("New label");
 		lblNewLabel_1.setText("Họ tên");
@@ -73,29 +80,31 @@ public class CustomerInfoForm extends JPanel {
 		panel_info.add(textField_1);
 		textField_1.setColumns(10);
 		
-		AppLabel lblNewLabel_2 = new AppLabel("New label");
-		lblNewLabel_2.setText("Số điện thoại");
+		AppLabel lblNewLabel_2 = new AppLabel("Số điện thoại");
 		panel_info.add(lblNewLabel_2);
 		
 		textField = new AppLineBorderTextField();
 		panel_info.add(textField);
 		textField.setColumns(10);
 		
-		AppLabel lblNewLabel_3 = new AppLabel("New label");
-		lblNewLabel_3.setText("Email");
+		AppLabel lblNewLabel_3 = new AppLabel("Email");
 		panel_info.add(lblNewLabel_3);
 		
 		textField_2 = new AppLineBorderTextField();
 		panel_info.add(textField_2);
 		textField_2.setColumns(10);
 		
+		AppLabel lblNewLabel_5 = new AppLabel("Loại khách hàng:");
+		panel_info.add(lblNewLabel_5);
+		
+		JComboBox comboBox = new JComboBox(options);
+		comboBox.setBorder(new LineBorder(ConstantValueView.primaryColor, 2));
+		panel_info.add(comboBox);
+		
+		
 		AppLabel lblNewLabel_4 = new AppLabel("New label");
 		lblNewLabel_4.setText("Điểm thưởng:");
 		panel_info.add(lblNewLabel_4);
-		
-		AppLabel lblNewLabel_5 = new AppLabel("New label");
-		lblNewLabel_5.setText("Loại khách hàng:");
-		panel_info.add(lblNewLabel_5);
 		
 		JPanel panel_1 = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
@@ -108,17 +117,15 @@ public class CustomerInfoForm extends JPanel {
 		gbc_panel_1.gridy = 2;
 		contentPanel.add(panel_1, gbc_panel_1);
 		
-		AppButton btnNewButton = new AppButton("New button");
-		btnNewButton.setText("XÓA");
-		panel_1.add(btnNewButton);
+		AppButton btnDelete = new AppButton("XÓA");
+		panel_1.add(btnDelete);
 		
-		AppButton btnNewButton_1 = new AppButton("New button");
-		btnNewButton_1.setText("LƯU");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		AppButton btnSave = new AppButton("LƯU");
+		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		panel_1.add(btnNewButton_1);
+		panel_1.add(btnSave);
 		
 	}
 }

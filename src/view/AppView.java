@@ -13,6 +13,7 @@ import view.discount.DiscountPageView;
 
 import view.employee.EmployeePageView;
 import view.home.HomePageView;
+import view.inventory.InventoryInfoForm;
 import view.inventory.InventoryView;
 import view.product.ProductPageView;
 import view.report.StatisticalReportPageView;
@@ -75,7 +76,7 @@ public class AppView extends JFrame {
 		contentPane.add(panel_dashboard, BorderLayout.WEST);
 
 		// Ten nhom
-		JLabel lblNewLabel = new JLabel("DILAMDOAN");
+		JLabel lblNewLabel = new JLabel("DILAMDOAN2");
 		lblNewLabel.setBounds(0, 0, 200, 95);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Trajan Pro", Font.BOLD, 16));
@@ -97,7 +98,7 @@ public class AppView extends JFrame {
 
 		DashboardOption homeOption = new DashboardOption("HOME", "/assets/home.png", new HomePageView());
 		DashboardOption menuOption = new DashboardOption("MENU", "/assets/menu.png", new ProductPageView());
-		DashboardOption invetoryOption = new DashboardOption("INVETORY", "/assets/collection.png", new InventoryView());
+		DashboardOption invetoryOption = new DashboardOption("INVETORY", "/assets/collection.png", new InventoryInfoForm());
 		DashboardOption ordersOption = new DashboardOption("ORDERS", "/assets/shopping-cart.png", new BillPageView());
 		DashboardOption customerOption = new DashboardOption("CUSTOMER", "/assets/customer.png", new CustomerPageView());
 		DashboardOption employeeOption = new DashboardOption("EMPLOYEE", "/assets/users.png", new EmployeePageView());

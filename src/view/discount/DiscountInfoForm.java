@@ -137,9 +137,9 @@ public class DiscountInfoForm extends JPanel {
 		AppButton btnNewButton = new AppButton("LƯU");
 		panel_button.add(btnNewButton);
 //		
-		String qualifyingCustomersList[] = {"ALL","MEMBERSHIP","VIP"};
-		JComboBox<String> comboBox = new JComboBox<>(qualifyingCustomersList); 
-		panel_info.add(comboBox); 
+//		String qualifyingCustomersList[] = {"ALL","MEMBERSHIP","VIP"};
+//		JComboBox<String> comboBox = new JComboBox<>(qualifyingCustomersList); 
+//		panel_info.add(comboBox); 
 		
 	}
 }

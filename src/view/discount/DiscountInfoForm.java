@@ -5,8 +5,8 @@ import javax.swing.JScrollPane;
 
 import globalComponent.AppLabel;
 import globalComponent.AppLineBorderTextField;
+import globalComponent.DatePickerComponent;
 import globalComponent.NumberSpinner;
-import view.employee.DatePickerComponent;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;

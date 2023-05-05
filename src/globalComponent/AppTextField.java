@@ -10,7 +10,7 @@ import constant.ConstantValueView;
 
 public class AppTextField extends JTextField{
 	public AppTextField(String text) {
-	
+		setFont(ConstantValueView.normalText);
 		Font font = new Font("Arial", Font.PLAIN, 16);
 		this.setOpaque(false);
 		this.setColumns(10);

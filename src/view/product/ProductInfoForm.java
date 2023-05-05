@@ -6,12 +6,16 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -20,191 +24,175 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.border.LineBorder;
 
 import constant.ConstantValueView;
 import diaglog.AppOptionPaneDialog;
+import globalComponent.AppButton;
+import globalComponent.AppLabel;
 import globalComponent.AppTextField;
+import globalComponent.DatePickerComponent;
+import globalComponent.NumberSpinner;
+
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.SpinnerNumberModel;
 
 
 public class ProductInfoForm extends JPanel {
 
-	/**
-	 * Create the panel.
-	 */
-
-	private JButton jbutton_saveProduct;
-	private JButton jbutton_deleteProduct;
-	private AppTextField jTextField_type;
 	public ProductInfoForm () {
+		JPanel contentPanel = new JPanel();
+		contentPanel.setBounds(20, 20, 790, 630);
 		this.setLayout(null);
-		this.setPreferredSize(new Dimension(840, 740));
-		this.setBackground(new Color(245, 222, 179));
-
+		this.add(contentPanel);
+		GridBagLayout gbl_contentPanel = new GridBagLayout();
+		gbl_contentPanel.columnWidths = new int[]{0, 0};
+		gbl_contentPanel.rowHeights = new int[]{0, 0, 0, 0};
+		gbl_contentPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
+		contentPanel.setLayout(gbl_contentPanel);
 		
-		Font font = new Font("Arial", Font.PLAIN, 18);
 		
-		//Tạo comboBox chọn loại sản phẩm
-		JComboBox<String> comboBox_unitProduct = new JComboBox<String>();
-		comboBox_unitProduct.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		comboBox_unitProduct.addItem("Trà sữa");
-		comboBox_unitProduct.addItem("Đá xay");
-		comboBox_unitProduct.addItem("Trà");
-		comboBox_unitProduct.addItem("Kem");
-		comboBox_unitProduct.addItem("Bánh");
-		comboBox_unitProduct.addItem("Topping");
-		comboBox_unitProduct.setName("Phân loại");
-		comboBox_unitProduct.setBackground(new Color(245, 222, 179));
-		comboBox_unitProduct.setBounds(515, 196, 165, 35);
-		this.add(comboBox_unitProduct);
-		// Lấy giá trị đơn vị tính được chọn
-		String unitProduct = comboBox_unitProduct.getSelectedItem().toString();
-		//nhãn Phân loại
-		JLabel jLabel_unitProduct = new JLabel("Phân loại");
-		jLabel_unitProduct.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		jLabel_unitProduct.setForeground(ConstantValueView.primaryDark);
-		jLabel_unitProduct.setBounds(515, 159, 78, 27);
-		add(jLabel_unitProduct);
+		AppLabel lblNewLabel = new AppLabel("THÔNG TIN SẢN PHẨM",24, true);
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.weighty = 2.0;
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel.gridx = 0;
+		gbc_lblNewLabel.gridy = 0;
+		contentPanel.add(lblNewLabel, gbc_lblNewLabel);
 		
-		//Tạo jlist chọn topping
-		String [] listTopping = {"Trân trâu đen", "Trân trâu trắng", "Sương sáo"};
-		JList list_selectTopping = new JList(listTopping);
-		list_selectTopping.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		list_selectTopping.setSelectionBackground(Color.LIGHT_GRAY);
-		list_selectTopping.setBackground(new Color(245, 222, 179));
-		list_selectTopping.setBounds(515, 312, 165, 46);
-		add(list_selectTopping);
+		JPanel panel_form = new JPanel();
+		GridBagConstraints gbc_panel_form = new GridBagConstraints();
+		gbc_panel_form.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_form.weighty = 1.0;
+		gbc_panel_form.fill = GridBagConstraints.BOTH;
+		gbc_panel_form.gridx = 0;
+		gbc_panel_form.gridy = 1;
+		contentPanel.add(panel_form, gbc_panel_form);
+		GridBagLayout gbl_panel_form = new GridBagLayout();
+		gbl_panel_form.columnWidths = new int[] {250, 350};
+		gbl_panel_form.rowHeights = new int[]{445, 0, 0};
+		gbl_panel_form.columnWeights = new double[]{0.0, 0.0};
+		gbl_panel_form.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		panel_form.setLayout(gbl_panel_form);
 		
-		JScrollPane scrollPane_topping = new JScrollPane(list_selectTopping);
-		scrollPane_topping.setLocation(515, 295);
-     	scrollPane_topping.setSize(165, 25);
-		add(scrollPane_topping);
+		JPanel panel_imagePicker = new JPanel();
+		GridBagConstraints gbc_panel_imagePicker = new GridBagConstraints();
+		gbc_panel_imagePicker.fill = GridBagConstraints.BOTH;
+		gbc_panel_imagePicker.insets = new Insets(0, 0, 5, 5);
+		gbc_panel_imagePicker.gridx = 0;
+		gbc_panel_imagePicker.gridy = 0;
+		panel_form.add(panel_imagePicker, gbc_panel_imagePicker);
+		GridBagLayout gbl_panel_imagePicker = new GridBagLayout();
+		gbl_panel_imagePicker.columnWidths = new int[]{395, 0};
+		gbl_panel_imagePicker.rowHeights = new int[] {0};
+		gbl_panel_imagePicker.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_panel_imagePicker.rowWeights = new double[]{0.0, 0.0, 0.0};
+		panel_imagePicker.setLayout(gbl_panel_imagePicker);
 		
-		//nhãn Topping
-		JLabel jLabel_selectTopping = new JLabel("Topping");
-		jLabel_selectTopping.setFont(new Font("Tahoma", Font.PLAIN,16));
-		jLabel_selectTopping.setForeground(ConstantValueView.primaryDark);
-		jLabel_selectTopping.setBounds(515,  258, 78, 27);
-		add(jLabel_selectTopping);
-
-
-		//Tạo các textfield 
-		AppTextField jTextField_priceProduct = new AppTextField("Giá");
-		jTextField_priceProduct.setBounds(10, 333, 172, 55);
-		jTextField_priceProduct.setToolTipText("VNĐ");
-		this.add(jTextField_priceProduct);
+		AppLabel lblNewLabel_ID = new AppLabel("MÃ SẢN PHẨM : ",16,true);
+		GridBagConstraints gbc_lblNewLabel_ID = new GridBagConstraints();
+		gbc_lblNewLabel_ID.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel_ID.gridx = 0;
+		gbc_lblNewLabel_ID.gridy = 0;
+		panel_imagePicker.add(lblNewLabel_ID, gbc_lblNewLabel_ID);
 		
-		AppTextField jTextField_nameProduct = new AppTextField("Tên sản phẩm");
-		jTextField_nameProduct.setBounds(515, 73, 239, 55);
-		jTextField_nameProduct.setToolTipText("tên");
-		this.add(jTextField_nameProduct);
-		
-		AppTextField jTextField_desProduct = new AppTextField("Mô tả");
-		jTextField_desProduct.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		jTextField_desProduct.setBounds(10, 432, 343, 55);
-		jTextField_desProduct.setToolTipText("option");
-		this.add(jTextField_desProduct);
-
-		// chèn ảnh vô khung
 		JEditorPane jeditorPane_image = new JEditorPane();
-		jeditorPane_image.setForeground(new Color(0, 0, 0));
-		jeditorPane_image.setBounds(20, 40, 138, 121);
+		jeditorPane_image.setPreferredSize(new Dimension(200, 200));
+		GridBagConstraints gbc_jeditorPane_image = new GridBagConstraints();
+		gbc_jeditorPane_image.insets = new Insets(0, 0, 5, 0);
+		gbc_jeditorPane_image.weighty = 1.0;
+		gbc_jeditorPane_image.gridx = 0;
+		gbc_jeditorPane_image.gridy = 1;
+		panel_imagePicker.add(jeditorPane_image, gbc_jeditorPane_image);
+		jeditorPane_image.setForeground(Color.BLACK);
 		jeditorPane_image.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		this.add(jeditorPane_image);
-
-		JButton jbutton_chooseFile = new JButton("Chọn file");
-		jbutton_chooseFile.setBackground(new Color(211, 211, 211));
-		jbutton_chooseFile.setForeground(new Color(255, 255, 102));
-		jbutton_chooseFile.setFont(new Font("Arial", Font.BOLD, 16));
-		jbutton_chooseFile.setBounds(34, 177, 105, 46);
-		this.add(jbutton_chooseFile);
 		
-		// tạo nút lưu mặt hàng
-		jbutton_saveProduct = new JButton("Lưu");
-		jbutton_saveProduct.setFont(new Font("Arial", Font.BOLD, 25));
-		jbutton_saveProduct.setHorizontalTextPosition(JButton.RIGHT);
-		jbutton_saveProduct.setVerticalTextPosition(JButton.CENTER);
-		jbutton_saveProduct.setIcon(new ImageIcon(getClass().getResource("/assets/save.png")));
-		jbutton_saveProduct.setIconTextGap(20);
-		jbutton_saveProduct.setForeground(new Color(255, 255, 255));
-		jbutton_saveProduct.setBackground(new Color(204, 102, 51));
-		jbutton_saveProduct.setBounds(597, 615, 147, 60);
-		jbutton_saveProduct.setBorder(null);
-		this.add(jbutton_saveProduct);
-
-		// tạo nút xóa mặt hàng
-		jbutton_deleteProduct = new JButton("Xóa");
-		jbutton_deleteProduct.setFont(new Font("Arial", Font.BOLD, 25));
-		jbutton_deleteProduct.setHorizontalTextPosition(JButton.RIGHT);
-		jbutton_deleteProduct.setVerticalTextPosition(JButton.CENTER);
-		jbutton_deleteProduct.setIcon(new ImageIcon(getClass().getResource("/assets/delete.png")));
-		jbutton_deleteProduct.setIconTextGap(20);
-		jbutton_deleteProduct.setForeground(new Color(255, 255, 255));
-		jbutton_deleteProduct.setBackground(new Color(204, 102, 51));
-		jbutton_deleteProduct.setBounds(353, 615, 147, 60);
-		jbutton_deleteProduct.setBorder(null);
-		this.add(jbutton_deleteProduct);
+		AppButton jbutton_chooseFile = new AppButton("Chọn file");
 		
+		GridBagConstraints gbc_jbutton_chooseFile = new GridBagConstraints();
+		gbc_jbutton_chooseFile.anchor = GridBagConstraints.NORTH;
+		gbc_jbutton_chooseFile.weighty = 1.0;
+		gbc_jbutton_chooseFile.gridx = 0;
+		gbc_jbutton_chooseFile.gridy = 2;
+		panel_imagePicker.add(jbutton_chooseFile, gbc_jbutton_chooseFile);
 		
+		JPanel panel_2 = new JPanel();
+		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
+		gbc_panel_2.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_2.weightx = 1.0;
+		gbc_panel_2.fill = GridBagConstraints.BOTH;
+		gbc_panel_2.gridx = 1;
+		gbc_panel_2.gridy = 0;
+		panel_form.add(panel_2, gbc_panel_2);
+		panel_2.setLayout(new GridLayout(8, 0, 0, 20));
 		
+		AppTextField jTextField_nameItem = new AppTextField("Tên mặt hàng");
+		jTextField_nameItem.setToolTipText("tên");
+		panel_2.add(jTextField_nameItem);
 		
+		AppTextField jTextField_desItem = new AppTextField("Mô tả");
+		jTextField_desItem.setToolTipText("option");
+		jTextField_desItem.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		panel_2.add(jTextField_desItem);
 		
+		SpinnerNumberModel model = new SpinnerNumberModel(0, 0, 100, 1);
+		
+		JPanel panel_unit = new JPanel();
+		panel_2.add(panel_unit);
+		panel_unit.setLayout(new BoxLayout(panel_unit, BoxLayout.X_AXIS));
+		
+		JLabel jLabel_unitItem = new JLabel("Đơn vị tính");
+		jLabel_unitItem.setPreferredSize(new Dimension(100, 13));
+		panel_unit.add(jLabel_unitItem);
+		jLabel_unitItem.setForeground(new Color(80, 43, 15));
+		jLabel_unitItem.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		JComboBox<String> comboBox_unitItem = new JComboBox<String>();
+		comboBox_unitItem.setBorder(new LineBorder(ConstantValueView.primaryColor, 2));
+		comboBox_unitItem.setName("Đơn vị tính");
+		comboBox_unitItem.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		comboBox_unitItem.setBackground(Color.WHITE);
+		panel_unit.add(comboBox_unitItem);
+		
+		JPanel panel_quantity = new JPanel();
+		panel_2.add(panel_quantity);
+		panel_quantity.setLayout(new BoxLayout(panel_quantity, BoxLayout.X_AXIS));
+		
+		AppLabel lblNewLabel_3 = new AppLabel("Số lượng");
+		lblNewLabel_3.setPreferredSize(new Dimension(100, 19));
+		panel_quantity.add(lblNewLabel_3);
+		NumberSpinner spinner_quantity = new NumberSpinner(model);
+		panel_quantity.add(spinner_quantity); 
+		
+		JPanel panel_date = new JPanel();
+		panel_2.add(panel_date);
+		panel_date.setLayout(new BoxLayout(panel_date, BoxLayout.X_AXIS));
+		
+		AppLabel lblNewLabel_1 = new AppLabel("Ngày nhập");
+		lblNewLabel_1.setPreferredSize(new Dimension(100, 19));
+		panel_date.add(lblNewLabel_1);
+		
+		DatePickerComponent datePicker = new DatePickerComponent();
+		panel_date.add(datePicker);
+		
+		JPanel panel_button = new JPanel();
+		GridBagConstraints gbc_panel_button = new GridBagConstraints();
+		gbc_panel_button.gridx = 1;
+		gbc_panel_button.gridy = 1;
+		panel_form.add(panel_button, gbc_panel_button);
+		FlowLayout fl_panel_button = (FlowLayout) panel_button.getLayout();
+		fl_panel_button.setHgap(55);
+		fl_panel_button.setAlignment(FlowLayout.RIGHT);
+		
+		AppButton jbutton_deleteItem = new AppButton("XÓA");
+		panel_button.add(jbutton_deleteItem); 
+		
+		AppButton jbutton_saveItem = new AppButton("LƯU");
+		panel_button.add(jbutton_saveItem);
 
-		// tạo hộp thoại xóa
-		jbutton_deleteProduct.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				JDialog dialog = new JDialog();
-				dialog.setTitle("Xác nhận xóa nguyên liệu đã chon?");
-				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				dialog.setSize(500, 300);
-				dialog.setLocationRelativeTo(null);
-				dialog.setBackground(new Color(245, 222, 179));
-				dialog.setFont(new Font("Arial", Font.BOLD, 15));
-				dialog.setForeground(new Color(139, 69, 19));
-				dialog.setResizable(false);
-
-				JPanel panel_dialog = new JPanel(new GridLayout(2, 1));
-				JLabel label_dialog = new JLabel("Lưu ý dữ liệu sẽ bị xóa hoàn toàn và không thể khôi phục.");
-				label_dialog.setHorizontalAlignment(SwingConstants.CENTER);
-				label_dialog.setVerticalAlignment(SwingConstants.CENTER);
-
-				JPanel panel_buttons = new JPanel(new FlowLayout());
-				JButton okButton = new JButton("Xác nhận");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						// Xử lý khi người dùng xác nhận xóa
-						//đóng dialog yêu cầu xác nhận xóa
-						Window window = SwingUtilities.getWindowAncestor(panel_dialog);
-				        window.dispose(); 
-				        
-						AppOptionPaneDialog dialog = new AppOptionPaneDialog("Xóa thành công"); 
-						
-						
-					}
-				});
-
-				JButton cancelButton = new JButton("Hủy bỏ");
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						// Xử lý khi người dùng hủy bỏ
-						dialog.dispose();
-					}
-				});
-
-				panel_buttons.add(okButton);
-				panel_buttons.add(cancelButton);
-
-				panel_dialog.add(label_dialog);
-				panel_dialog.add(panel_buttons);
-
-				dialog.getContentPane().add(panel_dialog);
-				dialog.pack();
-				dialog.setVisible(true);
-			}
-		});
 
 		this.setVisible(true); 
 	}

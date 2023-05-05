@@ -6,36 +6,49 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import constant.AppValues;
 import constant.ConstantValueView;
+import controller.CustomerController;
 import globalComponent.AppButton;
 import globalComponent.AppLabel;
 import globalComponent.AppScrollTable;
 import globalComponent.SearchBar;
+import model.CustomerModel;
 
 import java.awt.GridBagLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-
+import java.util.List;
 import java.awt.GridLayout;
 import javax.swing.SwingConstants;
 
 public class CustomerPageView extends JPanel {
 
+	public AppScrollTable scrollPane_customer ;
+	public Object[][] object;
+	public CustomerController controller;
+	public List<CustomerModel> customerList;
+	public AppButton btn_addCustomer;
+	public SearchBar searchBar; 
+
 	/**
 	 * Create the panel.
 	 */
 	public CustomerPageView() {
-		String[] titleList = new String[] {
-				"M\u00E3 kh\u00E1ch h\u00E0ng", "T\u00EAn kh\u00E1ch h\u00E0ng", "S\u0111t", "\u0110i\u1EC3m t\u00EDch l\u0169y", "Lo\u1EA1i kh\u00E1ch h\u00E0ng"
-			}; 
-		Object [][] object = new Object[][] {
-			{"", null, null, null, null},}; 
+		btn_addCustomer = new AppButton("+");
+		searchBar = new SearchBar();
 		setBackground(Color.WHITE);
-	
-		
+		DefaultTableModel defaultTableModel_customer = new DefaultTableModel(object, AppValues.customerAtributes); 
+		scrollPane_customer = new AppScrollTable(defaultTableModel_customer);
 		JPanel contentPanel = new JPanel();
+
+		//controller
+		controller = new CustomerController(this);
+		controller.displayCustomerListToTable(); 
+		
+
 		contentPanel.setBounds(20, 20, 790, 630);
 		this.setLayout(null);
 		this.add(contentPanel);
@@ -66,7 +79,7 @@ public class CustomerPageView extends JPanel {
 		gbc_lblNewLabel.gridy = 0;
 		panel_1.add(lblNewLabel, gbc_lblNewLabel);
 		
-		SearchBar searchBar = new SearchBar(titleList);
+
 
 		GridBagConstraints gbc_searchBar = new GridBagConstraints();
 		gbc_searchBar.insets = new Insets(0, 20, 0, 20);
@@ -77,14 +90,14 @@ public class CustomerPageView extends JPanel {
 		gbc_searchBar.weightx = 3.0;
 		panel_1.add(searchBar, gbc_searchBar); 
 		
-		AppButton btnNewButton = new AppButton("+");
-		btnNewButton.setFont(new Font("SansSerif", Font.BOLD, 32));
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.fill = GridBagConstraints.VERTICAL;
-		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton.gridx = 2;
-		gbc_btnNewButton.gridy = 0;
-		panel_1.add(btnNewButton, gbc_btnNewButton);
+	
+		btn_addCustomer.setFont(new Font("SansSerif", Font.BOLD, 32));
+		GridBagConstraints gbc_btn_addCustomer = new GridBagConstraints();
+		gbc_btn_addCustomer.fill = GridBagConstraints.VERTICAL;
+		gbc_btn_addCustomer.insets = new Insets(0, 0, 0, 5);
+		gbc_btn_addCustomer.gridx = 2;
+		gbc_btn_addCustomer.gridy = 0;
+		panel_1.add(btn_addCustomer, gbc_btn_addCustomer);
 		
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -95,9 +108,11 @@ public class CustomerPageView extends JPanel {
 		contentPanel.add(panel, gbc_panel);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		AppScrollTable scrollPane_customer = new AppScrollTable(new DefaultTableModel(object, titleList));
 		
 		panel.add(scrollPane_customer); 
+		
+		
+
 		
 	}
 }

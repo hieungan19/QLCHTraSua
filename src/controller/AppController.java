@@ -10,21 +10,22 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import model.DashboardOption;
+import view.AppView;
+
 import javax.swing.GroupLayout;
 import javax.swing.*;
 
 
 
 public class AppController {
-	public static JFrame appJFrame; 
-	public static  JPanel root;
+	public static AppView view; 
 	private String optionSelectedText;
 	private List<DashboardOption> listItem = null;
 
-	public AppController(JPanel root) {
+	public AppController(AppView view) {
 		// TODO Auto-generated constructor stub
-		this.root = root;
-		root.setLayout(new GroupLayout(root));
+		this.view = view; 
+		view.root.setLayout(new GroupLayout(view.root));
 
 
 	}
@@ -34,10 +35,10 @@ public class AppController {
 		optionSelectedText = optionItem.getText();
 		optionItem.getjLabelOption().setBackground(Color.white);
 		optionItem.getjLabelOption().setOpaque(true);
-		root.removeAll();
-		root.add(jpnItem);		
-		root.validate();
-		root.repaint();
+		view.root.removeAll();
+		view.root.add(jpnItem);		
+		view.root.validate();
+		view.root.repaint();
 
 	}
 
@@ -66,12 +67,12 @@ public class AppController {
 			// TODO Auto-generated method stub
 			node = optionItem.getjPanelOption();
 			optionSelectedText = optionText;
-			root.removeAll();
-			root.setLayout(new GridLayout());
+			view.root.removeAll();
+			view.root.setLayout(new GridLayout());
 			setView(optionItem);
 			setChangeBackground(optionText);
-			root.validate();
-			root.repaint();
+			view.root.validate();
+			view.root.repaint();
 		}
 
 		@Override

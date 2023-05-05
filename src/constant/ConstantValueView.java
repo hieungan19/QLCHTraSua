@@ -13,4 +13,5 @@ public class ConstantValueView {
 	public static Font normalText = new Font("Arial",Font.PLAIN,16 ); 
 	public static Font h4 = new Font("Arial",Font.BOLD,14 ); 
 	
+	
 }

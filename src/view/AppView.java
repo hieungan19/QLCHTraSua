@@ -31,8 +31,8 @@ public class AppView extends JFrame {
 
 	private JPanel contentPane;
 	ArrayList<DashboardOption> optionList = new ArrayList<>();
-	public AppController appController;
-	JPanel root;
+	public static  AppController appController;
+	public JPanel root;
 
 	/**
 	 * Launch the application.
@@ -42,8 +42,6 @@ public class AppView extends JFrame {
 			public void run() {
 				try {
 					AppView frame = new AppView();
-					AppController.appJFrame = frame;
-					AppController.root = frame.root; 
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -117,7 +115,7 @@ public class AppView extends JFrame {
 		optionList.add(statisticReportOption);
 		optionList.add(discountOption);
 
-		appController = new AppController(root);
+		appController = new AppController(this); 
 		root.setLayout(new GridLayout());		
 
 		appController.setView(homeOption);

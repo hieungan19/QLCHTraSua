@@ -1,4 +1,4 @@
-package view.employee;
+package globalComponent;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -14,7 +14,7 @@ public class DatePickerComponent extends JDateChooser {
     public DatePickerComponent() {
     	super(); 
     	getCalendarButton().setPreferredSize(new Dimension(60, 17));
-        this.getCalendarButton().setBorder(new EmptyBorder(0, 0, 0, 0));
+        this.getCalendarButton().setBorder(null);
         this.setBorder(new LineBorder(ConstantValueView.primaryColor, 2));
         this.setFont(ConstantValueView.normalText);
         this.setDateFormatString("dd-MM-yyyy");

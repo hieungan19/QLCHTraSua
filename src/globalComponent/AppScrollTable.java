@@ -20,8 +20,8 @@ public class AppScrollTable extends JScrollPane {
 	 * Create the panel.
 	 */
 	public AppScrollTable(DefaultTableModel tableModel) {
-		this.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		jTable = new JTable();
+		this.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		this.setViewportView(jTable);
 		jTable.setBackground(ConstantValueView.background);
 		jTable.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -37,5 +37,5 @@ public class AppScrollTable extends JScrollPane {
 		head.setForeground(Color.BLACK);
 		head.setFont(ConstantValueView.h4);
 	}
-
+	
 }

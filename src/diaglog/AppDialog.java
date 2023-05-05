@@ -20,6 +20,7 @@ public class AppDialog extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 
 	public AppDialog(String text) {
+		this.setLocationRelativeTo(null);
 		this.setBackground(Color.WHITE);
 		getContentPane().setBackground(Color.WHITE);
 		setSize(new Dimension(400,200));

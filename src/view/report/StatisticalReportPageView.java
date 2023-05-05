@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 import globalComponent.AppButton;
 import globalComponent.AppLabel;
-import view.employee.DatePickerComponent;
+import globalComponent.DatePickerComponent;
 
 import java.awt.GridLayout;
 import java.awt.GridBagLayout;

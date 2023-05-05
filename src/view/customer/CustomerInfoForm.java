@@ -10,32 +10,35 @@ import javax.swing.SwingConstants;
 import java.awt.Insets;
 import java.awt.GridLayout;
 import globalComponent.AppLineBorderTextField;
+import model.CustomerModel;
 import globalComponent.AppButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
-import java.awt.Dimension;
-import javax.swing.JComboBox;
-import javax.swing.border.LineBorder;
 
-import constant.ConstantValueView;
-
-import java.awt.Color;
 
 public class CustomerInfoForm extends JPanel {
-	private AppLineBorderTextField textField;
-	private AppLineBorderTextField textField_1;
-	private AppLineBorderTextField textField_2;
+	public AppLineBorderTextField textField_phoneNumber;
+	public AppLineBorderTextField textField_name;
+	public AppLabel lblNewLabel_point;
+	public AppButton btnDelete;
+	public AppButton btnSave;
+	public AppLabel lblNewLabel_level;
+	public CustomerModel model;
+	public AppLabel lblNewLabel_customerID;
+	public AppLabel lblNewLabel_registrationDate;
+	
 
 	/**
 	 * Create the panel.
 	 */
-	public CustomerInfoForm() {
-		String[] options = {"MEMBERSHIP","VIP"}; 
+	public CustomerInfoForm(CustomerModel model) {
+		this.model = model; 
+		btnSave = new AppButton("LƯU");
+		btnDelete = new AppButton("XÓA");
+		
 		JPanel contentPanel = new JPanel();
-		contentPanel.setSize(790, 630);
-		contentPanel.setLocation(20, 20);
+		contentPanel.setSize(600, 630);
+		contentPanel.setLocation(110, 20);
 		this.setLayout(null);
 		this.add(contentPanel);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
@@ -59,9 +62,23 @@ public class CustomerInfoForm extends JPanel {
 		panel.add(lblNewLabel);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		AppLabel lblNewLabel_6 = new AppLabel("MÃ KHÁCH HÀNG", 16, true);
-		lblNewLabel_6.setText("MÃ KHÁCH HÀNG: ");
-		panel.add(lblNewLabel_6);
+		JPanel panel_2 = new JPanel();
+		FlowLayout flowLayout_1 = (FlowLayout) panel_2.getLayout();
+		flowLayout_1.setHgap(10);
+		panel.add(panel_2);
+		
+		AppLabel lblMKhchHng = new AppLabel("Mã khách hàng: ");
+		panel_2.add(lblMKhchHng);
+		
+		lblNewLabel_customerID = new AppLabel("", 16, true);
+		panel_2.add(lblNewLabel_customerID);
+		
+		AppLabel lblNewLabel_3 = new AppLabel("Ngày đăng kí:");
+		lblNewLabel_3.setText("- Ngày đăng kí:");
+		panel_2.add(lblNewLabel_3);
+		
+		 lblNewLabel_registrationDate = new AppLabel("");
+		panel_2.add(lblNewLabel_registrationDate);
 		
 		JPanel panel_info = new JPanel();
 		GridBagConstraints gbc_panel_info = new GridBagConstraints();
@@ -72,41 +89,39 @@ public class CustomerInfoForm extends JPanel {
 		contentPanel.add(panel_info, gbc_panel_info);
 		panel_info.setLayout(new GridLayout(5, 0, 0, 10));
 		
-		AppLabel lblNewLabel_1 = new AppLabel("New label");
-		lblNewLabel_1.setText("Họ tên");
+		AppLabel lblNewLabel_1 = new AppLabel("Họ tên khách hàng");
 		panel_info.add(lblNewLabel_1);
 		
-		textField_1 = new AppLineBorderTextField();
-		panel_info.add(textField_1);
-		textField_1.setColumns(10);
+		textField_name = new AppLineBorderTextField();
+		if (model!=null) textField_name.setText(model.getName());
+		panel_info.add(textField_name);
+		textField_name.setColumns(10);
 		
 		AppLabel lblNewLabel_2 = new AppLabel("Số điện thoại");
 		panel_info.add(lblNewLabel_2);
 		
-		textField = new AppLineBorderTextField();
-		panel_info.add(textField);
-		textField.setColumns(10);
+		textField_phoneNumber = new AppLineBorderTextField();
+		if (model!=null) textField_phoneNumber.setText(model.getPhoneNumber());
+		panel_info.add(textField_phoneNumber);
+		textField_phoneNumber.setColumns(10);
 		
-		AppLabel lblNewLabel_3 = new AppLabel("Email");
-		panel_info.add(lblNewLabel_3);
-		
-		textField_2 = new AppLineBorderTextField();
-		panel_info.add(textField_2);
-		textField_2.setColumns(10);
 		
 		AppLabel lblNewLabel_5 = new AppLabel("Loại khách hàng:");
 		panel_info.add(lblNewLabel_5);
 		
-		JComboBox comboBox = new JComboBox(options);
-		comboBox.setBorder(new LineBorder(ConstantValueView.primaryColor, 2));
-		panel_info.add(comboBox);
+		lblNewLabel_level = new AppLabel("MEMBERSHIP");
+		panel_info.add(lblNewLabel_level);
 		
 		
-		AppLabel lblNewLabel_4 = new AppLabel("New label");
-		lblNewLabel_4.setText("Điểm thưởng:");
+		AppLabel lblNewLabel_4 = new AppLabel("Điểm thưởng: ");
 		panel_info.add(lblNewLabel_4);
 		
+		lblNewLabel_point = new AppLabel("0");
+		if (model!=null) lblNewLabel_point.setText(model.getPoint()+"");
+		panel_info.add(lblNewLabel_point);
+		
 		JPanel panel_1 = new JPanel();
+		
 		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
 		flowLayout.setHgap(20);
 		flowLayout.setAlignment(FlowLayout.RIGHT);
@@ -117,14 +132,10 @@ public class CustomerInfoForm extends JPanel {
 		gbc_panel_1.gridy = 2;
 		contentPanel.add(panel_1, gbc_panel_1);
 		
-		AppButton btnDelete = new AppButton("XÓA");
+
 		panel_1.add(btnDelete);
-		
-		AppButton btnSave = new AppButton("LƯU");
-		btnSave.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+
+	
 		panel_1.add(btnSave);
 		
 	}

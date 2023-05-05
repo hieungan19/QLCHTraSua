@@ -13,6 +13,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+import constant.AppValues;
 import constant.ConstantValueView;
 import globalComponent.AppButton;
 import globalComponent.AppLabel;
@@ -24,6 +25,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Component;
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Rectangle;
 import java.awt.Color;
 import javax.swing.JScrollPane;
@@ -93,8 +95,9 @@ public class HomePageView extends JPanel {
 			gbc_panel_header.gridy = 0;
 			panel_menuOder.add(panel_header, gbc_panel_header);
 			
-			SearchBar searchBarView = new SearchBar(new String[] {"Tên sản phẩm", "Mã sản phẩm"});
+			SearchBar searchBarView = new SearchBar();
 			GridBagConstraints gbc_searchBarView = new GridBagConstraints();
+			gbc_searchBarView.weighty = 1.0;
 			gbc_searchBarView.insets = new Insets(0, 20, 5, 20);
 			gbc_searchBarView.fill = GridBagConstraints.BOTH;
 			gbc_searchBarView.gridx = 0;
@@ -104,7 +107,7 @@ public class HomePageView extends JPanel {
 			JPanel panel = new JPanel();
 			panel.setBackground(ConstantValueView.background);
 			GridBagConstraints gbc_panel = new GridBagConstraints();
-			gbc_panel.weighty = 1.0;
+			gbc_panel.weighty = 2.0;
 			gbc_panel.insets = new Insets(10, 20, 0, 20);
 			gbc_panel.fill = GridBagConstraints.BOTH;
 			gbc_panel.gridx = 0;
@@ -116,15 +119,16 @@ public class HomePageView extends JPanel {
 			
 			
 			JScrollPane scrollPane = new JScrollPane(panel_filterButton);
+			scrollPane.setPreferredSize(new Dimension(12, 50));
 			scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 			panel.add(scrollPane);
 			panel_filterButton.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 0));
 			
 			
-			
-			AppButton btnTrSa = new AppButton("TRÀ SỮA");
-			panel_filterButton.add(btnTrSa);
-			
+			for (int i = 0; i<(AppValues.productTypes.length); ++i) {
+				panel_filterButton.add(new AppButton(AppValues.productTypes[i])); 
+			}
+
 			
 			JPanel panel_menu = new JPanel();
 			panel_menu.setOpaque(false);
@@ -151,6 +155,8 @@ public class HomePageView extends JPanel {
 		//cart 
 		JPanel panel_bill = new JPanel();
 		CartPanel cart = new CartPanel();
+		GridBagLayout gridBagLayout_1 = (GridBagLayout) cart.getLayout();
+		gridBagLayout_1.columnWidths = new int[] {250};
 		panel_bill.setBackground(ConstantValueView.primaryColor);
 		panel_bill.setLayout(new GridLayout(0, 1, 0, 0));
 		panel_bill.add(cart);

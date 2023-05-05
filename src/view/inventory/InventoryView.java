@@ -75,7 +75,7 @@ public class InventoryView extends JPanel {
 		gbc_lblNewLabel.gridy = 0;
 		panel_1.add(lblNewLabel, gbc_lblNewLabel);
 		
-		SearchBar searchBar = new SearchBar(titleList);
+		SearchBar searchBar = new SearchBar();
 
 		GridBagConstraints gbc_searchBar = new GridBagConstraints();
 		gbc_searchBar.insets = new Insets(0, 20, 0, 20);

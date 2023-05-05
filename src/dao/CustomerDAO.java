@@ -26,7 +26,7 @@ public class CustomerDAO {
 	private static final String GET_CUSTOMER_BY_ID = "SELECT * FROM KHACHHANG WHERE MAKH = ?"; 
 	private static final String DELETE_CUSTOMER_BY_ID = "DELETE FROM KHACHHANG WHERE MAKH = ? ";
 	private static final String UPDATE_CUSTOMER_INFO = "UPDATE KHACHHANG SET HOTEN = ?, SDT = ? WHERE MAKH = ?"; 
-	
+	private static final String COMMIT = "COMMIT"; 
 	public static List<CustomerModel> getCustomerList (){
 		List<CustomerModel> result = new ArrayList<>();
 		int test = 0; 
@@ -63,6 +63,9 @@ public class CustomerDAO {
 			psInsert.setString(1,model.getName());
 			psInsert.setString(2,model.getPhoneNumber());
 			int check = psInsert.executeUpdate();
+			Statement st = c.createStatement();
+			st.execute(COMMIT); 
+			
 			if (check >0 )
 				return 1; 
 		} catch (SQLException e) {

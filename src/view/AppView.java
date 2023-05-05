@@ -13,8 +13,8 @@ import view.discount.DiscountPageView;
 
 import view.employee.EmployeePageView;
 import view.home.HomePageView;
-import view.inventory.InventoryInfoForm;
-import view.inventory.InventoryView;
+import view.inventory.IngredientInfoForm;
+import view.inventory.IngredientPageView;
 import view.product.ProductPageView;
 import view.report.StatisticalReportPageView;
 
@@ -96,7 +96,7 @@ public class AppView extends JFrame {
 
 		DashboardOption homeOption = new DashboardOption("HOME", "/assets/home.png", new HomePageView());
 		DashboardOption menuOption = new DashboardOption("MENU", "/assets/menu.png", new ProductPageView());
-		DashboardOption invetoryOption = new DashboardOption("INVETORY", "/assets/collection.png", new InventoryInfoForm());
+		DashboardOption invetoryOption = new DashboardOption("INVETORY", "/assets/collection.png", new IngredientPageView());
 		DashboardOption ordersOption = new DashboardOption("ORDERS", "/assets/shopping-cart.png", new BillPageView());
 		DashboardOption customerOption = new DashboardOption("CUSTOMER", "/assets/customer.png", new CustomerPageView());
 		DashboardOption employeeOption = new DashboardOption("EMPLOYEE", "/assets/users.png", new EmployeePageView());

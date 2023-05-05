@@ -1,6 +1,5 @@
 package view.inventory;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -8,43 +7,41 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JTable;
-
-import javax.swing.JScrollPane;
 
 
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 
-import constant.ConstantValueView;
-import controller.AppController;
-import model.InventoryModel;
+import constant.AppValues;
+import controller.IngredientController;
 import globalComponent.AppButton;
 import globalComponent.AppLabel;
 import globalComponent.AppScrollTable;
 import globalComponent.SearchBar;
-import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class InventoryView extends JPanel {
+public class IngredientPageView extends JPanel {
 
+	public AppButton btn_addIngredient;
+	public SearchBar searchBar;
+	public AppScrollTable scrollPane_ingredient;
+	public IngredientController controller; 
+	public Object[][] object;
+	
 
 	/**
 	 * Create the panel.
 	 */
-	public InventoryView() {
-		String[] titleList = { "Mã hàng", "Ngày nhập", "Tên mặt hàng", "Đơn vị tính", "Số lượng", "Giá(VNĐ)" };
-		Object[][] object = { { "001", null, null, null, null, null }, { "", null, null, null, null, null },
-				 };
+	public IngredientPageView() {
+		scrollPane_ingredient = new AppScrollTable(new DefaultTableModel(
+				object, AppValues.inventoryItemAttributes
+		));
+		
+		btn_addIngredient = new AppButton("+");
 		JPanel contentPanel = new JPanel();
+		searchBar = new SearchBar();
+		
+		//controller
+		controller = new IngredientController(this); 
+		
 		contentPanel.setBounds(20, 20, 790, 630);
 		this.setLayout(null);
 		this.add(contentPanel);
@@ -75,7 +72,7 @@ public class InventoryView extends JPanel {
 		gbc_lblNewLabel.gridy = 0;
 		panel_1.add(lblNewLabel, gbc_lblNewLabel);
 		
-		SearchBar searchBar = new SearchBar();
+		
 
 		GridBagConstraints gbc_searchBar = new GridBagConstraints();
 		gbc_searchBar.insets = new Insets(0, 20, 0, 20);
@@ -85,15 +82,14 @@ public class InventoryView extends JPanel {
 		gbc_searchBar.gridy = 0;
 		gbc_searchBar.weightx = 3.0;
 		panel_1.add(searchBar, gbc_searchBar); 
-		
-		AppButton btnNewButton = new AppButton("+");
-		btnNewButton.setFont(new Font("SansSerif", Font.BOLD, 32));
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.fill = GridBagConstraints.VERTICAL;
-		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton.gridx = 2;
-		gbc_btnNewButton.gridy = 0;
-		panel_1.add(btnNewButton, gbc_btnNewButton);
+
+		btn_addIngredient.setFont(new Font("SansSerif", Font.BOLD, 32));
+		GridBagConstraints gbc_btn_addIngredient = new GridBagConstraints();
+		gbc_btn_addIngredient.fill = GridBagConstraints.VERTICAL;
+		gbc_btn_addIngredient.insets = new Insets(0, 0, 0, 5);
+		gbc_btn_addIngredient.gridx = 2;
+		gbc_btn_addIngredient.gridy = 0;
+		panel_1.add(btn_addIngredient, gbc_btn_addIngredient);
 		
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -103,12 +99,7 @@ public class InventoryView extends JPanel {
 		gbc_panel.gridy = 1;
 		contentPanel.add(panel, gbc_panel);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
-
-		AppScrollTable scrollPane_inventoryItem = new AppScrollTable(new DefaultTableModel(
-				object, titleList
-		));
-	
-		panel.add(scrollPane_inventoryItem);
+		panel.add(scrollPane_ingredient);
 		
 	}
 	

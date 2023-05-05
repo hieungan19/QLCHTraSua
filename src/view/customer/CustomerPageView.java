@@ -40,7 +40,7 @@ public class CustomerPageView extends JPanel {
 		btn_addCustomer = new AppButton("+");
 		searchBar = new SearchBar();
 		setBackground(Color.WHITE);
-		DefaultTableModel defaultTableModel_customer = new DefaultTableModel(object, AppValues.customerAtributes); 
+		DefaultTableModel defaultTableModel_customer = new DefaultTableModel(object, AppValues.customerAttributes); 
 		scrollPane_customer = new AppScrollTable(defaultTableModel_customer);
 		JPanel contentPanel = new JPanel();
 

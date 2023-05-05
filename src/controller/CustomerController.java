@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import constant.Utils;
 import dao.CustomerDAO;
 import diaglog.AppDialog;
 import diaglog.AppOptionPaneDialog;
@@ -32,6 +33,7 @@ public class CustomerController {
 	private CustomerInfoForm form;
 	CustomerModel selectedCustomer;
 	int selectedRow; 
+	
 
 	public CustomerController(CustomerPageView view) {
 		super();
@@ -80,10 +82,7 @@ public class CustomerController {
 				showPage(form);
 				form.btnDelete.setVisible(false);
 				java.util.Date date = new java.util.Date(); 
-		        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		        // Format the date as a string using the SimpleDateFormat object
-		        String dateString = sdf.format(date);
-				form.lblNewLabel_registrationDate.setText(dateString);
+				form.lblNewLabel_registrationDate.setText(Utils.getStringDate(date));
 				form.btnSave.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {

@@ -29,6 +29,14 @@ public class AppController {
 
 
 	}
+	
+	public static void showPage(JPanel jpanel) {
+		AppController.view.root.removeAll();
+		AppController.view.root.setLayout(new GridLayout());
+		AppController.view.root.add(jpanel);
+		AppController.view.root.validate();
+		AppController.view.root.repaint();
+	}
 
 	public void setView( DashboardOption optionItem) {
 		JPanel jpnItem = optionItem.getjPanelOption(); 

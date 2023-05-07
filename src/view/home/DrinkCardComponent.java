@@ -42,12 +42,12 @@ public class DrinkCardComponent extends JPanel {
         panel.setLayout(new GridLayout(2, 1, 0, 0));
         panel.setOpaque(false);
         
-        JLabel nameLabel = new JLabel(data.getDrinkName());
+        JLabel nameLabel = new JLabel(data.getName());
         nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
         nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(nameLabel);
         
-        JLabel priceLabel = new JLabel(Integer.toString(data.getDrinkPrice())+" VND");
+        JLabel priceLabel = new JLabel(Double.toString(data.getPrice())+" VND");
         priceLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
         priceLabel.setForeground(SystemColor.info);
         priceLabel.setHorizontalAlignment(SwingConstants.CENTER);

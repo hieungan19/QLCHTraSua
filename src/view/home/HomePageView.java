@@ -40,7 +40,13 @@ public class HomePageView extends JPanel {
 	public HomePageView() {
 		this.setPreferredSize(new Dimension(840, 740));
 		this.setBackground(ConstantValueView.background);
-		DrinkModel dummy = new DrinkModel("D01", "Tra sua Olong",20000 ,false,"/assets/bg-login.png", null,"Trà sữa", null);;
+
+		DrinkModel dummy = new DrinkModel(); 
+		dummy.setProductID("D01");
+		dummy.setName("Tra sua Olong");
+		dummy.setImageUri("/assets/bg-login.png");
+		dummy.setType("Trà sữa");
+		//DrinkModel dummy = new DrinkModel("D01", "Tra sua Olong",20000 ,false,"/assets/bg-login.png", null,"Trà sữa", null);;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{420, 420, 0};
 		gridBagLayout.rowHeights = new int[]{740, 0};

@@ -15,7 +15,7 @@ public class ChooseTopping extends JPanel{
 		// TODO Auto-generated constructor stub
 		this.setPreferredSize(new Dimension(200,30));
 		this.setLayout(new GridLayout());
-		JLabel text = new JLabel(topping.getDrinkName());
+		JLabel text = new JLabel(topping.getName());
 		this.add(text); 
 		this.setVisible(true);
 		NumberSpinner spinner = new NumberSpinner(new SpinnerNumberModel(1,0,10,1));

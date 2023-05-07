@@ -79,7 +79,7 @@ public class AppView extends JFrame {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Trajan Pro", Font.BOLD, 16));
 		panel_dashboard.add(lblNewLabel);
-		///bla bla
+	
 		// Options
 		JPanel panel_options = new JPanel();
 		panel_options.setOpaque(false);

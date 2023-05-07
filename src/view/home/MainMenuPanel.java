@@ -27,7 +27,13 @@ public class MainMenuPanel extends JPanel {
 		gl_panel.setHgap(10);
 		panel.setLayout(gl_panel);
 		panel.setOpaque(false);
-		DrinkModel dummy = new DrinkModel("D01", "Tra sua Olong",20000 ,false,"/assets/bg-login.png", null,"Trà sữa", null);
+		DrinkModel dummy = new DrinkModel(); 
+		dummy.setProductID("D01");
+		dummy.setName("Tra sua Olong");
+		dummy.setImageUri("/assets/bg-login.png");
+		dummy.setType("Trà sữa");
+		
+		//DrinkModel dummy = new DrinkModel("D01", "Tra sua Olong",20000 ,false,"/assets/bg-login.png", null,"Trà sữa", null);
 		for (int i =0; i<10; ++i) {
 			DrinkCardComponent drinkCardComponent = new DrinkCardComponent(dummy);
 			drinkCardComponent.addMouseListener(new MouseListener() {

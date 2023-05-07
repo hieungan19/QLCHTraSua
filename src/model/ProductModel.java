@@ -1,62 +1,83 @@
 package model;
-
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 
 public class ProductModel {
-	protected String drinkID;
-	protected String drinkName;
-	protected int drinkPrice;
-	protected boolean isTopping;  
+	protected String productID;
+	protected String name;
+	protected double price; 
 	protected String imageUri; 
-	private ArrayList<IngredientModel> ingredientList = new ArrayList<IngredientModel>();
-	public String getDrinkID() {
-		return drinkID;
+	protected String type;
+	protected int amount; 
+	protected List<ProductDetail> ingredientList; 
+	
+	public ProductModel(String productID, String name, double price, String type, String imageUri, List<ProductDetail> ingreList ) {
+		this.productID = productID; 
+		this.name = name;
+		this.price = price;
+		this.type = type; 
+		this.imageUri = imageUri;
+		this.ingredientList = ingreList; 
 	}
-	public String getDrinkName() {
-		return drinkName;
+	
+	public ProductModel() {
+		// TODO Auto-generated constructor stub
 	}
-	public int getDrinkPrice() {
-		return drinkPrice;
+	public String getProductID() {
+		return productID;
 	}
-	public boolean isTopping() {
-		return isTopping;
+	public String getName() {
+		return name;
+	}
+	public double getPrice() {
+		return price;
 	}
 	public String getImageUri() {
 		return imageUri;
 	}
-	public ArrayList<IngredientModel> getIngredientList() {
+	public String getType() {
+		return type;
+	}
+	public List<ProductDetail> getIngredientList() {
 		return ingredientList;
 	}
-	public void setDrinkID(String drinkID) {
-		this.drinkID = drinkID;
+	public void setProductID(String productID) {
+		this.productID = productID;
 	}
-	public void setDrinkName(String drinkName) {
-		this.drinkName = drinkName;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public void setDrinkPrice(int drinkPrice) {
-		this.drinkPrice = drinkPrice;
-	}
-	public void setIsTopping(boolean isTopping) {
-		this.isTopping = isTopping;
+	public void setPrice(double price) {
+		this.price = price;
 	}
 	public void setImageUri(String imageUri) {
 		this.imageUri = imageUri;
 	}
-	public void setIngredientList(ArrayList<IngredientModel> ingredientList) {
+	public void setType(String type) {
+		this.type = type;
+	}
+	public void setIngredientList(List<ProductDetail> ingredientList) {
 		this.ingredientList = ingredientList;
 	}
-	public ProductModel(String drinkID, String drinkName, int drinkPrice, boolean isTopping, String imageUri,
-			ArrayList<IngredientModel> ingredientList) {
-		super();
-		this.drinkID = drinkID;
-		this.drinkName = drinkName;
-		this.drinkPrice = drinkPrice;
-		this.isTopping = isTopping;
-		this.imageUri = imageUri;
-		this.ingredientList = ingredientList;
+	public int getAmount() {
+		return amount;
+	}
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+	
+	public String toStringIngredientList() {
+		String ingreListString = ""; 
+		for (ProductDetail ingre: ingredientList) {
+			if (ingre.getiAmount()!=0)
+			ingreListString+=ingre.getiName()+",";
+		}
+		return ingreListString; 
 	}
 	
 	
-	
+	public Object[] toOject() {
+		String ingreListString = toStringIngredientList(); 
+		return new Object[] {productID,imageUri,name, type, String.valueOf(price),ingreListString}; 
+	}
+
 }

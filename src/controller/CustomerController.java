@@ -39,6 +39,7 @@ public class CustomerController {
 		super();
 		this.view = view;
 		this.table = view.scrollPane_customer.jTable;
+		
 		this.form = new CustomerInfoForm(null);
 		
 		//find customer 

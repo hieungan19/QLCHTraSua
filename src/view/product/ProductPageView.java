@@ -12,21 +12,45 @@ import javax.swing.JPanel;
 
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+
+import constant.AppValues;
+import controller.ProductController;
+
 import javax.swing.ImageIcon;
 
 import globalComponent.AppButton;
 import globalComponent.AppLabel;
 import globalComponent.AppScrollTable;
+import globalComponent.MultiLineTableCellRenderer;
 import globalComponent.SearchBar;
 import view.ImageTableCellRenderer;
 
 public class ProductPageView extends JPanel{
 
+	public AppScrollTable scrollPane_product;
+	Object[][] object ; 
+	ProductController controller;
+	public AppButton btn_addProduct;
+	public SearchBar searchBar; 
+
 	public ProductPageView() {
-		String[] titleList  = new String[] {
-				"Mã món", "Ảnh", "Tên sản phẩm", "Phân loại", "Đơn giá", "Nguyên liệu"
-			};
+
+		scrollPane_product = new AppScrollTable(new DefaultTableModel(
+				object, AppValues.productAttributes
+		));
+		 searchBar = new SearchBar();
+		
+		scrollPane_product.jTable.setDefaultRenderer(String.class, new MultiLineTableCellRenderer());
 		JPanel contentPanel = new JPanel();
+		
+		scrollPane_product.jTable.setRowHeight(120);
+		TableColumn imageColumn = scrollPane_product.jTable.getColumnModel().getColumn(1); // "Ảnh" column
+		imageColumn.setCellRenderer(new ImageTableCellRenderer());
+		imageColumn.setMaxWidth(120);
+		
+		btn_addProduct = new AppButton("+");
+		controller = new ProductController(this); 
+		
 		contentPanel.setBounds(20, 20, 790, 630);
 		this.setLayout(null);
 		this.add(contentPanel);
@@ -58,7 +82,7 @@ public class ProductPageView extends JPanel{
 		gbc_lblNewLabel.gridy = 0;
 		panel_1.add(lblNewLabel, gbc_lblNewLabel);
 		
-		SearchBar searchBar = new SearchBar();
+		
 
 		GridBagConstraints gbc_searchBar = new GridBagConstraints();
 		gbc_searchBar.insets = new Insets(0, 20, 0, 20);
@@ -69,14 +93,14 @@ public class ProductPageView extends JPanel{
 		gbc_searchBar.weightx = 3.0;
 		panel_1.add(searchBar, gbc_searchBar); 
 		
-		AppButton btnNewButton = new AppButton("+");
-		btnNewButton.setFont(new Font("SansSerif", Font.BOLD, 32));
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.fill = GridBagConstraints.VERTICAL;
-		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton.gridx = 2;
-		gbc_btnNewButton.gridy = 0;
-		panel_1.add(btnNewButton, gbc_btnNewButton);
+	
+		btn_addProduct.setFont(new Font("SansSerif", Font.BOLD, 32));
+		GridBagConstraints gbc_btn_addProduct = new GridBagConstraints();
+		gbc_btn_addProduct.fill = GridBagConstraints.VERTICAL;
+		gbc_btn_addProduct.insets = new Insets(0, 0, 0, 5);
+		gbc_btn_addProduct.gridx = 2;
+		gbc_btn_addProduct.gridy = 0;
+		panel_1.add(btn_addProduct, gbc_btn_addProduct);
 		
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -86,34 +110,13 @@ public class ProductPageView extends JPanel{
 		gbc_panel.gridy = 1;
 		contentPanel.add(panel, gbc_panel);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		Object[][] object = new Object[][] {
-			 { "001", null, "Trà sữa hoa lài-L", "Trà sữa", "38000", null },
-		};
-		
- 
-		
-		AppScrollTable scrollPane_product = new AppScrollTable(new DefaultTableModel(
-				object, titleList
-		));
-	
 		panel.add(scrollPane_product);
 		
-		
-	scrollPane_product.jTable.setRowHeight(100);
 	// Set the cell renderer for the "Ảnh" column
-	TableColumn imageColumn = scrollPane_product.jTable.getColumnModel().getColumn(1); // "Ảnh" column
-	imageColumn.setCellRenderer(new ImageTableCellRenderer());
+
 
 	// Set an image for a specific row and column
-	
-	ImageIcon imageIcon = new ImageIcon(new ImageIcon("src/assets/tamthoitea.png").getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
-	scrollPane_product.jTable.getModel().setValueAt(imageIcon, 0, 1); // row and column indices start from 0
-	
 
-
-		
-	    
 	}
 
 }

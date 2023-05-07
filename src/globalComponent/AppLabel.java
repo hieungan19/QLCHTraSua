@@ -16,6 +16,8 @@ public class AppLabel extends JLabel {
 		this.setFont(new Font("Arial", (isBold?Font.BOLD:Font.PLAIN), fontSize));
 		this.setForeground(fontColor);
 	}
+	
+	
 
 	public AppLabel(String text) {
 		// TODO Auto-generated constructor stub

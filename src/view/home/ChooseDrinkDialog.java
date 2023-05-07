@@ -111,7 +111,13 @@ public class ChooseDrinkDialog extends JDialog {
 		
 		ArrayList<ChooseTopping> toppingList = new ArrayList<ChooseTopping>();
 		toppingList.add(new ChooseTopping(drinkModel)); 
-		DrinkModel dummy = new DrinkModel("D01", "TS",20000 ,false,"/assets/bg-login.png", null,"Trà sữa", null);
+
+		DrinkModel dummy = new DrinkModel(); 
+		dummy.setProductID("D01");
+		dummy.setName("Tra sua Olong");
+		dummy.setImageUri("/assets/bg-login.png");
+		dummy.setType("Trà sữa");
+		//DrinkModel dummy = new DrinkModel("D01", "TS",20000 ,false,"/assets/bg-login.png", null,"Trà sữa", null);
 		toppingList.add(new ChooseTopping(dummy)); 
 		
 		JScrollPane scrollPane = new JScrollPane(panel);

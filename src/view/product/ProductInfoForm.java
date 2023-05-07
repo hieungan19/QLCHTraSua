@@ -1,50 +1,57 @@
 package view.product;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
-import java.awt.Window;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JEditorPane;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.border.LineBorder;
 
-import constant.ConstantValueView;
-import diaglog.AppOptionPaneDialog;
+import javax.swing.JEditorPane;
+import javax.swing.JPanel;
+
+
 import globalComponent.AppButton;
 import globalComponent.AppLabel;
 import globalComponent.AppTextField;
-import globalComponent.DatePickerComponent;
 import globalComponent.NumberSpinner;
 
-import javax.swing.JComboBox;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
 import javax.swing.SpinnerNumberModel;
 
 
 public class ProductInfoForm extends JPanel {
+	public AppTextField textField_type;
+	public AppButton btn_chooseFile;
+	public JEditorPane editorPane_image;
+	public ChooseIngredientPanel chooseIngredientPanel;
+	public AppButton btn_saveProduct;
+	public AppTextField textField_name;
+	public NumberSpinner spinner_price;
+	public String imageUri;
+	public AppButton btn_deleteProduct;
+	public AppLabel lblNewLabel_ID; 
+	
 
 	public ProductInfoForm () {
+		lblNewLabel_ID = new AppLabel("",16,true);
+		btn_deleteProduct = new AppButton("XÓA");
+		btn_saveProduct = new AppButton("LƯU");
+		btn_chooseFile = new AppButton("Chọn file");
+		editorPane_image = new JEditorPane(); 
+		editorPane_image.setEditable(false);
+		editorPane_image.setContentType("text/html");
+		textField_name = new AppTextField("Tên mặt hàng");
+		textField_type = new AppTextField("Loại");
+		spinner_price = new NumberSpinner(new SpinnerNumberModel(0, 0, 1e9, 5000));
+		
+		chooseIngredientPanel = new ChooseIngredientPanel(); 
+		
 		JPanel contentPanel = new JPanel();
-		contentPanel.setBounds(20, 20, 790, 630);
+		contentPanel.setBounds(0, 20, 790, 630);
 		this.setLayout(null);
 		this.add(contentPanel);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
@@ -92,32 +99,32 @@ public class ProductInfoForm extends JPanel {
 		gbl_panel_imagePicker.rowWeights = new double[]{0.0, 0.0, 0.0};
 		panel_imagePicker.setLayout(gbl_panel_imagePicker);
 		
-		AppLabel lblNewLabel_ID = new AppLabel("MÃ SẢN PHẨM : ",16,true);
+		
 		GridBagConstraints gbc_lblNewLabel_ID = new GridBagConstraints();
 		gbc_lblNewLabel_ID.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel_ID.gridx = 0;
 		gbc_lblNewLabel_ID.gridy = 0;
 		panel_imagePicker.add(lblNewLabel_ID, gbc_lblNewLabel_ID);
 		
-		JEditorPane jeditorPane_image = new JEditorPane();
-		jeditorPane_image.setPreferredSize(new Dimension(200, 200));
-		GridBagConstraints gbc_jeditorPane_image = new GridBagConstraints();
-		gbc_jeditorPane_image.insets = new Insets(0, 0, 5, 0);
-		gbc_jeditorPane_image.weighty = 1.0;
-		gbc_jeditorPane_image.gridx = 0;
-		gbc_jeditorPane_image.gridy = 1;
-		panel_imagePicker.add(jeditorPane_image, gbc_jeditorPane_image);
-		jeditorPane_image.setForeground(Color.BLACK);
-		jeditorPane_image.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
-		AppButton jbutton_chooseFile = new AppButton("Chọn file");
+		editorPane_image.setPreferredSize(new Dimension(200, 200));
+		GridBagConstraints gbc_editorPane_image = new GridBagConstraints();
+		gbc_editorPane_image.insets = new Insets(0, 0, 5, 0);
+		gbc_editorPane_image.weighty = 1.0;
+		gbc_editorPane_image.gridx = 0;
+		gbc_editorPane_image.gridy = 1;
+		panel_imagePicker.add(editorPane_image, gbc_editorPane_image);
+		editorPane_image.setForeground(Color.BLACK);
+		editorPane_image.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
-		GridBagConstraints gbc_jbutton_chooseFile = new GridBagConstraints();
-		gbc_jbutton_chooseFile.anchor = GridBagConstraints.NORTH;
-		gbc_jbutton_chooseFile.weighty = 1.0;
-		gbc_jbutton_chooseFile.gridx = 0;
-		gbc_jbutton_chooseFile.gridy = 2;
-		panel_imagePicker.add(jbutton_chooseFile, gbc_jbutton_chooseFile);
+		
+		
+		GridBagConstraints gbc_btn_chooseFile = new GridBagConstraints();
+		gbc_btn_chooseFile.anchor = GridBagConstraints.NORTH;
+		gbc_btn_chooseFile.weighty = 1.0;
+		gbc_btn_chooseFile.gridx = 0;
+		gbc_btn_chooseFile.gridy = 2;
+		panel_imagePicker.add(btn_chooseFile, gbc_btn_chooseFile);
 		
 		JPanel panel_2 = new JPanel();
 		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
@@ -127,56 +134,54 @@ public class ProductInfoForm extends JPanel {
 		gbc_panel_2.gridx = 1;
 		gbc_panel_2.gridy = 0;
 		panel_form.add(panel_2, gbc_panel_2);
-		panel_2.setLayout(new GridLayout(8, 0, 0, 20));
+		GridBagLayout gbl_panel_2 = new GridBagLayout();
+		gbl_panel_2.columnWidths = new int[]{390, 0};
+		gbl_panel_2.rowHeights = new int[]{46, 46, 46, 0, 0};
+		gbl_panel_2.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		panel_2.setLayout(gbl_panel_2);
 		
-		AppTextField jTextField_nameItem = new AppTextField("Tên mặt hàng");
-		jTextField_nameItem.setToolTipText("tên");
-		panel_2.add(jTextField_nameItem);
 		
-		AppTextField jTextField_desItem = new AppTextField("Mô tả");
-		jTextField_desItem.setToolTipText("option");
-		jTextField_desItem.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		panel_2.add(jTextField_desItem);
+		textField_name.setToolTipText("tên");
+		GridBagConstraints gbc_jtextField_name = new GridBagConstraints();
+		gbc_jtextField_name.fill = GridBagConstraints.BOTH;
+		gbc_jtextField_name.insets = new Insets(0, 0, 5, 0);
+		gbc_jtextField_name.gridx = 0;
+		gbc_jtextField_name.gridy = 0;
+		panel_2.add(textField_name, gbc_jtextField_name);
 		
-		SpinnerNumberModel model = new SpinnerNumberModel(0, 0, 100, 1);
 		
-		JPanel panel_unit = new JPanel();
-		panel_2.add(panel_unit);
-		panel_unit.setLayout(new BoxLayout(panel_unit, BoxLayout.X_AXIS));
+		GridBagConstraints gbc_textField_type = new GridBagConstraints();
+		gbc_textField_type.fill = GridBagConstraints.BOTH;
+		gbc_textField_type.insets = new Insets(0, 0, 5, 0);
+		gbc_textField_type.gridx = 0;
+		gbc_textField_type.gridy = 1;
+		panel_2.add(textField_type, gbc_textField_type);
+		textField_type.setColumns(10);
 		
-		JLabel jLabel_unitItem = new JLabel("Đơn vị tính");
-		jLabel_unitItem.setPreferredSize(new Dimension(100, 13));
-		panel_unit.add(jLabel_unitItem);
-		jLabel_unitItem.setForeground(new Color(80, 43, 15));
-		jLabel_unitItem.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		JPanel panel_price = new JPanel();
+		GridBagConstraints gbc_panel_price = new GridBagConstraints();
+		gbc_panel_price.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_price.fill = GridBagConstraints.BOTH;
+		gbc_panel_price.gridx = 0;
+		gbc_panel_price.gridy = 2;
+		panel_2.add(panel_price, gbc_panel_price);
+		panel_price.setLayout(new BoxLayout(panel_price, BoxLayout.X_AXIS));
 		
-		JComboBox<String> comboBox_unitItem = new JComboBox<String>();
-		comboBox_unitItem.setBorder(new LineBorder(ConstantValueView.primaryColor, 2));
-		comboBox_unitItem.setName("Đơn vị tính");
-		comboBox_unitItem.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		comboBox_unitItem.setBackground(Color.WHITE);
-		panel_unit.add(comboBox_unitItem);
-		
-		JPanel panel_quantity = new JPanel();
-		panel_2.add(panel_quantity);
-		panel_quantity.setLayout(new BoxLayout(panel_quantity, BoxLayout.X_AXIS));
-		
-		AppLabel lblNewLabel_3 = new AppLabel("Số lượng");
+		AppLabel lblNewLabel_3 = new AppLabel("Giá");
 		lblNewLabel_3.setPreferredSize(new Dimension(100, 19));
-		panel_quantity.add(lblNewLabel_3);
-		NumberSpinner spinner_quantity = new NumberSpinner(model);
-		panel_quantity.add(spinner_quantity); 
+		panel_price.add(lblNewLabel_3);
+		panel_price.add(spinner_price);
 		
-		JPanel panel_date = new JPanel();
-		panel_2.add(panel_date);
-		panel_date.setLayout(new BoxLayout(panel_date, BoxLayout.X_AXIS));
 		
-		AppLabel lblNewLabel_1 = new AppLabel("Ngày nhập");
-		lblNewLabel_1.setPreferredSize(new Dimension(100, 19));
-		panel_date.add(lblNewLabel_1);
+		JPanel panel = new JPanel();
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 3;
+		panel_2.add(panel, gbc_panel);
 		
-		DatePickerComponent datePicker = new DatePickerComponent();
-		panel_date.add(datePicker);
+	
 		
 		JPanel panel_button = new JPanel();
 		GridBagConstraints gbc_panel_button = new GridBagConstraints();
@@ -187,13 +192,15 @@ public class ProductInfoForm extends JPanel {
 		fl_panel_button.setHgap(55);
 		fl_panel_button.setAlignment(FlowLayout.RIGHT);
 		
-		AppButton jbutton_deleteItem = new AppButton("XÓA");
-		panel_button.add(jbutton_deleteItem); 
+	
+		panel_button.add(btn_deleteProduct); 
+	
+		panel_button.add(btn_saveProduct);
+		panel.setLayout(new GridLayout(0, 1, 0, 0));
+
+
 		
-		AppButton jbutton_saveItem = new AppButton("LƯU");
-		panel_button.add(jbutton_saveItem);
-
-
+		panel.add(chooseIngredientPanel); 
 		this.setVisible(true); 
 	}
 }

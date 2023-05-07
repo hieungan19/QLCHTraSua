@@ -17,19 +17,21 @@ import javax.swing.JPanel;
 
 import globalComponent.AppButton;
 import globalComponent.AppLabel;
+import globalComponent.AppLineBorderTextField;
 import globalComponent.AppTextField;
 import globalComponent.NumberSpinner;
 
 import javax.swing.SpinnerNumberModel;
+import javax.swing.JLabel;
 
 
 public class ProductInfoForm extends JPanel {
-	public AppTextField textField_type;
+	public AppLineBorderTextField textField_type;
 	public AppButton btn_chooseFile;
 	public JEditorPane editorPane_image;
 	public ChooseIngredientPanel chooseIngredientPanel;
 	public AppButton btn_saveProduct;
-	public AppTextField textField_name;
+	public AppLineBorderTextField textField_name;
 	public NumberSpinner spinner_price;
 	public String imageUri;
 	public AppButton btn_deleteProduct;
@@ -44,8 +46,6 @@ public class ProductInfoForm extends JPanel {
 		editorPane_image = new JEditorPane(); 
 		editorPane_image.setEditable(false);
 		editorPane_image.setContentType("text/html");
-		textField_name = new AppTextField("Tên mặt hàng");
-		textField_type = new AppTextField("Loại");
 		spinner_price = new NumberSpinner(new SpinnerNumberModel(0, 0, 1e9, 5000));
 		
 		chooseIngredientPanel = new ChooseIngredientPanel(); 
@@ -141,22 +141,36 @@ public class ProductInfoForm extends JPanel {
 		gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		panel_2.setLayout(gbl_panel_2);
 		
+		JPanel panel_1 = new JPanel();
+		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.fill = GridBagConstraints.BOTH;
+		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_1.gridx = 0;
+		gbc_panel_1.gridy = 0;
+		panel_2.add(panel_1, gbc_panel_1);
+		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		AppLabel lblNewLabel_1 = new AppLabel("Tên sản phẩm");
+		panel_1.add(lblNewLabel_1);
+		textField_name = new AppLineBorderTextField();
+		panel_1.add(textField_name);
+		
 		
 		textField_name.setToolTipText("tên");
-		GridBagConstraints gbc_jtextField_name = new GridBagConstraints();
-		gbc_jtextField_name.fill = GridBagConstraints.BOTH;
-		gbc_jtextField_name.insets = new Insets(0, 0, 5, 0);
-		gbc_jtextField_name.gridx = 0;
-		gbc_jtextField_name.gridy = 0;
-		panel_2.add(textField_name, gbc_jtextField_name);
 		
+		JPanel panel_3 = new JPanel();
+		GridBagConstraints gbc_panel_3 = new GridBagConstraints();
+		gbc_panel_3.fill = GridBagConstraints.BOTH;
+		gbc_panel_3.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_3.gridx = 0;
+		gbc_panel_3.gridy = 1;
+		panel_2.add(panel_3, gbc_panel_3);
+		panel_3.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		GridBagConstraints gbc_textField_type = new GridBagConstraints();
-		gbc_textField_type.fill = GridBagConstraints.BOTH;
-		gbc_textField_type.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_type.gridx = 0;
-		gbc_textField_type.gridy = 1;
-		panel_2.add(textField_type, gbc_textField_type);
+		AppLabel lblNewLabel_2 = new AppLabel("Loại sản phẩm");
+		panel_3.add(lblNewLabel_2);
+		textField_type = new AppLineBorderTextField();
+		panel_3.add(textField_type);
 		textField_type.setColumns(10);
 		
 		JPanel panel_price = new JPanel();
@@ -166,7 +180,7 @@ public class ProductInfoForm extends JPanel {
 		gbc_panel_price.gridx = 0;
 		gbc_panel_price.gridy = 2;
 		panel_2.add(panel_price, gbc_panel_price);
-		panel_price.setLayout(new BoxLayout(panel_price, BoxLayout.X_AXIS));
+		panel_price.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		AppLabel lblNewLabel_3 = new AppLabel("Giá");
 		lblNewLabel_3.setPreferredSize(new Dimension(100, 19));

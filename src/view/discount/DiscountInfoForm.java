@@ -23,15 +23,23 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
 public class DiscountInfoForm extends JPanel {
-	private AppLineBorderTextField textField;
-	private AppLineBorderTextField textField_1;
-	private AppLineBorderTextField textField_2;
-	private AppLineBorderTextField textField_3;
+	public AppLineBorderTextField textField_name;
+	public JComboBox comboBox;
+	public String[] customerTypeList;
+	public NumberSpinner spinner_percent;
+	public DatePickerComponent startDay;
+	public DatePickerComponent endDay;
+	public NumberSpinner spinner_totalBill;
+	public AppButton btn_deleteDiscount;
+	public AppButton btn_saveDiscount;
+	public AppLabel lbl_discountID;
 
 	/**
 	 * Create the panel.
 	 */
 	public DiscountInfoForm() {
+	
+		
 		JPanel contentPanel = new JPanel();
 		contentPanel.setSize(790, 630);
 		contentPanel.setLocation(20, 20);
@@ -51,13 +59,13 @@ public class DiscountInfoForm extends JPanel {
 		gbc_lblNewLabel.gridy = 0;
 		contentPanel.add(lblNewLabel, gbc_lblNewLabel);
 		
-		AppLabel lblNewLabel_9 = new AppLabel("Mã nhân viên: ",16,true);
-		GridBagConstraints gbc_lblNewLabel_9 = new GridBagConstraints();
-		gbc_lblNewLabel_9.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel_9.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNewLabel_9.gridx = 0;
-		gbc_lblNewLabel_9.gridy = 1;
-		contentPanel.add(lblNewLabel_9, gbc_lblNewLabel_9);
+		lbl_discountID = new AppLabel("",16,true);
+		GridBagConstraints gbc_lbl_discountID = new GridBagConstraints();
+		gbc_lbl_discountID.anchor = GridBagConstraints.WEST;
+		gbc_lbl_discountID.insets = new Insets(0, 0, 5, 0);
+		gbc_lbl_discountID.gridx = 0;
+		gbc_lbl_discountID.gridy = 1;
+		contentPanel.add(lbl_discountID, gbc_lbl_discountID);
 		
 		JPanel panel_info = new JPanel();
 		GridBagConstraints gbc_panel_info = new GridBagConstraints();
@@ -69,53 +77,35 @@ public class DiscountInfoForm extends JPanel {
 		contentPanel.add(panel_info, gbc_panel_info);
 		panel_info.setLayout(new GridLayout(8, 0, 0, 10));
 		
-		AppLabel lblNewLabel_2 = new AppLabel("Mã khuyến mãi");
-		panel_info.add(lblNewLabel_2);
-		
-		textField = new AppLineBorderTextField();
-		panel_info.add(textField);
-		textField.setColumns(10);
-		
 		AppLabel lblNewLabel_3 = new AppLabel("Tên khuyến mãi");
 		panel_info.add(lblNewLabel_3);
 		
-		textField_1 = new AppLineBorderTextField();
-		panel_info.add(textField_1);
-		textField_1.setColumns(10);
+		textField_name = new AppLineBorderTextField();
+		panel_info.add(textField_name);
+		textField_name.setColumns(10);
 		
-		AppLabel lblNewLabel_4 = new AppLabel("Số tiền khuyến mãi");
-		panel_info.add(lblNewLabel_4);
-		NumberSpinner discountAmountSpinner = new NumberSpinner(new SpinnerNumberModel(0,0,100000,1000)); 
-		panel_info.add(discountAmountSpinner); 
+		AppLabel lblNewLabel_ = new AppLabel("Tổng giá trị tối thiểu của hóa đơn");
+		panel_info.add(lblNewLabel_);
+		spinner_totalBill = new NumberSpinner(new SpinnerNumberModel(0,0,1e9,1000)); 
+		panel_info.add(spinner_totalBill); 
 		
 		
 		AppLabel lblNewLabel_1 = new AppLabel("Phần trăm khuyến mãi");
 		panel_info.add(lblNewLabel_1);
 		
-		NumberSpinner discountPercentageSpinner = new NumberSpinner(new SpinnerNumberModel(0,0,100,5));
-		panel_info.add(discountPercentageSpinner); 
-		
-		AppLabel lblNewLabel_5 = new AppLabel("Mô tả chi tiết");
-		panel_info.add(lblNewLabel_5);
-		
-		
-		JTextArea textArea = new JTextArea();
-		textArea.setFont(new Font("Arial", Font.PLAIN, 12));
-		textArea.setLineWrap(true);
-		textArea.setWrapStyleWord(true);
-		textArea.setRows(1);
-		JScrollPane jScrollPane = new JScrollPane(textArea); 
-		panel_info.add(jScrollPane);
+		spinner_percent = new NumberSpinner(new SpinnerNumberModel(0,0,100,5));
+		spinner_percent.setModel(new SpinnerNumberModel(0.0, 0.0, 100.0, 5.0));
+		panel_info.add(spinner_percent);
 		
 		AppLabel lblNewLabel_6 = new AppLabel("Ngày bắt đầu khuyến mãi");
 		panel_info.add(lblNewLabel_6);
 		
-		DatePickerComponent startDay = new DatePickerComponent();
+		startDay = new DatePickerComponent();
 		panel_info.add(startDay); 
 		
 		AppLabel lblNewLabel_7 = new AppLabel("Ngày kết thúc khuyến mãi");
 		panel_info.add(lblNewLabel_7);
-		DatePickerComponent endDay = new DatePickerComponent(); 
+		endDay = new DatePickerComponent(); 
 		panel_info.add(endDay); 
 		
 		AppLabel lblNewLabel_8 = new AppLabel("Đối tượng áp dụng");
@@ -131,15 +121,16 @@ public class DiscountInfoForm extends JPanel {
 		contentPanel.add(panel_button, gbc_panel_button);
 		panel_button.setLayout(new FlowLayout(FlowLayout.TRAILING, 20, 5));
 		
-		AppButton btnNewButton_1 = new AppButton("XÓA");
-		panel_button.add(btnNewButton_1);
+		btn_deleteDiscount = new AppButton("XÓA");
+		panel_button.add(btn_deleteDiscount);
 		
-		AppButton btnNewButton = new AppButton("LƯU");
-		panel_button.add(btnNewButton);
+		btn_saveDiscount = new AppButton("LƯU");
+		panel_button.add(btn_saveDiscount);
+		
+		customerTypeList= new String[] {"ALL","MEMBERSHIP","VIP"};
+		comboBox = new JComboBox<>(customerTypeList); 
+		panel_info.add(comboBox); 
+
 //		
-//		String qualifyingCustomersList[] = {"ALL","MEMBERSHIP","VIP"};
-//		JComboBox<String> comboBox = new JComboBox<>(qualifyingCustomersList); 
-//		panel_info.add(comboBox); 
-		
 	}
 }

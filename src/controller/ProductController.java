@@ -147,7 +147,7 @@ public class ProductController {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
-						int check = updateProduct(form);
+						int check = updateProductAndDisplayIntoTable(form);
 						if (check == 0) {
 							AppOptionPaneDialog failDialog = new AppOptionPaneDialog("Lưu không thành công!", 5000);
 
@@ -491,7 +491,7 @@ public class ProductController {
 	}
 
 	// update dữ liệu trong db và trong table
-	public int updateProduct(ProductInfoForm form) {
+	public int updateProductAndDisplayIntoTable(ProductInfoForm form) {
 		ProductModel product = getProductModelFromView(form);
 		System.out.println("PRODUCT HAS TO UPDATE: " + product.getName());
 		int check = ProductDAO.updateProduct(product);
@@ -509,5 +509,7 @@ public class ProductController {
 		return check;
 
 	}
+	
+	
 
 }

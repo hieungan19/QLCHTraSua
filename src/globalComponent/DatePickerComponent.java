@@ -22,8 +22,6 @@ public class DatePickerComponent extends JDateChooser {
         // Set default date to today
         this.setDate(new Date());
     }
-    public Date getDate() {
-    	return this.getDate(); 
-    }
+   
     
 }

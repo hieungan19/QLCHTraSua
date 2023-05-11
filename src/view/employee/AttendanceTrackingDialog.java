@@ -5,14 +5,17 @@ import java.awt.FlowLayout;
 import java.util.Calendar;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
 
 import globalComponent.AppButton;
 import globalComponent.AppLabel;
+import globalComponent.NumberSpinner;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -26,22 +29,26 @@ import constant.ConstantValueView;
 
 public class AttendanceTrackingDialog extends JDialog {
 
-	private final JPanel contentPanel = new JPanel();
-	private JSpinner timeSpinner;
-	private JTextField textField;
+	public final JPanel contentPanel = new JPanel();
+	public JTextField textField;
+	public TimePickerComponent startTime;
+	public TimePickerComponent endTime;
+	public NumberSpinner spinner_penalty;
+	public AppButton okButton;
+	public AppButton cancelButton;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			AttendanceTrackingDialog dialog = new AttendanceTrackingDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) {
+//		try {
+//			AttendanceTrackingDialog dialog = new AttendanceTrackingDialog();
+//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//			dialog.setVisible(true);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Create the dialog.
@@ -68,7 +75,7 @@ public class AttendanceTrackingDialog extends JDialog {
 				panel.add(lblNewLabel);
 			}
 			
-			TimePickerComponent startTime = new TimePickerComponent();
+			startTime = new TimePickerComponent();
 			startTime.setBorder(new LineBorder(ConstantValueView.primaryColor,2));
 			startTime.setPreferredSize(new Dimension(50, 40));
 			panel.add(startTime); 
@@ -78,10 +85,10 @@ public class AttendanceTrackingDialog extends JDialog {
 				panel.add(lblNewLabel_2);
 			}
 			{
-				TimePickerComponent startTime_1 = new TimePickerComponent();
-				startTime_1.setBorder(new LineBorder(ConstantValueView.primaryColor, 2));
-				startTime_1.setPreferredSize(new Dimension(50, 40));
-				panel.add(startTime_1);
+				endTime = new TimePickerComponent();
+				endTime.setBorder(new LineBorder(ConstantValueView.primaryColor, 2));
+				endTime.setPreferredSize(new Dimension(50, 40));
+				panel.add(endTime);
 			}
 			{
 				AppLabel lblNewLabel_1 = new AppLabel("New label");
@@ -89,25 +96,23 @@ public class AttendanceTrackingDialog extends JDialog {
 				panel.add(lblNewLabel_1);
 			}
 			{
-				textField = new JTextField();
-				textField.setBorder(new LineBorder(ConstantValueView.primaryColor, 2));
-				textField.setFont(new Font("Tahoma", Font.PLAIN, 16));
-				textField.setCaretColor(Color.BLACK);
-				panel.add(textField);
-				textField.setColumns(10);
+				 spinner_penalty = new NumberSpinner(new SpinnerNumberModel(0.0, 0.0, 1e8, 1000)); 
+			
+				panel.add(spinner_penalty);
+				
 			}
 			
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				AppButton okButton = new AppButton("OK");
+				okButton = new AppButton("OK");
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				AppButton cancelButton = new AppButton("Cancel");
+				cancelButton = new AppButton("Cancel");
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

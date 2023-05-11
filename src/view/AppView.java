@@ -13,7 +13,6 @@ import view.discount.DiscountPageView;
 
 import view.employee.EmployeePageView;
 import view.home.HomePageView;
-import view.inventory.IngredientInfoForm;
 import view.inventory.IngredientPageView;
 import view.product.ProductPageView;
 import view.report.StatisticalReportPageView;
@@ -56,7 +55,6 @@ public class AppView extends JFrame {
 	
 	public AppView() {
 		getContentPane().setLayout(new BorderLayout(0, 0));
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1040, 740);
 		setLocationRelativeTo(null);

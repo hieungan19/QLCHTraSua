@@ -7,6 +7,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.Color;
@@ -22,6 +23,9 @@ import javax.swing.SwingConstants;
 
 import javax.swing.border.TitledBorder;
 
+import constant.ConstantValueView;
+import controller.LoginController;
+
 import javax.swing.border.MatteBorder;
 import java.awt.event.ActionListener;
 
@@ -29,29 +33,12 @@ import java.awt.event.ActionEvent;
 
 public class LoginView extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField textField_username;
-	private JTextField textField_password;
+	public JPanel contentPane;
+	public JTextField textField_username;
+	public JPasswordField textField_password;
+	public JButton jButton_login;
+	public LoginController controller; 
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LoginView frame = new LoginView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 
 	public LoginView() {
 		setSize(1040, 740);
@@ -68,7 +55,7 @@ public class LoginView extends JFrame {
 		Font font = new Font("Arial", Font.PLAIN, 18);
 
 		JLabel lblNewLabel_1 = new JLabel("WELCOME");
-		lblNewLabel_1.setForeground(new Color(139, 69, 19));
+		lblNewLabel_1.setForeground(ConstantValueView.primaryDark);
 		lblNewLabel_1.setFont(new Font("SansSerif", Font.BOLD, 60));
 		lblNewLabel_1.setBounds(81, 151, 314, 77);
 		contentPane.add(lblNewLabel_1);
@@ -93,7 +80,7 @@ public class LoginView extends JFrame {
 		JLabel lblNewLabel_3 = new JLabel("ĐĂNG NHẬP");
 		lblNewLabel_3.setBounds(0, 0, 448, 156);
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_3.setForeground(new Color(139, 69, 19));
+		lblNewLabel_3.setForeground(ConstantValueView.primaryDark);
 		lblNewLabel_3.setFont(new Font("SansSerif", Font.BOLD, 36));
 		panel_1.add(lblNewLabel_3);
 
@@ -109,21 +96,22 @@ public class LoginView extends JFrame {
 		textField_username.setSelectionColor(Color.BLACK);
 		textField_username.setFont(new Font("SansSerif", Font.PLAIN, 20));
 		textField_username.setColumns(10);
-		textField_username.setBorder(new TitledBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(139, 69, 19)),
-				"User name", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(139, 69, 19)));
+		textField_username.setBorder(new TitledBorder(new MatteBorder(0, 0, 2, 0, ConstantValueView.primaryDark),
+				"User name", TitledBorder.LEADING, TitledBorder.TOP, null, ConstantValueView.primaryDark));
 		((TitledBorder) textField_username.getBorder()).setTitleFont(font);
 
 		panel.add(textField_username);
 
-		textField_password = new JTextField();
+		textField_password = new JPasswordField();
 		textField_password.setToolTipText("Enter your password");
 		textField_password.setColumns(10);
-		textField_password.setBorder(new TitledBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(139, 69, 19)),
-				"Password", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(139, 69, 19)));
+		textField_password.setBorder(new TitledBorder(new MatteBorder(0, 0, 2, 0, ConstantValueView.primaryDark),
+				"Password", TitledBorder.LEADING, TitledBorder.TOP, null, ConstantValueView.primaryDark));
 		((TitledBorder) textField_password.getBorder()).setTitleFont(font);
 		panel.add(textField_password);
 
-		JButton jButton_login = new JButton("Login");
+		jButton_login = new JButton("Login");
+		
 		jButton_login.setHorizontalTextPosition(SwingConstants.CENTER);
 		jButton_login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -133,7 +121,7 @@ public class LoginView extends JFrame {
 		jButton_login.setForeground(new Color(255, 250, 250));
 		jButton_login.setFont(new Font("SansSerif", Font.BOLD, 20));
 		jButton_login.setBorder(null);
-		jButton_login.setBackground(new Color(139, 69, 19));
+		jButton_login.setBackground(ConstantValueView.primaryDark);
 		panel_1.add(jButton_login);
 
 		JLabel lblNewLabel = new JLabel("");
@@ -147,7 +135,8 @@ public class LoginView extends JFrame {
 		lblNewLabel_4.setBounds(754, 668, 262, 25);
 		contentPane.add(lblNewLabel_4);
 		
+		
 	
-
+		controller = new LoginController(this); 
 	}
 }

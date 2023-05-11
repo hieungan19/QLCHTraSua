@@ -19,23 +19,33 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import constant.AppValues;
 import constant.ConstantValueView;
+import controller.EmployeeController;
 
 import java.awt.BorderLayout;
 
 public class EmployeePageView extends JPanel {
-	private JTable jTable_employee;
-	private JScrollPane scrollPane;
+
+	public Object[][] object;
+	public AppScrollTable scrollPane_employee;
+	public SearchBar searchBar;
+	public EmployeeController controller;
+	public AppButton btn_addEmployee; 
 
 	/**
 	 * Create the panel.
 	 */
 	public EmployeePageView() {
 		
-		String[] titleList  = new String[] {
-				"Mã nhân viên", "Tên Nhân viên","Ngày vào làm","Ngày sinh", "Số CCCD","Chức vụ","Lương cơ bản","SĐT","Email","Địa chỉ"
-			}; 
+
+		scrollPane_employee = new AppScrollTable(new DefaultTableModel(
+				object, AppValues.employeeAttributes
+		));
+		searchBar = new SearchBar();
+		btn_addEmployee = new AppButton("+");
 		
+		controller = new EmployeeController(this); 
 		JPanel contentPanel = new JPanel();
 		contentPanel.setBounds(20, 20, 790, 630);
 		this.setLayout(null);
@@ -68,7 +78,7 @@ public class EmployeePageView extends JPanel {
 		gbc_lblNewLabel.gridy = 0;
 		panel_1.add(lblNewLabel, gbc_lblNewLabel);
 		
-		SearchBar searchBar = new SearchBar();
+		
 
 		GridBagConstraints gbc_searchBar = new GridBagConstraints();
 		gbc_searchBar.insets = new Insets(0, 20, 0, 20);
@@ -79,14 +89,14 @@ public class EmployeePageView extends JPanel {
 		gbc_searchBar.weightx = 3.0;
 		panel_1.add(searchBar, gbc_searchBar); 
 		
-		AppButton btnNewButton = new AppButton("+");
-		btnNewButton.setFont(new Font("SansSerif", Font.BOLD, 32));
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.fill = GridBagConstraints.VERTICAL;
-		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton.gridx = 2;
-		gbc_btnNewButton.gridy = 0;
-		panel_1.add(btnNewButton, gbc_btnNewButton);
+
+		btn_addEmployee.setFont(new Font("SansSerif", Font.BOLD, 32));
+		GridBagConstraints gbc_btn_addEmployee = new GridBagConstraints();
+		gbc_btn_addEmployee.fill = GridBagConstraints.VERTICAL;
+		gbc_btn_addEmployee.insets = new Insets(0, 0, 0, 5);
+		gbc_btn_addEmployee.gridx = 2;
+		gbc_btn_addEmployee.gridy = 0;
+		panel_1.add(btn_addEmployee, gbc_btn_addEmployee);
 		
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -96,17 +106,8 @@ public class EmployeePageView extends JPanel {
 		gbc_panel.gridy = 1;
 		contentPanel.add(panel, gbc_panel);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		Object[][] object = new Object[][] {
-			
-		};
-		
-
-		
-		AppScrollTable scrollPane_employee = new AppScrollTable(new DefaultTableModel(
-				object, titleList
-		));
 	
+		
 		panel.add(scrollPane_employee);
 	}
 }

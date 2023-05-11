@@ -2,6 +2,8 @@ package view.employee;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.swing.JPanel;
@@ -33,10 +35,24 @@ public class TimePickerComponent extends JPanel {
 	        spinnerDateModel.setValue(calendar.getTime());
 	        timeSpinner = new JSpinner(spinnerDateModel);
 	        timeSpinner.setBorder(null);
-	        timeSpinner.setEditor(new JSpinner.DateEditor(timeSpinner, "hh:mm:ss a"));
+	        timeSpinner.setEditor(new JSpinner.DateEditor(timeSpinner, "HH:mm:ss"));
 	        timeSpinner.setFont(ConstantValueView.normalText);
 	        this.add(timeSpinner);
 	        setVisible(true);
+		 
 	}
+	
+	public String getTimeString() {
+		
+	    Date time = (Date) timeSpinner.getValue();
+	    Date now = new Date(); 
+	    time.setDate(now.getDate());
+	    time.setMonth(now.getMonth());
+	    time.setYear(now.getYear());
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    return formatter.format(time);
+	}
+
+	
 
 }

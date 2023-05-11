@@ -11,5 +11,9 @@ public class AppValues {
 			"Mã món", "Ảnh", "Tên sản phẩm", "Phân loại", "Đơn giá", "Nguyên liệu"
 		};
 	public static String[] discountAttributes = new String[] {"Mã khuyến mãi","Tên khuyến mãi","Hóa đơn tối thiểu","Phần trăm khuyến mãi","Ngày bắt đầu","Ngày kết thúc", "Đối tượng áp dụng"};
+	public static String[] employeeAttributes =  new String[] {
+			"Mã nhân viên", "Họ tên","Số điện thoại","CCCD", "Địa chỉ","Ngày sinh","Giới tính","Lương cơ bản","Ngày vào làm","Chức vụ"};
+	public static String[] positionList = new String[] {"QUẢN LÝ","THU NGÂN","PHA CHẾ","PHỤC VỤ","BẢO VỆ","LAO CÔNG"};
 	
-}
+	}
+

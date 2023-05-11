@@ -49,6 +49,7 @@ public class ProductInfoForm extends JPanel {
 		spinner_price = new NumberSpinner(new SpinnerNumberModel(0, 0, 1e9, 5000));
 		
 		chooseIngredientPanel = new ChooseIngredientPanel(); 
+		chooseIngredientPanel.setVisible(false); 
 		
 		JPanel contentPanel = new JPanel();
 		contentPanel.setBounds(0, 20, 790, 630);

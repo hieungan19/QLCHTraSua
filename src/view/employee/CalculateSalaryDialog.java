@@ -1,11 +1,12 @@
 package view.employee;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.FlowLayout;
 
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
 
 import constant.ConstantValueView;
@@ -13,6 +14,7 @@ import globalComponent.AppButton;
 import globalComponent.AppLabel;
 import globalComponent.AppLineBorderTextField;
 import globalComponent.DatePickerComponent;
+import globalComponent.NumberSpinner;
 import model.EmployeeModel;
 
 import javax.swing.JLabel;
@@ -20,36 +22,31 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.GridLayout;
-import java.awt.CardLayout;
 import java.awt.Dimension;
-import java.awt.Color;
 import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
-import java.awt.Font;
+
 
 public class CalculateSalaryDialog extends JDialog {
 
-	private final JPanel contentPanel = new JPanel();
-	private AppLineBorderTextField textField;
-
+	public final JPanel contentPanel = new JPanel();
+	public NumberSpinner spinner_bonus;
+	public DatePickerComponent endDate;
+	public DatePickerComponent startDate;
+	public AppLabel lbl_total;
+	public AppLabel lbl_penalty;
+	public AppLabel lbl_baseSalary;
+	public AppButton btn_ok;
+	public AppLabel lbl_hours;
+	public AppButton btn_cancel;
+	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			CalculateSalaryDialog dialog = new CalculateSalaryDialog(null);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public CalculateSalaryDialog(EmployeeModel employeeModel) {
+	public CalculateSalaryDialog() {
 		setBounds(100, 100, 450, 500);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(ConstantValueView.background);
@@ -65,10 +62,13 @@ public class CalculateSalaryDialog extends JDialog {
 			buttonPane.setBackground(ConstantValueView.background);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			
+			btn_ok = new AppButton("OK");
+			buttonPane.add(btn_ok);
 			{
-				AppButton cancelButton = new AppButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+				 btn_cancel = new AppButton("Cancel");
+				btn_cancel.setActionCommand("Cancel");
+				buttonPane.add(btn_cancel);
 			}
 		}
 		{
@@ -94,22 +94,10 @@ public class CalculateSalaryDialog extends JDialog {
 				panel.add(panel_1, gbc_panel_1);
 				{
 					JPanel panel_1_1 = new JPanel();
-					panel_1_1.setBounds(10, 10, 416, 145);
+					panel_1_1.setBounds(10, 10, 416, 121);
 					panel_1_1.setPreferredSize(new Dimension(200, 10));
 					panel_1.add(panel_1_1);
-					panel_1_1.setLayout(new GridLayout(5, 2, 0, 5));
-					{
-						AppLabel lblNewLabel_employeeID = new AppLabel("Mã nhân viên:");
-						panel_1_1.add(lblNewLabel_employeeID);
-					}
-					{
-						AppLabel lblNewLabel_employeeName = new AppLabel("Tên nhân viên: ");
-						panel_1_1.add(lblNewLabel_employeeName);
-					}
-					{
-						AppLabel lblNewLabel_employeePosition = new AppLabel("Chức vụ: ");
-						panel_1_1.add(lblNewLabel_employeePosition);
-					}
+					panel_1_1.setLayout(new GridLayout(2, 2, 0, 5));
 					{
 						JPanel panel_2 = new JPanel();
 						panel_1_1.add(panel_2);
@@ -120,7 +108,7 @@ public class CalculateSalaryDialog extends JDialog {
 						}
 						panel_1_1.add(panel_2);
 						{
-							DatePickerComponent startDate = new DatePickerComponent();
+							startDate = new DatePickerComponent();
 							panel_2.add(startDate); 
 						}
 					}
@@ -132,7 +120,7 @@ public class CalculateSalaryDialog extends JDialog {
 							AppLabel lblNewLabel_4 = new AppLabel("Ngày kết thúc: ");
 							panel_2.add(lblNewLabel_4);
 							
-							DatePickerComponent endDate = new DatePickerComponent();
+							endDate = new DatePickerComponent();
 							panel_2.add(endDate); 
 						}
 					}
@@ -152,7 +140,13 @@ public class CalculateSalaryDialog extends JDialog {
 					JPanel panel_2 = new JPanel();
 					panel_2.setBounds(10, 0, 416, 174);
 					panel_1.add(panel_2);
-					panel_2.setLayout(new GridLayout(4, 0, 0, 0));
+					panel_2.setLayout(new GridLayout(5, 0, 0, 0));
+					
+					AppLabel lblNewLabel_1 = new AppLabel("Số giờ làm:");
+					panel_2.add(lblNewLabel_1);
+					
+					lbl_hours = new AppLabel("");
+					panel_2.add(lbl_hours);
 					{
 						AppLabel lblNewLabel_baseSalary = new AppLabel("Lương cơ bản");
 						lblNewLabel_baseSalary.setText("Lương cơ bản:");
@@ -163,15 +157,9 @@ public class CalculateSalaryDialog extends JDialog {
 						panel_2.add(panel_3);
 						panel_3.setLayout(new GridLayout(1, 1, 0, 0));
 						{
-							AppLabel lblNewLabel_bonus = new AppLabel("Tiền thưởng");
-							panel_3.add(lblNewLabel_bonus);
-							lblNewLabel_bonus.setText("Tiền thưởng:");
-						}
-						{
-							textField = new AppLineBorderTextField();
-						
-							panel_3.add(textField);
-							textField.setColumns(10);
+							lbl_baseSalary = new AppLabel("LƯƠNG",16,true);
+							lbl_baseSalary.setText("");
+							panel_3.add(lbl_baseSalary);
 						}
 					}
 					{
@@ -180,10 +168,30 @@ public class CalculateSalaryDialog extends JDialog {
 						panel_2.add(lblNewLabel_penaltyForMisconduct);
 					}
 					{
+						lbl_penalty = new AppLabel("TRỪ",16,true);
+						lbl_penalty.setText("");
+						panel_2.add(lbl_penalty);
+					}
+					{
+						AppLabel lblNewLabel_bonus = new AppLabel("Tiền thưởng");
+						panel_2.add(lblNewLabel_bonus);
+						lblNewLabel_bonus.setText("Tiền thưởng:");
+					}
+					{
+						spinner_bonus = new NumberSpinner(new SpinnerNumberModel(0.0, 0.0, 1e8, 1000)); 
+			
+						panel_2.add(spinner_bonus);
+					
+					}
+					{
 						AppLabel lblNewLabel_total = new AppLabel("Tổng cộng",16,true);
 						lblNewLabel_total.setText("Tổng cộng:");
-						lblNewLabel_total.setHorizontalAlignment(SwingConstants.TRAILING);
+						lblNewLabel_total.setHorizontalAlignment(SwingConstants.LEFT);
 						panel_2.add(lblNewLabel_total);
+					}
+					{
+						lbl_total = new AppLabel("",16,true);
+						panel_2.add(lbl_total);
 					}
 				}
 			}

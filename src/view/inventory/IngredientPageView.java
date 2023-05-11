@@ -17,6 +17,7 @@ import globalComponent.AppButton;
 import globalComponent.AppLabel;
 import globalComponent.AppScrollTable;
 import globalComponent.SearchBar;
+import javax.swing.BoxLayout;
 
 public class IngredientPageView extends JPanel {
 
@@ -25,6 +26,8 @@ public class IngredientPageView extends JPanel {
 	public AppScrollTable scrollPane_ingredient;
 	public IngredientController controller; 
 	public Object[][] object;
+	public AppScrollTable scrollPane_import;
+	public AppScrollTable scrollPane_export;
 	
 
 	/**
@@ -34,6 +37,13 @@ public class IngredientPageView extends JPanel {
 		scrollPane_ingredient = new AppScrollTable(new DefaultTableModel(
 				object, AppValues.inventoryItemAttributes
 		));
+		scrollPane_export = new AppScrollTable(new DefaultTableModel(
+				object,new String[] {"MÃ NL","Ngày xuất","Số lượng"}
+		));
+
+		scrollPane_import = new AppScrollTable(new DefaultTableModel(
+				object,new String[] {"MÃ NL","Ngày nhập","Số lượng",}
+		)); 
 		
 		btn_addIngredient = new AppButton("+");
 		JPanel contentPanel = new JPanel();
@@ -98,8 +108,31 @@ public class IngredientPageView extends JPanel {
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 1;
 		contentPanel.add(panel, gbc_panel);
-		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		panel.setLayout(new GridLayout(0, 1, 0, 10));
 		panel.add(scrollPane_ingredient);
+		
+		JPanel panel_2 = new JPanel();
+		panel.add(panel_2);
+		panel_2.setLayout(new GridLayout(1, 0, 10, 0));
+		
+		JPanel panel_3 = new JPanel();
+		panel_2.add(panel_3);
+		panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.Y_AXIS));
+		
+		AppLabel lblNewLabel_1 = new AppLabel("CHI TIẾT NHẬP KHO",16,true);
+		panel_3.add(lblNewLabel_1);
+		
+		panel_3.add(scrollPane_import);
+		
+		JPanel panel_4 = new JPanel();
+		panel_2.add(panel_4);
+		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.Y_AXIS));
+		
+		AppLabel lblNewLabel_2 = new AppLabel("CHI TIẾT XUẤT KHO",16,true);
+		panel_4.add(lblNewLabel_2);
+		
+	
+		panel_4.add(scrollPane_export);
 		
 	}
 	

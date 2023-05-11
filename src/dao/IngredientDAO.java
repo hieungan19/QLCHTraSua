@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.CustomerModel;
+import model.ImportExportModel;
 import model.IngredientModel;
 
 public class IngredientDAO {
@@ -25,6 +26,8 @@ public class IngredientDAO {
 	private static final String DELETE_INGREDIENT_BY_ID = "DELETE FROM NGUYENLIEU WHERE MANL = ?"; 
 	private static final String UPDATE_INGREDIENT_INFO = "UPDATE NGUYENLIEU SET TENNL = ?, DONVI = ?, SOLUONG = ?, GIA=? WHERE MANL = ?"; 
 	private static final String GET_INGREDIENT_BY_ID = "SELECT * FROM NGUYENLIEU WHERE MANL = ?"; 
+	
+	private static final String GET_ALL_NHAPXUAT = "SELECT * FROM XUATNHAPNL"; 
 	
 	public static List<IngredientModel> getIngredientList (){
 		List<IngredientModel> result = new ArrayList<>();
@@ -154,5 +157,29 @@ public class IngredientDAO {
 	}
 	
 
-	
+	public static List<ImportExportModel> getImportExportModelList(){
+		List<ImportExportModel> result = new ArrayList<>(); 
+		try {
+			Connection c = MyDB.getInstance().getConnection();
+			Statement st = c.createStatement();
+			ResultSet rs = st.executeQuery(GET_ALL_NHAPXUAT);
+			while (rs.next()) {
+				String id = rs.getString("MAXN");
+				String ingreID = rs.getString("MANL");
+				Date ieDate = rs.getDate("NGAYNX");
+				double amount = rs.getDouble("SOLUONG");
+				double money = rs.getDouble("SOTIEN"); 
+				
+				ImportExportModel ie = new ImportExportModel(id, ingreID, ieDate, amount, money);
+				result.add(ie); 
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result; 
+		
+	}
 }

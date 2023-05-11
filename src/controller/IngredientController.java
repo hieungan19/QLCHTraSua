@@ -24,6 +24,7 @@ import dao.IngredientDAO;
 import diaglog.AppDialog;
 import diaglog.AppOptionPaneDialog;
 import model.CustomerModel;
+import model.ImportExportModel;
 import model.IngredientModel;
 import view.inventory.IngredientInfoForm;
 import view.inventory.IngredientPageView;
@@ -33,11 +34,14 @@ public class IngredientController {
 	public IngredientInfoForm form;
 	public JTable table;
 	private int selectedRow;
+	List<ImportExportModel> importExportList;
 
 	public IngredientController(IngredientPageView view) {
 		this.view = view;
 		this.table = view.scrollPane_ingredient.jTable;
 		displayIngredientListToTable();
+		displayImportTable();
+		displayExportTable();
 
 		// Khởi tạo TableRowSorter
 		TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
@@ -163,6 +167,8 @@ public class IngredientController {
 							}
 							
 							AppController.showPage(view);
+							displayExportTable();
+							displayImportTable(); 
 						}
 					}); 
 				}
@@ -191,9 +197,11 @@ public class IngredientController {
 							AppOptionPaneDialog dialog = new AppOptionPaneDialog("Thêm không thành công!", 1000);
 						} else {
 							AppOptionPaneDialog dialog = new AppOptionPaneDialog(
-									"Thêm thành công khách hàng.\nMã nguyên liệu:" + ingredient.getIngredientID(),
+									"Thêm thành công.\nMã nguyên liệu:" + ingredient.getIngredientID(),
 									5000);
 							AppController.showPage(view);
+							displayImportTable();
+							displayExportTable();
 							addIngredientToTable(ingredient);
 						}
 
@@ -269,5 +277,33 @@ public class IngredientController {
 		return 0; 
 	}
 	
+	public void displayImportTable() {
+		DefaultTableModel dtm = (DefaultTableModel) view.scrollPane_import.jTable.getModel();
+		importExportList = IngredientDAO.getImportExportModelList();
+		dtm.setNumRows(0);
+		if (importExportList.isEmpty()) {
+			System.out.println("Khong co nguyen lieu.");
+		} else {
+			for (int i = 0; i < importExportList.size(); i++) {
+				ImportExportModel ie = importExportList.get(i);
+				if (ie.getAmount()>0) dtm.addRow(ie.toObject());
+			}
+		}
+		view.scrollPane_import.jTable.setModel(dtm);
+	}
 	
+	public void displayExportTable() {
+		DefaultTableModel dtm = (DefaultTableModel) view.scrollPane_export.jTable.getModel();
+		importExportList = IngredientDAO.getImportExportModelList();
+		dtm.setNumRows(0);
+		if (importExportList.isEmpty()) {
+			System.out.println("Khong co nguyen lieu.");
+		} else {
+			for (int i = 0; i < importExportList.size(); i++) {
+				ImportExportModel ie = importExportList.get(i);
+				if (ie.getAmount()<0) dtm.addRow(ie.toObject());
+			}
+		}
+		view.scrollPane_export.jTable.setModel(dtm);
+	}
 }

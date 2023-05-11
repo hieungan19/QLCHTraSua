@@ -446,6 +446,7 @@ public class EmployeeController {
 			pen += a.getPenalty();
 
 		}
+		total+= salaryDialog.spinner_bonus.getNumber(); 
 
 		salaryDialog.lbl_hours.setText(String.valueOf(hours));
 		salaryDialog.lbl_penalty.setText(String.valueOf(pen));

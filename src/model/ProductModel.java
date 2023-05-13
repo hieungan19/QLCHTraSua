@@ -150,4 +150,8 @@ public class ProductModel {
 		return new Object[] {productID,name, toStringToppingList(), getTotal()}; 
 	}
 
+	
+	public String toStringConsoleTest() {
+		return productID + " - " + name + " - " + amount ; 
+	}
 }

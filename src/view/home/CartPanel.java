@@ -28,16 +28,17 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SpinnerNumberModel;
 import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
+import javax.swing.JButton;
 
 public class CartPanel extends JPanel {
 	private JTable table_cart;
 	public AppScrollTable scrollPane_cart;
 	public AppTextField cusPhoneNumber;
 	public AppLabel cusName;
-	public AppButton btn_confirm;
 	public NumberSpinner spinner_cusPaymentAmount;
 	public JComboBox<String> comboBox_discount;
 	public AppLabel cusID;
+	public AppButton btn_confirm; 
 
 	/**
 	 * Create the panel.
@@ -47,10 +48,11 @@ public class CartPanel extends JPanel {
 		Object[][] object = new Object[][] { { "1", null, "abcababababababababa", null, null, null },
 
 		};
+
 		btn_confirm = new AppButton("XÁC NHẬN");
 		this.setOpaque(false);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 250 };
+		gridBagLayout.columnWidths = new int[] {240};
 		gridBagLayout.rowHeights = new int[] { 0, 0, 250, 0, 0, 0 };
 		setLayout(gridBagLayout);
 		AppLabel lblNewLabel_cart = new AppLabel("CART");
@@ -128,18 +130,8 @@ public class CartPanel extends JPanel {
 		gbc_comboBox_discount.gridy = 4;
 		add(comboBox_discount, gbc_comboBox_discount);
 
-		btn_confirm.setBackground(ConstantValueView.primaryDark);
-		btn_confirm.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				BillDialog bill = new BillDialog();
-				bill.setVisible(true);
-			}
-		});
-
 		JPanel panel_2 = new JPanel();
+		panel_2.setOpaque(false);
 		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
 		gbc_panel_2.fill = GridBagConstraints.BOTH;
 		gbc_panel_2.gridwidth = 2;
@@ -162,6 +154,7 @@ public class CartPanel extends JPanel {
 		panel_2.add(lblNewLabel_estimateAmount);
 
 		AppLabel subtotal = new AppLabel("New label");
+		subtotal.setText("");
 		panel_2.add(subtotal);
 
 		AppLabel lblNewLabel_discountValue = new AppLabel("Khuyến mãi: 10000 VND");
@@ -169,6 +162,7 @@ public class CartPanel extends JPanel {
 		panel_2.add(lblNewLabel_discountValue);
 
 		AppLabel discountValue = new AppLabel("New label");
+		discountValue.setText("");
 		panel_2.add(discountValue);
 
 		AppLabel lblNewLabel_totalAmount = new AppLabel("Tổng cộng: 190000 VND");
@@ -176,15 +170,25 @@ public class CartPanel extends JPanel {
 		panel_2.add(lblNewLabel_totalAmount);
 
 		AppLabel total = new AppLabel("New label");
+		total.setText("");
 		panel_2.add(total);
-
-		GridBagConstraints gbc_btnConfirm = new GridBagConstraints();
-		gbc_btnConfirm.weightx = 1.0;
-		gbc_btnConfirm.fill = GridBagConstraints.BOTH;
-		gbc_btnConfirm.anchor = GridBagConstraints.WEST;
-		gbc_btnConfirm.gridx = 1;
-		gbc_btnConfirm.gridy = 11;
-		add(btn_confirm, gbc_btnConfirm);
+		
+		JPanel panel_3 = new JPanel();
+		GridBagConstraints gbc_panel_3 = new GridBagConstraints();
+		gbc_panel_3.gridwidth = 2;
+		gbc_panel_3.fill = GridBagConstraints.BOTH;
+		gbc_panel_3.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_3.gridx = 0;
+		gbc_panel_3.gridy = 6;
+		add(panel_3, gbc_panel_3);
+		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		AppButton btnNewButton = new AppButton("Tạm tính");
+		btnNewButton.setText("TẠM TÍNH");
+		panel_3.add(btnNewButton);
+		
+		btn_confirm.setBackground(new Color(80, 43, 15));
+		panel_3.add(btn_confirm);
 		/*
 		 * btnConfirm.addActionListener(e -> { // Tạo JDialog và thiết lập thông tin
 		 * JDialog dialog = new JDialog(root, "Pop-up Example", true);

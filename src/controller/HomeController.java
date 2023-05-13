@@ -352,7 +352,7 @@ public class HomeController {
 				BillModel bill  = new BillModel("NV13", cart.cusID.getText(), cartProducts, null, 0, 0, 0, 0);
 				bill.setSubtotal();
 				bill.setDiscountID(getDiscountID());
-				bill.setTenderAmount(cart.spinner_cusPaymentAmount.getNumber());
+				bill.setTenderAmount((Integer)cart.spinner_cusPaymentAmount.getValue());
 				bill.setDiscountValue();
 				bill.setTotal();
 				System.out.println("BILL: "+ bill.getTotal());
@@ -404,6 +404,8 @@ public class HomeController {
 		}
 		return discount.getDiscountID(); 
 	}
+	
+	// g
 
 
 }

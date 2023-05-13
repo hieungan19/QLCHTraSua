@@ -75,7 +75,9 @@ public class BillModel {
 		this.total = subtotal- discountValue; 
 	}
 	public void setDiscountValue() {
+		if (discountID!=null)
 		this.discountValue = subtotal * DiscountDAO.getDiscountByID(discountID).getPercent()/100; 
+		this.discountValue = 0; 
 	}
 	public void setTenderAmount(double tenderAmount) {
 		this.tenderAmount = tenderAmount;
@@ -112,6 +114,8 @@ public class BillModel {
 	public Object[] toOject() {
 		return new Object[] {billID, billDate, employeeID, customerID, total};
 	}
-	
+	public String toStringConsoleTest() {
+		return billID + " - "+ total + "\n"; 
+	}
 	
 }

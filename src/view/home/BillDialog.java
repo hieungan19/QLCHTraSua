@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import dao.BillController;
 import globalComponent.AppButton;
 import globalComponent.AppLabel;
 import globalComponent.AppScrollTable;
@@ -17,12 +18,24 @@ import javax.swing.SwingConstants;
 
 public class BillDialog extends JDialog {
 
-	private final JPanel contentPanel = new JPanel();
+	public final JPanel contentPanel = new JPanel();
+	public AppLabel billID;
+	public AppLabel billDate;
+	public AppLabel empName;
+	public AppLabel cusName;
+	public AppLabel cusPhoneNumber;
+	public AppScrollTable scrollPane_bill;
+	public AppLabel subtotal;
+	public AppLabel discountValue;
+	public AppLabel total;
+	public AppLabel point;
+	public AppLabel customerPayment;
+	public AppLabel change;
+	BillController controller; 
 
 	public BillDialog() {
 		String[] titleList = {
-				"M\u00E3 \u0111\u1ED3 u\u1ED1ng", "T\u00EAn \u0111\u1ED3 u\u1ED1ng", "Topping", "S\u1ED1 l\u01B0\u1EE3ng", "T\u1ED5ng gi\u00E1"
-			, "Ghi chú"};
+				"STT", "Tên món", "Số lượng", "Đơn giá", "Thành tiền"};
 		Object[][] object = new Object[][] {
 			{"1", null, "abcababababababababa", null, null,null},
 			
@@ -54,18 +67,29 @@ public class BillDialog extends JDialog {
 					flowLayout.setHgap(30);
 					panel_infoStaff.add(panel_billInfo);
 					{
-						AppLabel lblNewLabel_billID = new AppLabel("Mã hóa đơn:");
-						panel_billInfo.add(lblNewLabel_billID);
+						billID = new AppLabel("Mã hóa đơn:");
+						panel_billInfo.add(billID);
 					}
 					{
-						AppLabel lblNewLabel_billDateTime = new AppLabel("Ngày giờ: ");
-						panel_billInfo.add(lblNewLabel_billDateTime);
+						billDate = new AppLabel("Ngày giờ: ");
+						billDate.setText("Ngày:");
+						panel_billInfo.add(billDate);
 					}
 				}
 				{
-					AppLabel lblNewLabel_staffName = new AppLabel("Nhân viên: ");
-					
-					panel_infoStaff.add(lblNewLabel_staffName);
+					JPanel panel = new JPanel();
+					FlowLayout flowLayout = (FlowLayout) panel.getLayout();
+					flowLayout.setAlignment(FlowLayout.LEADING);
+					panel_infoStaff.add(panel);
+					{
+						AppLabel lblNewLabel_staffName = new AppLabel("Nhân viên: ");
+						panel.add(lblNewLabel_staffName);
+					}
+					{
+						empName = new AppLabel("New label");
+						empName.setText("");
+						panel.add(empName);
+					}
 				}
 			}
 			{
@@ -73,20 +97,33 @@ public class BillDialog extends JDialog {
 				panel_infoStaffAndCustomer.add(panel_infoCustomer);
 				panel_infoCustomer.setLayout(new GridLayout(2, 0, 0, 0));
 				{
-					AppLabel lblNewLabel_customerName = new AppLabel("Tên khách hàng: ");
-					panel_infoCustomer.add(lblNewLabel_customerName);
-				}
-				{
 					JPanel panel = new JPanel();
+					FlowLayout flowLayout = (FlowLayout) panel.getLayout();
+					flowLayout.setAlignment(FlowLayout.LEADING);
 					panel_infoCustomer.add(panel);
-					panel.setLayout(new GridLayout(0, 2, 0, 0));
 					{
-						AppLabel lblNewLabel_currentPoint = new AppLabel("Điểm tích lũy: ");
-						panel.add(lblNewLabel_currentPoint);
+						AppLabel lblNewLabel_customerName = new AppLabel("Tên khách hàng: ");
+						panel.add(lblNewLabel_customerName);
 					}
 					{
+						cusName = new AppLabel("New label");
+						cusName.setText("");
+						panel.add(cusName);
+					}
+				}
+				{
+					JPanel panel_1 = new JPanel();
+					FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
+					flowLayout.setAlignment(FlowLayout.LEFT);
+					panel_infoCustomer.add(panel_1);
+					{
 						AppLabel lblNewLabel_phoneNumber = new AppLabel("Số điện thoại: ");
-						panel.add(lblNewLabel_phoneNumber);
+						panel_1.add(lblNewLabel_phoneNumber);
+					}
+					{
+						cusPhoneNumber = new AppLabel("New label");
+						cusPhoneNumber.setText("");
+						panel_1.add(cusPhoneNumber);
 					}
 				}
 			}
@@ -94,19 +131,32 @@ public class BillDialog extends JDialog {
 		{
 			JPanel panel_tableDrink = new JPanel();
 			panel_tableDrink.setLayout(new GridLayout(0, 1, 0, 0));
-			AppScrollTable table_scrollPane = new AppScrollTable(new DefaultTableModel(object, titleList));
-			table_scrollPane.setEnabled(false);
-			panel_tableDrink.add(table_scrollPane); 
+			scrollPane_bill = new AppScrollTable(new DefaultTableModel(object, titleList));
+			scrollPane_bill.jTable.setModel(new DefaultTableModel(
+				new Object[][] {
+					{"1", null, "abcababababababababa", null, null},
+				},
+				new String[] {
+					"STT", "T\u00EAn m\u00F3n", "S\u1ED1 l\u01B0\u1EE3ng", "\u0110\u01A1n gi\u00E1", "Th\u00E0nh ti\u1EC1n"
+				}
+			));
+			scrollPane_bill.jTable.getColumnModel().getColumn(1).setPreferredWidth(150);
+			scrollPane_bill.setEnabled(false);
+			panel_tableDrink.add(scrollPane_bill); 
 			contentPanel.add(panel_tableDrink);
 		}
 		{
 			JPanel panel = new JPanel();
 			contentPanel.add(panel);
-			panel.setLayout(new GridLayout(6, 0, 0, 0));
+			panel.setLayout(new GridLayout(6, 0, 0, 10));
 			{
 				AppLabel lblNewLabel_estimateAmount = new AppLabel("Tạm tính");
 				lblNewLabel_estimateAmount.setText("Tạm tính:");
 				panel.add(lblNewLabel_estimateAmount);
+			}
+			{
+				subtotal = new AppLabel("New label");
+				panel.add(subtotal);
 			}
 			{
 				AppLabel lblNewLabel_discountedPrice = new AppLabel("");
@@ -114,9 +164,17 @@ public class BillDialog extends JDialog {
 				panel.add(lblNewLabel_discountedPrice);
 			}
 			{
+				discountValue = new AppLabel("New label");
+				panel.add(discountValue);
+			}
+			{
 				AppLabel lblNewLabel_total = new AppLabel("New label");
 				lblNewLabel_total.setText("Tổng cộng: ");
 				panel.add(lblNewLabel_total);
+			}
+			{
+				total = new AppLabel("New label");
+				panel.add(total);
 			}
 			{
 				AppLabel lblNewLabel_point = new AppLabel("New label");
@@ -125,13 +183,25 @@ public class BillDialog extends JDialog {
 				panel.add(lblNewLabel_point);
 			}
 			{
+				point = new AppLabel("New label");
+				panel.add(point);
+			}
+			{
 				AppLabel lblNewLabel_customerGaveMoney = new AppLabel("Tiền khách đưa");
 				panel.add(lblNewLabel_customerGaveMoney);
+			}
+			{
+				customerPayment = new AppLabel("New label");
+				panel.add(customerPayment);
 			}
 			{
 				AppLabel lblNewLabel_changeMoney = new AppLabel("New label");
 				lblNewLabel_changeMoney.setText("Tiền thối: ");
 				panel.add(lblNewLabel_changeMoney);
+			}
+			{
+				change = new AppLabel("New label");
+				panel.add(change);
 			}
 		}
 		{
@@ -146,6 +216,8 @@ public class BillDialog extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		
+		
 	}
 
 }

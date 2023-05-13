@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import constant.ConstantValueView;
+import dao.BillController;
 import diaglog.AppOptionPaneDialog;
 import globalComponent.AppButton;
 import globalComponent.AppLabel;
@@ -32,9 +33,15 @@ import globalComponent.AppScrollTable;
 import globalComponent.SearchBar;
 import model.OrdersModel;
 import java.awt.event.ActionListener;
+import java.util.concurrent.Flow.Publisher;
 import java.awt.event.ActionEvent;
 
 public class BillPageView extends JPanel{
+
+	public SearchBar searchBar;
+	public AppScrollTable scrollPane_bill;
+	public AppButton btnNewButton;
+	public BillController controller; 
 
 	/**
 	 * Create the panel.
@@ -45,8 +52,15 @@ public class BillPageView extends JPanel{
 		};
 		
 		String[] titleList  = new String[] {
-				"Mã hóa đơn","Ngày hóa đơn", "Mã nhân viên","Tên nhân viên","Mã khách hàng","Tên khách hàng","Trị giá hóa đơn"
+				"Mã hóa đơn","Ngày hóa đơn", "Mã nhân viên","Mã khách hàng","Trị giá hóa đơn"
 			}; 
+		searchBar = new SearchBar();
+		scrollPane_bill = new AppScrollTable(new DefaultTableModel(
+				object, titleList
+		));
+		btnNewButton = new AppButton("+");
+		
+		controller = new BillController(this); 
 		
 		JPanel contentPanel = new JPanel();
 		contentPanel.setBounds(20, 20, 790, 630);
@@ -80,7 +94,7 @@ public class BillPageView extends JPanel{
 		gbc_lblNewLabel.gridy = 0;
 		panel_1.add(lblNewLabel, gbc_lblNewLabel);
 		
-		SearchBar searchBar = new SearchBar();
+
 
 		GridBagConstraints gbc_searchBar = new GridBagConstraints();
 		gbc_searchBar.insets = new Insets(0, 20, 0, 20);
@@ -91,7 +105,7 @@ public class BillPageView extends JPanel{
 		gbc_searchBar.weightx = 3.0;
 		panel_1.add(searchBar, gbc_searchBar); 
 		
-		AppButton btnNewButton = new AppButton("+");
+
 		btnNewButton.setFont(new Font("SansSerif", Font.BOLD, 32));
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.fill = GridBagConstraints.VERTICAL;
@@ -109,11 +123,6 @@ public class BillPageView extends JPanel{
 		contentPanel.add(panel, gbc_panel);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-
-		
-		AppScrollTable scrollPane_bill = new AppScrollTable(new DefaultTableModel(
-				object, titleList
-		));
 	
 		panel.add(scrollPane_bill);
 			 // tạo hộp thoại xóa

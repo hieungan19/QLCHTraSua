@@ -1,36 +1,39 @@
-package view.product;
+package view.home;
 
 import javax.swing.JPanel;
 
 import globalComponent.AppButton;
 import globalComponent.AppLabel;
-import model.IngredientModel;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.util.ArrayList;
 import java.awt.FlowLayout;
 import javax.swing.JComboBox;
-import javax.swing.JButton;
+
 import java.awt.GridLayout;
 import javax.swing.JScrollPane;
+import java.awt.Dimension;
+import javax.swing.ScrollPaneConstants;
 
 
-public class ChooseIngredientPanel extends JPanel {
+public class ChooseToppingPanel extends JPanel {
 
-	public JPanel panel_ingre;
-	public JComboBox comboBox_ingreList;
-	public AppButton btn_addIngre;
+	public JPanel panel_topping;
+	public JComboBox comboBox_topList;
+	public AppButton btn_addTopping;
 
 	/**
 	 * Create the panel.
 	 */
-	public ChooseIngredientPanel() {
-		panel_ingre = new JPanel();
+	public ChooseToppingPanel() {
+		// TODO Auto-generated constructor stub
+	
+		panel_topping = new JPanel();
 		
-		comboBox_ingreList = new JComboBox();
-		btn_addIngre = new AppButton("+");
+		comboBox_topList = new JComboBox();
+		comboBox_topList.setMaximumSize(new Dimension(100, 32767));
+		btn_addTopping = new AppButton("+");
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
@@ -50,21 +53,23 @@ public class ChooseIngredientPanel extends JPanel {
 		panel.setLayout(new GridLayout(0, 1, 10, 10));
 		
 		AppLabel lblNewLabel = new AppLabel("Chọn nguyên liệu");
+		lblNewLabel.setText("Chọn topping");
 		panel.add(lblNewLabel);
 		
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2);
 		panel_2.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 	
-		panel_2.add(comboBox_ingreList);
+		panel_2.add(comboBox_topList);
 		
 	
-		panel_2.add(btn_addIngre);
+		panel_2.add(btn_addTopping);
 		
 		
 		
-		JScrollPane scrollPane = new JScrollPane(panel_ingre);
-		panel_ingre.setLayout(new GridLayout(4, 1, 5, 5));
+		JScrollPane scrollPane = new JScrollPane(panel_topping);
+		panel_topping.setLayout(new GridLayout(3, 1, 0, 5));
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.weighty = 8.0;
 		gbc_scrollPane.gridheight = 2;

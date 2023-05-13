@@ -15,10 +15,11 @@ import javax.swing.SwingConstants;
 
 import constant.AppValues;
 import constant.ConstantValueView;
+import controller.HomeController;
+import controller.LoginController;
 import globalComponent.AppButton;
 import globalComponent.AppLabel;
 import globalComponent.SearchBar;
-import model.DrinkModel;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -34,19 +35,21 @@ import javax.swing.ScrollPaneConstants;
 
 public class HomePageView extends JPanel {
 
+	public MainMenuPanel mainMenu;
+	public JLabel lblNewLabel_userName;
+	public CartPanel cart; 
+	public HomeController controller; 
 	/**
 	 * Create the panel.
 	 */
 	public HomePageView() {
 		this.setPreferredSize(new Dimension(840, 740));
 		this.setBackground(ConstantValueView.background);
-
-		DrinkModel dummy = new DrinkModel(); 
-		dummy.setProductID("D01");
-		dummy.setName("Tra sua Olong");
-		dummy.setImageUri("/assets/bg-login.png");
-		dummy.setType("Trà sữa");
-		//DrinkModel dummy = new DrinkModel("D01", "Tra sua Olong",20000 ,false,"/assets/bg-login.png", null,"Trà sữa", null);;
+		lblNewLabel_userName = new JLabel("");
+		cart = new CartPanel();
+		mainMenu = new MainMenuPanel();
+		controller = new HomeController(this); 
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{420, 420, 0};
 		gridBagLayout.rowHeights = new int[]{740, 0};
@@ -82,7 +85,7 @@ public class HomePageView extends JPanel {
 		panel_info.setLayout(new GridLayout(2, 1, 0, 0));
 		
 		//user name
-		JLabel lblNewLabel_userName = new JLabel("User Name");
+
 		lblNewLabel_userName.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNewLabel_userName.setForeground(ConstantValueView.primaryColor);
 		panel_info.add(lblNewLabel_userName);
@@ -147,7 +150,7 @@ public class HomePageView extends JPanel {
 			panel_menuOder.add(panel_menu, gbc_panel_menu);
 			panel_menu.setLayout(new GridLayout(0, 1, 0, 0));
 			
-			MainMenuPanel mainMenu = new MainMenuPanel();
+			
 			mainMenu.setOpaque(false);
 			mainMenu.setBounds(new Rectangle(0, 120, 490, 520));
 			panel_menu.add(mainMenu);
@@ -160,7 +163,7 @@ public class HomePageView extends JPanel {
 			add(panel_menuOder, gbc_panel_menuOder);
 		//cart 
 		JPanel panel_bill = new JPanel();
-		CartPanel cart = new CartPanel();
+	
 		GridBagLayout gridBagLayout_1 = (GridBagLayout) cart.getLayout();
 		gridBagLayout_1.columnWidths = new int[] {250};
 		panel_bill.setBackground(ConstantValueView.primaryColor);

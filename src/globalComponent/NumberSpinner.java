@@ -23,4 +23,8 @@ public class NumberSpinner extends JSpinner{
 	public double getNumber() {
 		return(Double) this.getValue(); 
 	}
+	
+	public int getInt() {
+		return (Integer) this.getValue(); 
+	}
 }

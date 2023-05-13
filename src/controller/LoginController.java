@@ -9,13 +9,14 @@ import java.sql.SQLException;
 
 import dao.EmployeeDAO;
 import dao.MyDB;
+import diaglog.AppOptionPaneDialog;
 import model.EmployeeModel;
 import view.AppView;
 import view.LoginView;
 
 public class LoginController {
 	LoginView view;
-	EmployeeModel user; 
+	public static EmployeeModel user; 
 	
 	public static String GET_EMP_INFO_FROM_ACCOUNT = "SELECT * FROM TAIKHOAN WHERE MANV = ? "; 
 	public static String GET_EM_INFO_FROM_EMPLOYEE = "SELECT * FROM NHANVIEN WHERE MANV = ? "; 
@@ -34,6 +35,7 @@ public class LoginController {
 				String id = view.textField_username.getText();
 				String password = view.textField_password.getText();
 				user = getUser(id, password);
+				
 				if (user!=null) {
 					
 					AppView frameApp = new AppView();
@@ -41,6 +43,10 @@ public class LoginController {
 			        frameApp.setLocationRelativeTo(null);
 			        frameApp.setVisible(true); 
 			        view.setVisible(false); 
+				}
+				else {
+					AppOptionPaneDialog dialog = new AppOptionPaneDialog("Tài khoản hoặc mật khẩu không đúng.\nVui lòng nhập lại!", 2000); 
+					dialog.show(); 
 				}
 			}
 		});
@@ -60,6 +66,7 @@ public class LoginController {
 			
 			ResultSet rs = psGetAccount.executeQuery();
 			if (rs.next()) {
+				System.out.println("USER ID: "+rs.getString(COLUMN_EMP_ID));
 				String pass = rs.getString(COLUMN_PASSWORD); 
 				if (pass.equals(password)) {
 					ResultSet rsEmp = psGetEmployee.executeQuery();

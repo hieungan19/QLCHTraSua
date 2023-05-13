@@ -6,7 +6,10 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import model.DrinkModel;
+import javax.swing.JTextArea;
+
+import model.ProductModel;
+
 import javax.swing.SwingConstants;
 import constant.ConstantValueView;
 import java.awt.GridLayout;
@@ -18,17 +21,18 @@ public class DrinkCardComponent extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	private DrinkModel data; 
-	public DrinkCardComponent(DrinkModel drink) {
-		this.data = drink; 
+	private ProductModel data;
+	private ImageIcon scaledIcon;
+	public DrinkCardComponent(ProductModel pro ) {
+		this.data = pro; 
 		this.setPreferredSize(new Dimension(150, 180));
 		this.setLayout(new BorderLayout(10,10));
 		this.setBackground(ConstantValueView.primaryColor);
-		
-		ImageIcon imgIcon = new ImageIcon(DrinkCardComponent.class.getResource(drink.getImageUri()));
-		Image image = imgIcon.getImage();
-		Image scaledImage = image.getScaledInstance(130,150 , Image.SCALE_SMOOTH);
-		ImageIcon scaledIcon = new ImageIcon(scaledImage);
+		if (!pro.getImageUri().isEmpty()) {
+			scaledIcon = new ImageIcon(new ImageIcon(pro.getImageUri()).getImage()
+					.getScaledInstance(120, 140, Image.SCALE_DEFAULT));
+		}
+	
         // Create a label for the image
         JLabel imageLabel = new JLabel(scaledIcon);
         
@@ -42,10 +46,14 @@ public class DrinkCardComponent extends JPanel {
         panel.setLayout(new GridLayout(2, 1, 0, 0));
         panel.setOpaque(false);
         
-        JLabel nameLabel = new JLabel(data.getName());
-        nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        panel.add(nameLabel);
+        JTextArea name = new JTextArea(data.getName());
+        name.setLineWrap(true); // bật wrap text tự động xuống dòng
+        name.setWrapStyleWord(true); // wrap text theo từ
+        name.setFont(new Font("Tahoma", Font.BOLD, 12));
+        name.setForeground(ConstantValueView.primaryDark );
+        name.setOpaque(false);
+        panel.add(name);
+       
         
         JLabel priceLabel = new JLabel(Double.toString(data.getPrice())+" VND");
         priceLabel.setFont(new Font("Tahoma", Font.BOLD, 16));

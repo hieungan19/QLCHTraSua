@@ -50,7 +50,7 @@ public class ProductDAO {
 	}
 
 	// get product List không bao gồm thông tin nguyên liệu chi tiết của sản phẩm đó
-	public static List<ProductModel> getProductListWithoutIngredients() {
+	public static List<ProductModel> getAllProducts() {
 		List<ProductModel> result = new ArrayList<>();
 		Connection con;
 		int test = 0;
@@ -112,7 +112,7 @@ public class ProductDAO {
 
 	// get product list có đầy đủ chi tiết
 	public static List<ProductModel> getProductList() {
-		List<ProductModel> productList = ProductDAO.getProductListWithoutIngredients();
+		List<ProductModel> productList = ProductDAO.getAllProducts();
 		for (ProductModel product : productList) {
 			List<ProductDetail> detailsList = ProductDAO.getProductDetailsByProductID(product.getProductID());
 			product.setIngredientList(detailsList);

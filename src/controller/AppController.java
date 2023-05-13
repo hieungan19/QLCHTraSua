@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import model.DashboardOption;
 import view.AppView;
+import view.bill.BillPageView;
 
 import javax.swing.GroupLayout;
 import javax.swing.*;
@@ -67,12 +68,17 @@ public class AppController {
 
 			this.optionItem = optionItem;
 			this.optionText = optionItem.getText();
+			
 
 		}
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			if (optionText == "ORDERS") {
+				System.out.println("ORDERS VIEW");
+				optionItem.setjPanelOption(new BillPageView());
+			}
 			node = optionItem.getjPanelOption();
 			optionSelectedText = optionText;
 			view.root.removeAll();

@@ -2,6 +2,8 @@ package model;
 
 import java.util.List;
 
+import javax.swing.JTextArea;
+
 public class ProductModel {
 	private String billID;
 	private String detailID; 
@@ -28,7 +30,6 @@ public class ProductModel {
 	protected String imageUri;
 	protected String type;
 	protected int amount;
-	protected List<ProductDetail> ingredientList;
 	protected List<ProductModel> toppingList;
 
 	public ProductModel(ProductModel pro) {
@@ -39,14 +40,13 @@ public class ProductModel {
 		this.imageUri = pro.imageUri;
 	}
 
-	public ProductModel(String productID, String name, double price, String type, String imageUri,
-			List<ProductDetail> ingreList) {
+	public ProductModel(String productID, String name, double price, String type, String imageUri) {
 		this.productID = productID;
 		this.name = name;
 		this.price = price;
 		this.type = type;
 		this.imageUri = imageUri;
-		this.ingredientList = ingreList;
+		
 	}
 
 	public String toStringToppingList() {
@@ -88,9 +88,7 @@ public class ProductModel {
 		return type;
 	}
 
-	public List<ProductDetail> getIngredientList() {
-		return ingredientList;
-	}
+
 
 	public void setProductID(String productID) {
 		this.productID = productID;
@@ -112,10 +110,6 @@ public class ProductModel {
 		this.type = type;
 	}
 
-	public void setIngredientList(List<ProductDetail> ingredientList) {
-		this.ingredientList = ingredientList;
-	}
-
 	public int getAmount() {
 		return amount;
 	}
@@ -124,18 +118,11 @@ public class ProductModel {
 		this.amount = amount;
 	}
 
-	public String toStringIngredientList() {
-		String ingreListString = "";
-		for (ProductDetail ingre : ingredientList) {
-			if (ingre.getiAmount() != 0)
-				ingreListString += ingre.getiName() + ",";
-		}
-		return ingreListString;
-	}
+	
 
 	public Object[] toOject() {
-		String ingreListString = toStringIngredientList();
-		return new Object[] { productID, imageUri, name, type,  ingreListString };
+		
+		return new Object[] { productID, imageUri, name, type,price};
 	}
 
 	public List<ProductModel> getToppingList() {
@@ -147,7 +134,11 @@ public class ProductModel {
 	}
 	
 	public Object[] toObjectDrink() {
-		return new Object[] {productID,name, toStringToppingList(), getTotal()}; 
+		JTextArea textArea = new JTextArea(toStringToppingList());
+		 textArea.setLineWrap(true); // Enable text wrapping
+	     textArea.setWrapStyleWord(true); // Wrap at word boundaries
+
+		return new Object[] {productID,name,toStringToppingList() , getTotal()}; 
 	}
 
 	

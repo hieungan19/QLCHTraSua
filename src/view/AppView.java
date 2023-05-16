@@ -1,7 +1,6 @@
 package view;
 import java.awt.EventQueue;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import controller.AppController;
@@ -19,7 +18,6 @@ import view.product.ProductPageView;
 import view.report.StatisticalReportPageView;
 
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.util.ArrayList;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -56,8 +54,6 @@ public class AppView extends JFrame {
 	 */
 	
 	public AppView() {
-		Image logo = new ImageIcon(LoginView.class.getResource("/assets/tea-logo.png")).getImage();
-		this.setIconImage(logo);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1040, 740);
@@ -143,7 +139,7 @@ public class AppView extends JFrame {
 		panel_logout.add(jLabel_logoutOption);
 		panel_logout.setOpaque(false);
 		panel_logout.setLayout(new GridLayout(1, 0, 0, 0));
-		
+
 
 	}
 

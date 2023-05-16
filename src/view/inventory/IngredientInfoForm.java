@@ -9,6 +9,9 @@ import globalComponent.AppLabel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import javax.swing.SwingConstants;
+
+import constant.AppValues;
+
 import java.awt.Insets;
 import java.awt.GridLayout;
 import globalComponent.AppLineBorderTextField;
@@ -17,6 +20,8 @@ import model.CustomerModel;
 import model.IngredientModel;
 import globalComponent.AppButton;
 import java.awt.FlowLayout;
+
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
@@ -27,11 +32,11 @@ public class IngredientInfoForm extends JPanel {
 	public AppButton btnDelete;
 	public AppButton btnSave;
 	public IngredientModel model;
-	
-	public AppLineBorderTextField textField_unit;
+
 	public NumberSpinner spinner_price;
 	public NumberSpinner spinner_amount;
 	public AppLabel lblNewLabel_ingredientID;
+	public JComboBox comboBox_unit;
 
 	
 
@@ -108,9 +113,9 @@ public class IngredientInfoForm extends JPanel {
 		lblNewLabel_5.setText("Đơn vị");
 		panel_info.add(lblNewLabel_5);
 		
-		textField_unit = new AppLineBorderTextField();
-		panel_info.add(textField_unit);
-		textField_unit.setColumns(10);
+		comboBox_unit = new JComboBox<>(AppValues.unit);
+		panel_info.add(comboBox_unit);
+		
 		
 		AppLabel lblNewLabel_2 = new AppLabel("Số điện thoại");
 		lblNewLabel_2.setText("Giá/đơn vị");

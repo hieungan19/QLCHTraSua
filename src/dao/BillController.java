@@ -100,7 +100,7 @@ public class BillController {
 		return bill;
 	}
 
-	public void setDataToBillDialog(BillDialog dialog, BillModel bill) {
+	public static void setDataToBillDialog(BillDialog dialog, BillModel bill) {
 		int count = 0;
 		CustomerModel cus = CustomerDAO.getCustomerByID(bill.getCustomerID());
 

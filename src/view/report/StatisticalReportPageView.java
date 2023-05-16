@@ -25,13 +25,15 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+
+import controller.ReportController;
+
 import javax.swing.UIManager;
 import java.awt.SystemColor;
-import javax.swing.JLabel;
 
 public class StatisticalReportPageView extends JPanel {
 
-
+	ReportController report; 
 	/**
 	 * Create the panel.
 	 */
@@ -117,21 +119,27 @@ public class StatisticalReportPageView extends JPanel {
         roundedPanel.setBackground(SystemColor.info);
         roundedPanel.setPreferredSize(new Dimension(200, 150));
         roundedPanel.setBorder(UIManager.getBorder("RadioButton.border"));
-        roundedPanel.setLayout(new GridLayout(0, 1, 0, 0));
+        roundedPanel.setLayout(new GridLayout(4, 1, 0, 0));
         
-                AppLabel label1 = new AppLabel("DOANH THU",24,true);
-                label1.setHorizontalAlignment(SwingConstants.CENTER);
+                AppLabel lbl_NV = new AppLabel("DOANH THU",24,true);
+                lbl_NV.setText("NHÂN VIÊN");
+                lbl_NV.setHorizontalAlignment(SwingConstants.CENTER);
                 
-                roundedPanel.add(label1);
+                roundedPanel.add(lbl_NV);
+                        
+                        JPanel panel_4 = new JPanel();
+                        panel_4.setOpaque(false);
+                        FlowLayout flowLayout = (FlowLayout) panel_4.getLayout();
+                        flowLayout.setAlignment(FlowLayout.LEFT);
+                        roundedPanel.add(panel_4);
                 
                         AppLabel label2 = new AppLabel("Doanh thu:");
-                        roundedPanel.add(label2);
+                        label2.setText("Tổng lương:");
+                        panel_4.add(label2);
                         
-                        AppLabel lblNewLabel_3 = new AppLabel("Chi phí:");
-                        roundedPanel.add(lblNewLabel_3);
-                        
-                        AppLabel lblNewLabel_4 = new AppLabel("Lợi nhuận:");
-                        roundedPanel.add(lblNewLabel_4);
+                        AppLabel totalSalary = new AppLabel("New label");
+                        totalSalary.setText("");
+                        panel_4.add(totalSalary);
                         
                         AppLabel label = new AppLabel("");
                         panel_2.add(label);
@@ -141,21 +149,39 @@ public class StatisticalReportPageView extends JPanel {
                         roundedPanel_1.setBorder(UIManager.getBorder("RadioButton.border"));
                         roundedPanel_1.setBackground(SystemColor.info);
                         panel_2.add(roundedPanel_1);
-                        roundedPanel_1.setLayout(new GridLayout(0, 1, 0, 0));
+                        roundedPanel_1.setLayout(new GridLayout(4, 1, 0, 0));
                         
                         AppLabel label1_1 = new AppLabel("DOANH THU", 24, true);
-                        label1_1.setText("KHÁCH HÀNG");
+                        label1_1.setText("HÓA ĐƠN");
                         label1_1.setHorizontalAlignment(SwingConstants.CENTER);
                         roundedPanel_1.add(label1_1);
                         
-                        AppLabel label2_1 = new AppLabel("Tổng hóa đơn");
-                        roundedPanel_1.add(label2_1);
+                        JPanel panel_7 = new JPanel();
+                        panel_7.setOpaque(false);
+                        FlowLayout flowLayout_3 = (FlowLayout) panel_7.getLayout();
+                        flowLayout_3.setAlignment(FlowLayout.LEFT);
+                        roundedPanel_1.add(panel_7);
                         
-                        AppLabel lblNewLabel_5 = new AppLabel("Số khách hàng thành viên:");
-                        roundedPanel_1.add(lblNewLabel_5);
+                        AppLabel label2_1 = new AppLabel("Số hóa đơn:");
+                        panel_7.add(label2_1);
                         
-                        AppLabel lblNewLabel_6 = new AppLabel("Số khách hàng VIP:");
-                        roundedPanel_1.add(lblNewLabel_6);
+                        AppLabel bills = new AppLabel("New label");
+                        bills.setText("");
+                        panel_7.add(bills);
+                        
+                        JPanel panel_5 = new JPanel();
+                        panel_5.setOpaque(false);
+                        FlowLayout flowLayout_1 = (FlowLayout) panel_5.getLayout();
+                        flowLayout_1.setAlignment(FlowLayout.LEFT);
+                        roundedPanel_1.add(panel_5);
+                        
+                        AppLabel lblNewLabel_3 = new AppLabel("Tổng tiền hóa đơn:");
+                        lblNewLabel_3.setText("Tổng tiền:");
+                        panel_5.add(lblNewLabel_3);
+                        
+                        AppLabel lblNewLabel_4 = new AppLabel("New label");
+                        lblNewLabel_4.setText("");
+                        panel_5.add(lblNewLabel_4);
                         
                         AppLabel label_1 = new AppLabel("");
                         panel_2.add(label_1);
@@ -165,21 +191,26 @@ public class StatisticalReportPageView extends JPanel {
                         roundedPanel_1_1.setBorder(UIManager.getBorder("RadioButton.border"));
                         roundedPanel_1_1.setBackground(SystemColor.info);
                         panel_2.add(roundedPanel_1_1);
-                        roundedPanel_1_1.setLayout(new GridLayout(0, 1, 0, 0));
+                        roundedPanel_1_1.setLayout(new GridLayout(4, 1, 0, 0));
                         
                         AppLabel label1_1_1 = new AppLabel("DOANH THU", 24, true);
-                        label1_1_1.setText("NHÂN VIÊN");
+                        label1_1_1.setText("NGUYÊN LIỆU");
                         label1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
                         roundedPanel_1_1.add(label1_1_1);
                         
-                        AppLabel label2_1_1 = new AppLabel("Tổng số nhân viên:");
-                        roundedPanel_1_1.add(label2_1_1);
+                        JPanel panel_8 = new JPanel();
+                        panel_8.setOpaque(false);
+                        FlowLayout flowLayout_4 = (FlowLayout) panel_8.getLayout();
+                        flowLayout_4.setAlignment(FlowLayout.LEFT);
+                        roundedPanel_1_1.add(panel_8);
                         
                         AppLabel lblNewLabel_7 = new AppLabel("Tổng lương");
-                        roundedPanel_1_1.add(lblNewLabel_7);
+                        lblNewLabel_7.setText("Số tiền: ");
+                        panel_8.add(lblNewLabel_7);
                         
-                        JLabel lblNewLabel_8 = new JLabel("");
-                        roundedPanel_1_1.add(lblNewLabel_8);
+                        AppLabel lblNewLabel_10 = new AppLabel("New label");
+                        lblNewLabel_10.setText("");
+                        panel_8.add(lblNewLabel_10);
         
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         dataset.setValue(5, "Sales", "Product 1");
@@ -210,5 +241,6 @@ public class StatisticalReportPageView extends JPanel {
         gbc_chartPanel.gridy = 4;
         contentPanel.add(chartPanel, gbc_chartPanel);
         chartPanel.setPreferredSize(new Dimension(790, 300));
+        report = new ReportController(this); 
 	}
 }

@@ -50,7 +50,7 @@ public class MainMenuPanel extends JPanel {
                 .addGap(30, 30, 30))
         );
         
-		GridLayout gl_panel = new GridLayout(2,2);
+		GridLayout gl_panel = new GridLayout(2,3);
 		gl_panel.setVgap(10);
 		gl_panel.setHgap(10);
 		panel.setLayout(gl_panel);

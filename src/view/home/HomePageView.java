@@ -3,15 +3,9 @@ package view.home;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JFrame;
-import javax.swing.LayoutStyle.ComponentPlacement;
-
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import javax.swing.SwingConstants;
 
 import constant.AppValues;
 import constant.ConstantValueView;
@@ -24,13 +18,8 @@ import globalComponent.SearchBar;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.Component;
-import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Rectangle;
-import java.awt.Color;
 import javax.swing.JScrollPane;
-import javax.swing.JButton;
 import javax.swing.ScrollPaneConstants;
 
 public class HomePageView extends JPanel {
@@ -38,16 +27,25 @@ public class HomePageView extends JPanel {
 	public MainMenuPanel mainMenu;
 	public JLabel lblNewLabel_userName;
 	public CartPanel cart; 
-	public HomeController controller; 
+	public HomeController controller;
+	public SearchBar searchBar;
+	public JPanel panel_filterButton; 
 	/**
 	 * Create the panel.
 	 */
 	public HomePageView() {
 		this.setPreferredSize(new Dimension(840, 740));
 		this.setBackground(ConstantValueView.background);
-		lblNewLabel_userName = new JLabel("");
+		lblNewLabel_userName = new JLabel();
 		cart = new CartPanel();
 		mainMenu = new MainMenuPanel();
+		searchBar = new SearchBar();
+		JPanel panel_menu = new JPanel();
+		panel_filterButton = new JPanel();
+		for (int i = 0; i<(AppValues.productTypes.length); ++i) {
+			panel_filterButton.add(new AppButton(AppValues.productTypes[i])); 
+		}
+		
 		controller = new HomeController(this); 
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -104,14 +102,14 @@ public class HomePageView extends JPanel {
 			gbc_panel_header.gridy = 0;
 			panel_menuOder.add(panel_header, gbc_panel_header);
 			
-			SearchBar searchBarView = new SearchBar();
+			
 			GridBagConstraints gbc_searchBarView = new GridBagConstraints();
 			gbc_searchBarView.weighty = 1.0;
 			gbc_searchBarView.insets = new Insets(0, 20, 5, 20);
 			gbc_searchBarView.fill = GridBagConstraints.BOTH;
 			gbc_searchBarView.gridx = 0;
 			gbc_searchBarView.gridy = 1;
-			panel_menuOder.add(searchBarView, gbc_searchBarView);
+			panel_menuOder.add(searchBar, gbc_searchBarView);
 			
 			JPanel panel = new JPanel();
 			panel.setBackground(ConstantValueView.background);
@@ -124,7 +122,7 @@ public class HomePageView extends JPanel {
 			panel_menuOder.add(panel, gbc_panel);
 			panel.setLayout(new GridLayout(0, 1, 0, 0));
 			
-			JPanel panel_filterButton = new JPanel();
+			
 			
 			
 			JScrollPane scrollPane = new JScrollPane(panel_filterButton);
@@ -134,12 +132,10 @@ public class HomePageView extends JPanel {
 			panel_filterButton.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 0));
 			
 			
-			for (int i = 0; i<(AppValues.productTypes.length); ++i) {
-				panel_filterButton.add(new AppButton(AppValues.productTypes[i])); 
-			}
+			
 
 			
-			JPanel panel_menu = new JPanel();
+			
 			panel_menu.setOpaque(false);
 			GridBagConstraints gbc_panel_menu = new GridBagConstraints();
 			gbc_panel_menu.insets = new Insets(0, 0, 5, 0);

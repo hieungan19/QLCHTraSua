@@ -28,7 +28,7 @@ public class DrinkCardComponent extends JPanel {
 		this.setPreferredSize(new Dimension(150, 180));
 		this.setLayout(new BorderLayout(10,10));
 		this.setBackground(ConstantValueView.primaryColor);
-		if (!pro.getImageUri().isEmpty()) {
+		if (pro.getImageUri()!=null && !pro.getImageUri().isEmpty()) {
 			scaledIcon = new ImageIcon(new ImageIcon(pro.getImageUri()).getImage()
 					.getScaledInstance(120, 140, Image.SCALE_DEFAULT));
 		}

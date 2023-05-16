@@ -75,9 +75,10 @@ public class BillModel {
 		this.total = subtotal- discountValue; 
 	}
 	public void setDiscountValue() {
+		this.discountValue = 0; 
 		if (discountID!=null)
 		this.discountValue = subtotal * DiscountDAO.getDiscountByID(discountID).getPercent()/100; 
-		this.discountValue = 0; 
+	
 	}
 	public void setTenderAmount(double tenderAmount) {
 		this.tenderAmount = tenderAmount;

@@ -57,7 +57,6 @@ public class ProductController {
 		this.view = view;
 		this.table = view.scrollPane_product.jTable;
 		table.setDefaultRenderer(String.class, new MultiLineTableCellRenderer());
-		ingreList = getIngredientList();
 		displayProductListToTable();
 
 		// search bar
@@ -124,15 +123,7 @@ public class ProductController {
 				form = new ProductInfoForm();
 				setDataOnForm(product);
 				AppController.showPage(form);
-				// chọn nguyên liệu
-				form.chooseIngredientPanel.btn_addIngre.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						// TODO Auto-generated method stub
-						displayChoseIngredientIntoPanel();
-					}
-				});
+				
 				form.btn_chooseFile.addActionListener(new ActionListener() {
 
 					@Override
@@ -198,12 +189,8 @@ public class ProductController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				form = new ProductInfoForm();
-				ingreIDSet = new HashSet<String>();
-				choseIngreDetailsList = new ArrayList<>();
-				panel_ingreDetails = form.chooseIngredientPanel.panel_ingre;
+				form = new ProductInfoForm();			
 				AppController.showPage(form);
-				displayIngredientToComboBox(form.chooseIngredientPanel.comboBox_ingreList);
 
 				// Step 1: choose image file
 				form.btn_chooseFile.addActionListener(new ActionListener() {
@@ -215,18 +202,7 @@ public class ProductController {
 					}
 				});
 
-				// Step 2: choose ingredient
-
-				form.chooseIngredientPanel.btn_addIngre.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						displayChoseIngredientIntoPanel();
-
-						// TODO Auto-generated method stub
-						// displayChoseIngredientIntoPanel();
-					}
-				});
+				
 
 				form.btn_deleteProduct.setVisible(false);
 				// Step 3: Save
@@ -269,15 +245,11 @@ public class ProductController {
 
 	// set dữ liệu lên view
 	public void setDataOnForm(ProductModel product) {
-		choseIngreDetailsList = new ArrayList<>();
-		ingreIDSet = new HashSet<>();
-		ingreList = getIngredientList();
 
-		System.out.println("SET DATA ON FORM - Ingrelist Size: " + ingreList.size());
 		// set name
 		form.textField_name.setText(product.getName());
 		// set type
-		form.textField_type.setText(product.getType());
+		form.comboBox_type.setSelectedItem(product.getType());
 		// set price
 		form.spinner_price.setValue(product.getPrice());
 
@@ -291,77 +263,30 @@ public class ProductController {
 		// Embed the image in an HTML <img> tag
 		String html = "<html><body><img src=\"" + imageURL + "\" width=\"200\" height=\"200\"></body></html>";
 		form.editorPane_image.setText(html);
-//		
 
-		// set ingredient for comboBox
 
-		displayIngredientToComboBox(form.chooseIngredientPanel.comboBox_ingreList);
-
-		// set ingredient panel
-		panel_ingreDetails = form.chooseIngredientPanel.panel_ingre;
-
-		List<ProductDetail> productDetailList = product.getIngredientList();
-
-		for (int i = 0; i < productDetailList.size(); ++i) {
-			for (int j = 0; j < ingreList.size(); ++j) {
-				if (productDetailList.get(i).getIngredientID().equals(ingreList.get(j).getIngredientID()))
-					displayIngredientIntoPanelFromDB(productDetailList.get(i), j);
-			}
-		}
+		
 
 	}
 
-	// hiển thị dữ liệu các nguyên liệu đã lấy được từ database lên scroll jPanel
-
-	public void displayIngredientIntoPanelFromDB(ProductDetail productDetail, int index) {
-
-		if (!ingreIDSet.contains(ingreList.get(index).getIngredientID())) {
-			ChooseIngredientDetail temp = new ChooseIngredientDetail(ingreList.get(index));
-			temp.spinner.setValue(productDetail.getiAmount());
-			panel_ingreDetails.add(temp);
-			choseIngreDetailsList.add(temp);
-			System.out.println("INGREDIENT LIST SIZE: " + choseIngreDetailsList.size());
-			ingreIDSet.add(ingreList.get(index).getIngredientID());
-			System.out.println("INGRE ID: " + ingreList.get(index).getIngredientID());
-		}
-		panel_ingreDetails.validate();
-		panel_ingreDetails.repaint();
-	}
-
+	
 	// lấy dữ liệu từ view
 	public ProductModel getProductModelFromView(ProductInfoForm form) {
 		String name = form.textField_name.getText();
-		String type = form.textField_type.getText();
+		String type = form.comboBox_type.getSelectedItem().toString();
 		double price = form.spinner_price.getNumber();
 		String productID = form.lblNewLabel_ID.getText();
 		String imageUri = form.imageUri;
 
-		List<ProductDetail> ingreList = new ArrayList<>();
-		for (int i = 0; i < choseIngreDetailsList.size(); ++i) {
-			String ingreID = choseIngreDetailsList.get(i).ingredient.getIngredientID();
-			double amount = choseIngreDetailsList.get(i).spinner.getNumber();
-
-			String iName = choseIngreDetailsList.get(i).ingredient.getName();
-			System.out.println("NAME: " + iName + "- AMOUNT" + amount);
-
-			ProductDetail productDetail = new ProductDetail();
-			productDetail.setIngredientID(ingreID);
-			productDetail.setiAmount(amount);
-			productDetail.setiName(iName);
-			if (productDetail.getiAmount() >= 0)
-				ingreList.add(productDetail);
-
-		}
+		
 
 		ProductModel product = new ProductModel();
 		product.setName(name);
 		product.setImageUri(imageUri);
 		product.setPrice(price);
 		product.setType(type);
-		product.setIngredientList(ingreList);
 		product.setProductID(productID);
 
-		System.out.println("DETAIL LIST SIZE: " + product.getIngredientList().size());
 
 		return product;
 
@@ -369,25 +294,7 @@ public class ProductController {
 
 	// Hiển thị nguyên liệu đã chọn lên jPanel bằng cách chọn và nhấn add add trong
 	// combo box
-	public IngredientModel displayChoseIngredientIntoPanel() {
-		JComboBox comboBox = form.chooseIngredientPanel.comboBox_ingreList;
-		int index = comboBox.getSelectedIndex() - 1;
-		if (index >= 0) {
-			System.out.println("NAME OF INGRE: " + ingreList.get(index).getName());
-			if (!ingreIDSet.contains(ingreList.get(index).getIngredientID())) {
-				ChooseIngredientDetail temp = new ChooseIngredientDetail(ingreList.get(index));
-				panel_ingreDetails.add(temp);
-				choseIngreDetailsList.add(temp);
-				System.out.println("INGREDIENT LIST SIZE: " + choseIngreDetailsList.size());
-				ingreIDSet.add(ingreList.get(index).getIngredientID());
-				System.out.println("INDEX: " + index);
-			}
-
-		}
-		panel_ingreDetails.validate();
-		panel_ingreDetails.repaint();
-		return ingreList.get(index);
-	}
+	
 
 	public String chooseAndGetImageUri() {
 		JFileChooser fileChooser = new JFileChooser();
@@ -412,25 +319,14 @@ public class ProductController {
 	}
 
 	List<ProductModel> getProductList() {
-		return ProductDAO.getProductList();
-	}
-
-	// Hiển thị tên các nguyên liệu cho user chọn
-	public void displayIngredientToComboBox(JComboBox comboBox) {
-		String ingreOptions[] = new String[ingreList.size() + 1];
-		ingreOptions[0] = null;
-		for (int i = 0; i < ingreList.size(); ++i) {
-			ingreOptions[i + 1] = ingreList.get(i).getName();
-		}
-		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(ingreOptions);
-		comboBox.setModel(model);
+		return ProductDAO.getAllProducts();
 	}
 
 	// Hiển thị toàn bộ các sản phẩm
 	public void displayProductListToTable() {
 
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
-		List<ProductModel> productList = ProductDAO.getProductList();
+		List<ProductModel> productList = ProductDAO.getAllProducts();
 		dtm.setNumRows(0);
 		if (productList.isEmpty()) {
 			System.out.println("Không có sản phẩm nào.");
@@ -446,10 +342,6 @@ public class ProductController {
 		table.setModel(dtm);
 	}
 
-	List<IngredientModel> getIngredientList() {
-		return IngredientDAO.getIngredientList();
-
-	}
 
 	// thêm mới 1 sản phẩm và add nơ vào table
 	public int insertProductAndDisplayIntoTable(ProductModel product) {
@@ -503,7 +395,6 @@ public class ProductController {
 			dtm.setValueAt(product.getName(), selectedRow, 2);
 			dtm.setValueAt(product.getType(), selectedRow, 3);
 			dtm.setValueAt(product.getPrice(), selectedRow, 4);
-			dtm.setValueAt(product.toStringIngredientList(), selectedRow, 5);
 
 		}
 		return check;

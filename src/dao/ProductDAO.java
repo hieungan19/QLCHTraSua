@@ -35,14 +35,11 @@ public class ProductDAO {
 
 	public static final String GET_ALL_PRODUCT = "SELECT * FROM SANPHAM";
 	public static final String GET_ALL_PRODUCT_DETAILS = "SELECT * FROM CHITIETSP";
-	public static final String GET_PRODUCT_DETAILS_BY_ID = "SELECT * FROM CHITIETSP WHERE MASP = ?";
 	private static final String GET_MAXID_INSERTED_PRODUCT = "SELECT * FROM SANPHAM WHERE ROWID = (SELECT MAX(ROWID) FROM SANPHAM)";
 	private static final String GET_PRODUCT_BY_ID = "SELECT * FROM SANPHAM WHERE MASP = ?";
 	private static final String INSERT_PRODUCT = "INSERT INTO SANPHAM (TENSP, HINHANH, GIA, LOAISP) VALUES (?,?,?,?)";
-	private static final String INSERT_PRODUCT_DETAIL = "INSERT INTO CHITIETSP (MASP, MANL, SOLUONG) VALUES (?,?,?)";
 	private static final String DELETE_PRODUCT_BY_ID = "DELETE FROM SANPHAM WHERE MASP = ?";
 	private static final String UPDATE_PRODUCT = "UPDATE SANPHAM SET TENSP = ?, HINHANH = ?,GIA = ?, LOAISP = ? WHERE MASP = ?";
-	private static final String DELETE_ALL_PRODUCT_DETAILS_BY_ID = "DELETE FROM CHITIETSP WHERE MASP = ?";
 	// get ingredient list
 
 	public static List<IngredientModel> getIngredientList() {
@@ -65,7 +62,7 @@ public class ProductDAO {
 				String loai = rs.getNString(COLUMN_SPTYPE);
 				double price = rs.getDouble(COLUMN_SPPRICE);
 				String imageUri = rs.getString(COLUMN_IMAGE);
-				ProductModel product = new ProductModel(productID, name, price, loai, imageUri, null);
+				ProductModel product = new ProductModel(productID, name, price, loai, imageUri);
 				result.add(product);
 			}
 			System.out.println(test);
@@ -79,48 +76,7 @@ public class ProductDAO {
 
 	}
 
-	// lấy danh sách chi tiết nguyên liệu của 1 sản phẩm
-
-	public static List<ProductDetail> getProductDetailsByProductID(String iID) {
-		List<ProductDetail> result = new ArrayList<ProductDetail>();
-		Connection con;
-		int test = 0;
-		try {
-			con = MyDB.getInstance().getConnection();
-			PreparedStatement psGet = con.prepareStatement(GET_PRODUCT_DETAILS_BY_ID);
-			psGet.setString(1, iID);
-			ResultSet rs = psGet.executeQuery();
-			while (rs.next()) {
-				++test;
-				String productID = rs.getString(COLUMN_SPID);
-				String ingredientID = rs.getNString(COLUMN_NLID);
-				double iAmount = rs.getDouble(COLUMN_CTAMOUNT);
-				String iName = IngredientDAO.getIngredientByID(ingredientID).getName(); // ingredient amount
-				ProductDetail pDetail = new ProductDetail(productID, ingredientID, iName, iAmount);
-				result.add(pDetail);
-			}
-			System.out.println(test);
-			return result;
-		} catch (SQLException e) {
-			System.out.println("Error in getProductDetailsByProductID() " + e.getMessage());
-
-		}
-
-		return result;
-
-	}
-
-	// get product list có đầy đủ chi tiết
-	public static List<ProductModel> getProductList() {
-		List<ProductModel> productList = ProductDAO.getAllProducts();
-		for (ProductModel product : productList) {
-			List<ProductDetail> detailsList = ProductDAO.getProductDetailsByProductID(product.getProductID());
-			product.setIngredientList(detailsList);
-
-		}
-		return productList;
-
-	}
+	
 
 	public static ProductModel getMaxIDProduct() {
 		try {
@@ -130,7 +86,7 @@ public class ProductDAO {
 			if (rs.next()) {
 				System.out.println("VUA INSERT VAO: " + rs.getString(COLUMN_SPNAME));
 				ProductModel model = new ProductModel(rs.getString(COLUMN_SPID), rs.getString(COLUMN_SPNAME),
-						rs.getDouble(COLUMN_SPPRICE), rs.getString(COLUMN_SPTYPE), rs.getString(COLUMN_IMAGE), null);
+						rs.getDouble(COLUMN_SPPRICE), rs.getString(COLUMN_SPTYPE), rs.getString(COLUMN_IMAGE));
 				return model;
 			}
 
@@ -155,7 +111,6 @@ public class ProductDAO {
 				product.setType(rs.getString(COLUMN_SPTYPE));
 				product.setPrice(rs.getDouble(COLUMN_SPPRICE));
 				product.setImageUri(rs.getString(COLUMN_IMAGE));
-				product.setIngredientList(getProductDetailsByProductID(productID));
 				return product;
 			}
 
@@ -182,16 +137,7 @@ public class ProductDAO {
 			st.execute(COMMIT);
 
 			if (check > 0) {
-				ProductModel insertedProduct = getMaxIDProduct();
-				List<ProductDetail> productDetailList = product.getIngredientList();
-				for (int i = 0; i < product.getIngredientList().size(); ++i) {
-					PreparedStatement psInsertProductDetail = c.prepareStatement(INSERT_PRODUCT_DETAIL);
-					psInsertProductDetail.setString(1, insertedProduct.getProductID());
-					psInsertProductDetail.setString(2, productDetailList.get(i).getIngredientID());
-					psInsertProductDetail.setDouble(3, productDetailList.get(i).getiAmount());
-
-					psInsertProductDetail.executeUpdate();
-				}
+				
 				return 1;
 			}
 
@@ -236,20 +182,7 @@ public class ProductDAO {
 			st.execute(COMMIT);
 
 			if (check > 0) {
-				PreparedStatement psDeleteAllProductDetail = c.prepareStatement(DELETE_ALL_PRODUCT_DETAILS_BY_ID);
-				psDeleteAllProductDetail.setString(1, product.getProductID());
-				psDeleteAllProductDetail.executeUpdate();
-				List<ProductDetail> productDetailList = product.getIngredientList();
-				for (int i = 0; i < productDetailList.size(); ++i) {
-					if (productDetailList.get(i).getiAmount() > 0) {
-						PreparedStatement psInsertProductDetail = c.prepareStatement(INSERT_PRODUCT_DETAIL);
-						psInsertProductDetail.setString(1, product.getProductID());
-						psInsertProductDetail.setString(2, productDetailList.get(i).getIngredientID());
-						psInsertProductDetail.setDouble(3, productDetailList.get(i).getiAmount());
-						psInsertProductDetail.executeUpdate();
-
-					}
-				}
+				
 				return 1;
 			}
 

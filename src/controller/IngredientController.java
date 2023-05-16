@@ -107,7 +107,7 @@ public class IngredientController {
 				if (ingredient != null) {
 					form = new IngredientInfoForm(ingredient);
 					form.lblNewLabel_ingredientID.setText(ingredient.getIngredientID());
-					form.textField_unit.setText(ingredient.getUnit());
+					form.comboBox_unit.setSelectedItem(ingredient.getUnit());
 					form.spinner_amount.setValue(ingredient.getAmount());
 					form.spinner_price.setValue(ingredient.getPrice());
 					form.textField_name.setText(ingredient.getName());
@@ -152,7 +152,7 @@ public class IngredientController {
 							// TODO Auto-generated method stub
 							int check = 0; 
 							ingredient.setName( form.textField_name.getText());
-							ingredient.setUnit(form.textField_unit.getText()); 
+							ingredient.setUnit(form.comboBox_unit.getSelectedItem().toString()); 
 							ingredient.setAmount( (double) form.spinner_amount.getValue());
 							ingredient.setPrice( (double) form.spinner_price.getValue()); 
 							check = updateIngredientInfo(ingredient); 
@@ -188,7 +188,7 @@ public class IngredientController {
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
 						String name = form.textField_name.getText();
-						String unit = form.textField_unit.getText().toUpperCase();
+						String unit = form.comboBox_unit.getSelectedItem().toString();
 						double amount = form.spinner_amount.getNumber();
 						double price = form.spinner_price.getNumber();
 

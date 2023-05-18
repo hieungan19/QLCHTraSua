@@ -33,10 +33,9 @@ public class ChooseToppingPanel extends JPanel {
 		
 		comboBox_topList = new JComboBox();
 		comboBox_topList.setMaximumSize(new Dimension(100, 32767));
-		btn_addTopping = new AppButton("+");
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0};
+		gridBagLayout.columnWidths = new int[] {100, 0};
 		gridBagLayout.rowHeights = new int[] {0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, 1.0, 1.0};
@@ -50,7 +49,7 @@ public class ChooseToppingPanel extends JPanel {
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 0;
 		add(panel, gbc_panel);
-		panel.setLayout(new GridLayout(0, 1, 10, 10));
+		panel.setLayout(new GridLayout(0, 1, 10, 0));
 		
 		AppLabel lblNewLabel = new AppLabel("Chọn nguyên liệu");
 		lblNewLabel.setText("Chọn topping");
@@ -58,18 +57,19 @@ public class ChooseToppingPanel extends JPanel {
 		
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2);
-		panel_2.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		panel_2.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 5));
 	
 		panel_2.add(comboBox_topList);
 		
-	
-		panel_2.add(btn_addTopping);
+		JPanel panel_1 = new JPanel();
+		panel_2.add(panel_1);
+		btn_addTopping = new AppButton("+");
+		panel_1.add(btn_addTopping);
 		
 		
 		
 		JScrollPane scrollPane = new JScrollPane(panel_topping);
 		panel_topping.setLayout(new GridLayout(3, 1, 0, 5));
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.weighty = 8.0;
 		gbc_scrollPane.gridheight = 2;

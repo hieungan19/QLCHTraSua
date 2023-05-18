@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JTable;
@@ -72,7 +73,7 @@ public class IngredientController {
 			}
 		});
 
-		//clicked on a table row
+		// clicked on a table row
 		table.addMouseListener(new MouseListener() {
 
 			@Override
@@ -103,74 +104,65 @@ public class IngredientController {
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				IngredientModel ingredient = getIngredientBySelected();
-				System.out.println("NAME: " + ingredient.getName());
 				if (ingredient != null) {
-					form = new IngredientInfoForm(ingredient);
-					form.lblNewLabel_ingredientID.setText(ingredient.getIngredientID());
-					form.comboBox_unit.setSelectedItem(ingredient.getUnit());
-					form.spinner_amount.setValue(ingredient.getAmount());
-					form.spinner_price.setValue(ingredient.getPrice());
-					form.textField_name.setText(ingredient.getName());
 					
+					setDataToForm(ingredient);
+
 					AppController.showPage(form);
-					
+
 					form.btnDelete.addActionListener(new ActionListener() {
-						
+
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							// TODO Auto-generated method stub
-							
-							AppDialog confirmDelete = new AppDialog("Xác nhận xóa dữ liệu"); 
+
+							AppDialog confirmDelete = new AppDialog("Xác nhận xóa dữ liệu");
 							confirmDelete.setVisible(true);
 							confirmDelete.okButton.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
 									// Xử lý khi người dùng xác nhận xóa
-									//đóng dialog yêu cầu xác nhận xóa
+									// đóng dialog yêu cầu xác nhận xóa
 									Window window = SwingUtilities.getWindowAncestor(confirmDelete);
-							        window.dispose(); 
-							        deleteIngredient(ingredient.getIngredientID()); 
-									AppOptionPaneDialog dialog = new AppOptionPaneDialog("Xóa thành công",1000);
+									window.dispose();
+									deleteIngredient(ingredient.getIngredientID());
+									AppOptionPaneDialog dialog = new AppOptionPaneDialog("Xóa thành công", 1000);
 									AppController.showPage(view);
-									
-									
-								}});
+
+								}
+							});
 							confirmDelete.cancelButton.addActionListener(new ActionListener() {
-								
+
 								@Override
 								public void actionPerformed(ActionEvent e) {
 									// TODO Auto-generated method stub
-									confirmDelete.dispose(); 
+									confirmDelete.dispose();
 								}
-							}); 
+							});
 						}
 					});
-					
+
 					form.btnSave.addActionListener(new ActionListener() {
-						
+
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							// TODO Auto-generated method stub
-							int check = 0; 
-							ingredient.setName( form.textField_name.getText());
-							ingredient.setUnit(form.comboBox_unit.getSelectedItem().toString()); 
-							ingredient.setAmount( (double) form.spinner_amount.getValue());
-							ingredient.setPrice( (double) form.spinner_price.getValue()); 
-							check = updateIngredientInfo(ingredient); 
-							if (check !=0 ) {
+							int check = 0;
+							IngredientModel newIngre = getDataFromForm();
+							newIngre.setIngredientID(ingredient.getIngredientID());
+							check = updateIngredientInfo(newIngre);
+							if (check != 0) {
 								AppOptionPaneDialog dialog = new AppOptionPaneDialog(
 										"Sửa thành công nguyên liệu:" + ingredient.getIngredientID(), 1000);
-								
+
+							} else {
+								AppOptionPaneDialog dialog = new AppOptionPaneDialog("Sửa không thành công", 1000);
 							}
-							else {
-								AppOptionPaneDialog dialog = new AppOptionPaneDialog(
-										"Sửa không thành công" , 1000);
-							}
-							
+
 							AppController.showPage(view);
 							displayExportTable();
-							displayImportTable(); 
+							displayImportTable();
 						}
-					}); 
+					});
 				}
 			}
 		});
@@ -187,18 +179,15 @@ public class IngredientController {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
-						String name = form.textField_name.getText();
-						String unit = form.comboBox_unit.getSelectedItem().toString();
-						double amount = form.spinner_amount.getNumber();
-						double price = form.spinner_price.getNumber();
-
-						IngredientModel ingredient = insertIngredient(name, unit, amount, price);
+						
+						IngredientModel ingredient = getDataFromForm();
+						ingredient = insertIngredient(ingredient); 
+						
 						if (ingredient == null) {
 							AppOptionPaneDialog dialog = new AppOptionPaneDialog("Thêm không thành công!", 1000);
 						} else {
 							AppOptionPaneDialog dialog = new AppOptionPaneDialog(
-									"Thêm thành công.\nMã nguyên liệu:" + ingredient.getIngredientID(),
-									5000);
+									"Thêm thành công.\nMã nguyên liệu:" + ingredient.getIngredientID(), 5000);
 							AppController.showPage(view);
 							displayImportTable();
 							displayExportTable();
@@ -211,6 +200,18 @@ public class IngredientController {
 			}
 		});
 
+	}
+	public IngredientModel getDataFromForm() {
+		String name = form.textField_name.getText();
+		String unit = form.comboBox_unit.getSelectedItem().toString();
+		double amount = form.spinner_amount.getNumber();
+		double price = form.spinner_price.getNumber();
+		Date mfDate = form.mfDate.getDate();
+		Date expDate  = form.expDate.getDate();
+		String supplier = form.textField_name.getText();
+		IngredientModel i = new IngredientModel(name, unit, amount, price, mfDate, expDate, supplier);
+		return i; 
+		
 	}
 
 	public void addIngredientToTable(IngredientModel ingredient) {
@@ -234,13 +235,12 @@ public class IngredientController {
 		table.setModel(dtm);
 	}
 
-	public IngredientModel insertIngredient(String name, String unit, double amount, double price) {
-		IngredientModel model = new IngredientModel(null, name, unit, amount, price);
+	public IngredientModel insertIngredient(IngredientModel i) {
 		int check = 0;
-		check = IngredientDAO.insertIngredient(model);
+		check = IngredientDAO.insertIngredient(i);
 		if (check == 1) {
-			model = IngredientDAO.getMaxIDIngredient();
-			return model;
+			i = IngredientDAO.getMaxIDIngredient();
+			return i;
 		}
 		return null;
 
@@ -254,29 +254,34 @@ public class IngredientController {
 		String id = String.valueOf(tableModel.getValueAt(selectedRow, 0));
 		return IngredientDAO.getIngredientByID(id);
 	}
+
 	public int updateIngredientInfo(IngredientModel ingredient) {
-		int check = IngredientDAO.updateIngredient(ingredient.getIngredientID(), ingredient.getName(), ingredient.getUnit(), ingredient.getAmount(), ingredient.getPrice());
-		if (check==1) {
+		int check = IngredientDAO.updateIngredient(ingredient);
+		if (check == 1) {
 			DefaultTableModel dtm = (DefaultTableModel) view.scrollPane_ingredient.jTable.getModel();
-			dtm.setValueAt(ingredient.getName(), selectedRow,1);
+			dtm.setValueAt(ingredient.getName(), selectedRow, 1);
 			dtm.setValueAt(ingredient.getUnit(), selectedRow, 2);
-			dtm.setValueAt(ingredient.getAmount(), selectedRow,3);
-			dtm.setValueAt(ingredient.getPrice(),selectedRow , 4);
-			return 1; 
+			dtm.setValueAt(ingredient.getAmount(), selectedRow, 3);
+			dtm.setValueAt(ingredient.getPrice(), selectedRow, 4);
+			dtm.setValueAt(ingredient.getMfDate(),selectedRow, 5);
+			dtm.setValueAt(ingredient.getExpDate(),selectedRow, 6);
+			dtm.setValueAt(ingredient.getSupplier(),selectedRow, 7);
+			return 1;
 		}
-		return 0; 
-		
+		return 0;
+
 	}
+
 	public int deleteIngredient(String id) {
-		int check = IngredientDAO.deleteIngredientByID(id); 
-		if (check==1) {
+		int check = IngredientDAO.deleteIngredientByID(id);
+		if (check == 1) {
 			DefaultTableModel dtm = (DefaultTableModel) view.scrollPane_ingredient.jTable.getModel();
 			dtm.removeRow(selectedRow);
-			return 1; 
+			return 1;
 		}
-		return 0; 
+		return 0;
 	}
-	
+
 	public void displayImportTable() {
 		DefaultTableModel dtm = (DefaultTableModel) view.scrollPane_import.jTable.getModel();
 		importExportList = IngredientDAO.getImportExportModelList();
@@ -286,12 +291,13 @@ public class IngredientController {
 		} else {
 			for (int i = 0; i < importExportList.size(); i++) {
 				ImportExportModel ie = importExportList.get(i);
-				if (ie.getAmount()>0) dtm.addRow(ie.toObject());
+				if (ie.getAmount() > 0)
+					dtm.addRow(ie.toObject());
 			}
 		}
 		view.scrollPane_import.jTable.setModel(dtm);
 	}
-	
+
 	public void displayExportTable() {
 		DefaultTableModel dtm = (DefaultTableModel) view.scrollPane_export.jTable.getModel();
 		importExportList = IngredientDAO.getImportExportModelList();
@@ -301,9 +307,22 @@ public class IngredientController {
 		} else {
 			for (int i = 0; i < importExportList.size(); i++) {
 				ImportExportModel ie = importExportList.get(i);
-				if (ie.getAmount()<0) dtm.addRow(ie.toObject());
+				if (ie.getAmount() < 0)
+					dtm.addRow(ie.toObject());
 			}
 		}
 		view.scrollPane_export.jTable.setModel(dtm);
+	}
+	public void setDataToForm(IngredientModel i) {
+		form = new IngredientInfoForm(i); 
+		form.lblNewLabel_ingredientID.setText(i.getIngredientID());
+		form.comboBox_unit.setSelectedItem(i.getUnit());
+		form.spinner_amount.setValue(i.getAmount());
+		form.spinner_price.setValue(i.getPrice());
+		form.textField_name.setText(i.getName());
+		form.comboBox_unit.setSelectedItem(i.getUnit());
+		form.mfDate.setDate(i.getMfDate());
+		form.expDate.setDate(i.getExpDate());
+		form.textField_supplier.setText(i.getSupplier());
 	}
 }

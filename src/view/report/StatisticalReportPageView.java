@@ -33,7 +33,15 @@ import java.awt.SystemColor;
 
 public class StatisticalReportPageView extends JPanel {
 
-	ReportController report; 
+	ReportController report;
+	public AppLabel num_mem;
+	public AppLabel bills;
+	public AppLabel ingreTotal;
+	public AppLabel billTotal;
+	public AppButton btn_report;
+	public DatePickerComponent startDate;
+	public DatePickerComponent endDate;
+	public DefaultCategoryDataset dataset; 
 	/**
 	 * Create the panel.
 	 */
@@ -77,9 +85,9 @@ public class StatisticalReportPageView extends JPanel {
 		lblNewLabel_1.setText("From: ");
 		panel.add(lblNewLabel_1);
 		
-		DatePickerComponent startDay = new DatePickerComponent();
-		BorderLayout borderLayout = (BorderLayout) startDay.getLayout();
-		panel.add(startDay);
+		startDate = new DatePickerComponent();
+		BorderLayout borderLayout = (BorderLayout) startDate.getLayout();
+		panel.add(startDate);
 		
 		
 		AppLabel lblNewLabel_2 = new AppLabel("New label");
@@ -87,9 +95,9 @@ public class StatisticalReportPageView extends JPanel {
 		lblNewLabel_2.setText("To:");
 		panel.add(lblNewLabel_2);
 		
-		DatePickerComponent endDay = new DatePickerComponent();
-		BorderLayout borderLayout_1 = (BorderLayout) endDay.getLayout();
-		panel.add(endDay);
+		endDate = new DatePickerComponent();
+		BorderLayout borderLayout_1 = (BorderLayout) endDate.getLayout();
+		panel.add(endDate);
         Border roundedBorder = BorderFactory.createCompoundBorder();
         
         JPanel panel_3 = new JPanel();
@@ -101,10 +109,10 @@ public class StatisticalReportPageView extends JPanel {
         contentPanel.add(panel_3, gbc_panel_3);
         panel_3.setLayout(new FlowLayout(FlowLayout.TRAILING, 0, 5));
         
-        AppButton btnNewButton = new AppButton("New button");
-        btnNewButton.setPreferredSize(new Dimension(180, 40));
-        btnNewButton.setText("KẾT XUẤT BÁO CÁO");
-        panel_3.add(btnNewButton);
+        btn_report = new AppButton("New button");
+        btn_report.setPreferredSize(new Dimension(180, 40));
+        btn_report.setText("KẾT XUẤT BÁO CÁO");
+        panel_3.add(btn_report);
         
         JPanel panel_2 = new JPanel();
         GridBagConstraints gbc_panel_2 = new GridBagConstraints();
@@ -122,7 +130,7 @@ public class StatisticalReportPageView extends JPanel {
         roundedPanel.setLayout(new GridLayout(4, 1, 0, 0));
         
                 AppLabel lbl_NV = new AppLabel("DOANH THU",24,true);
-                lbl_NV.setText("NHÂN VIÊN");
+                lbl_NV.setText("KHÁCH HÀNG");
                 lbl_NV.setHorizontalAlignment(SwingConstants.CENTER);
                 
                 roundedPanel.add(lbl_NV);
@@ -134,12 +142,12 @@ public class StatisticalReportPageView extends JPanel {
                         roundedPanel.add(panel_4);
                 
                         AppLabel label2 = new AppLabel("Doanh thu:");
-                        label2.setText("Tổng lương:");
+                        label2.setText("KH Thành viên:");
                         panel_4.add(label2);
                         
-                        AppLabel totalSalary = new AppLabel("New label");
-                        totalSalary.setText("");
-                        panel_4.add(totalSalary);
+                        num_mem = new AppLabel("New label");
+                        num_mem.setText("");
+                        panel_4.add(num_mem);
                         
                         AppLabel label = new AppLabel("");
                         panel_2.add(label);
@@ -165,7 +173,7 @@ public class StatisticalReportPageView extends JPanel {
                         AppLabel label2_1 = new AppLabel("Số hóa đơn:");
                         panel_7.add(label2_1);
                         
-                        AppLabel bills = new AppLabel("New label");
+                        bills = new AppLabel("New label");
                         bills.setText("");
                         panel_7.add(bills);
                         
@@ -179,9 +187,9 @@ public class StatisticalReportPageView extends JPanel {
                         lblNewLabel_3.setText("Tổng tiền:");
                         panel_5.add(lblNewLabel_3);
                         
-                        AppLabel lblNewLabel_4 = new AppLabel("New label");
-                        lblNewLabel_4.setText("");
-                        panel_5.add(lblNewLabel_4);
+                        billTotal = new AppLabel("New label");
+                        billTotal.setText("");
+                        panel_5.add(billTotal);
                         
                         AppLabel label_1 = new AppLabel("");
                         panel_2.add(label_1);
@@ -208,21 +216,18 @@ public class StatisticalReportPageView extends JPanel {
                         lblNewLabel_7.setText("Số tiền: ");
                         panel_8.add(lblNewLabel_7);
                         
-                        AppLabel lblNewLabel_10 = new AppLabel("New label");
-                        lblNewLabel_10.setText("");
-                        panel_8.add(lblNewLabel_10);
+                        ingreTotal = new AppLabel("New label");
+                        ingreTotal.setText("");
+                        panel_8.add(ingreTotal);
         
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.setValue(5, "Sales", "Product 1");
-        dataset.setValue(10, "Sales", "Product 2");
-        dataset.setValue(15, "Sales", "Product 3");
-        dataset.setValue(20, "Sales", "Product 4");
+        dataset = new DefaultCategoryDataset();
+      
         
         // Create chart
         JFreeChart chart = ChartFactory.createBarChart(
-            "Product Sales",
-            "Product",
-            "Sales",
+            "THỐNG KÊ THỨC UỐNG",
+            "THỨC UỐNG",
+            "SỐ LƯỢNG",
             dataset,
             PlotOrientation.VERTICAL,
             false,

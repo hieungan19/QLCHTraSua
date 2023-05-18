@@ -7,6 +7,7 @@ import javax.swing.JScrollPane;
 
 
 import javax.swing.ScrollPaneConstants;
+import java.awt.Color;
 
 public class MainMenuPanel extends JPanel {
 
@@ -21,12 +22,15 @@ public class MainMenuPanel extends JPanel {
 
 	}
 	public MainMenuPanel() {
+
 		panel = new javax.swing.JPanel();
+		panel.setBackground(new Color(138, 43, 226));
+		panel.setOpaque(false);
 		
 		jScrollPane1 = new javax.swing.JScrollPane();
 		jScrollPane1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
      
-
+		jScrollPane1.setOpaque(false);
 
         jScrollPane1.setBorder(null);
 
@@ -54,7 +58,6 @@ public class MainMenuPanel extends JPanel {
 		gl_panel.setVgap(10);
 		gl_panel.setHgap(10);
 		panel.setLayout(gl_panel);
-		panel.setOpaque(false);
         
 
 	}

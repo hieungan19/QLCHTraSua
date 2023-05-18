@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import controller.AppController;
+import globalComponent.AppLabel;
 import model.DashboardOption;
 import view.bill.BillPageView;
 
@@ -72,7 +73,7 @@ public class AppView extends JFrame {
 		contentPane.add(panel_dashboard, BorderLayout.WEST);
 
 		// Ten nhom
-		JLabel lblNewLabel = new JLabel("DILAMDOAN2");
+		AppLabel lblNewLabel = new AppLabel("DILAMDOAN", 32, true);
 		lblNewLabel.setBounds(0, 0, 200, 95);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Trajan Pro", Font.BOLD, 16));
@@ -81,7 +82,7 @@ public class AppView extends JFrame {
 		// Options
 		JPanel panel_options = new JPanel();
 		panel_options.setOpaque(false);
-		panel_options.setBounds(10, 119, 180, 441);
+		panel_options.setBounds(10, 120, 180, 441);
 		panel_dashboard.add(panel_options, BorderLayout.WEST);
 		GridLayout gridLayout = new GridLayout(8, 1, 0, 20);
 		panel_options.setLayout(gridLayout);

@@ -19,12 +19,15 @@ public class IngredientDAO {
 	public static final String COLUMN_PRICE = "GIA";
 	public static final String COLUMN_UNIT = "DONVI";
 	public static final String COLUMN_AMOUNT = "SOLUONG";
+	public static final String COLUMN_NSX = "NSX";
+	public static final String COLUMN_HSD = "HSD"; 
+	public static final String COLUMN_SUPPLIER = "NHACUNGCAP"; 
 	private static final String GET_ALL_INGREDIENTS = "SELECT * FROM NGUYENLIEU";
-	private static final String INSERT_INGREDIENT = "INSERT INTO NGUYENLIEU (TENNL, DONVI,SOLUONG,GIA) VALUES(?,?,?,?)";
+	private static final String INSERT_INGREDIENT = "INSERT INTO NGUYENLIEU (TENNL, DONVI,SOLUONG,GIA, NSX, HSD, NHACUNGCAP) VALUES(?,?,?,?,?,?,?)";
 	private static final String GET_MAXID_INSERTED_INGREDIENT = "SELECT * FROM NGUYENLIEU WHERE ROWID = (SELECT MAX(ROWID) FROM NGUYENLIEU)";
 	private static final String COMMIT = "COMMIT"; 
 	private static final String DELETE_INGREDIENT_BY_ID = "DELETE FROM NGUYENLIEU WHERE MANL = ?"; 
-	private static final String UPDATE_INGREDIENT_INFO = "UPDATE NGUYENLIEU SET TENNL = ?, DONVI = ?, SOLUONG = ?, GIA=? WHERE MANL = ?"; 
+	private static final String UPDATE_INGREDIENT_INFO = "UPDATE NGUYENLIEU SET TENNL = ?, DONVI = ?, SOLUONG = ?, GIA=?, NSX = ?, HSD = ?, NHACUNGCAP = ? WHERE MANL = ?"; 
 	private static final String GET_INGREDIENT_BY_ID = "SELECT * FROM NGUYENLIEU WHERE MANL = ?"; 
 	
 	private static final String GET_ALL_NHAPXUAT = "SELECT * FROM XUATNHAPNL"; 
@@ -43,7 +46,10 @@ public class IngredientDAO {
             	String unit = rs.getNString(COLUMN_UNIT);
             	double amount = rs.getDouble(COLUMN_AMOUNT); 
             	double price = rs.getDouble(COLUMN_PRICE); 
-            	IngredientModel ingredient = new IngredientModel(ingredientID, name, unit, amount, price); 
+            	Date mfDate = rs.getDate(COLUMN_NSX);
+            	Date expDate = rs.getDate(COLUMN_HSD);
+            	String supplier  = rs.getString(COLUMN_SUPPLIER); 
+            	IngredientModel ingredient = new IngredientModel(ingredientID,name, unit, amount, price, mfDate, expDate, supplier); 
             	result.add(ingredient); 
             }
             System.out.println("So luong nguyen lieu: "+test);
@@ -56,15 +62,34 @@ public class IngredientDAO {
 		
 		return result; 
 	}
+	public static void setDataForPrepareStatement(PreparedStatement ps, IngredientModel model) {
+		try {
+			ps.setString(1,model.getName());
+			ps.setString(2,model.getUnit());
+			ps.setDouble(3, model.getAmount());
+			ps.setDouble(4, model.getPrice());
+			java.sql.Date sqlDate = null;
+			if (model.getMfDate() != null) {
+				sqlDate = new java.sql.Date(model.getMfDate().getTime());
+			}
+			ps.setDate(5, sqlDate);
+			if (model.getExpDate() != null) {
+				sqlDate = new java.sql.Date(model.getExpDate().getTime());
+			}
+			ps.setDate(6, sqlDate);
+			ps.setNString(7, model.getSupplier());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	
 	public static int insertIngredient(IngredientModel model) {
 		 try {
 			Connection c = MyDB.getInstance().getConnection();
 			PreparedStatement psInsert = c.prepareStatement(INSERT_INGREDIENT);
-			psInsert.setString(1,model.getName());
-			psInsert.setString(2,model.getUnit());
-			psInsert.setDouble(3, model.getAmount());
-			psInsert.setDouble(4, model.getPrice());
+			setDataForPrepareStatement(psInsert, model); 
 			int check = psInsert.executeUpdate();
 			Statement st = c.createStatement();
 			st.execute(COMMIT); 
@@ -84,7 +109,7 @@ public class IngredientDAO {
 			ResultSet rs = state.executeQuery(GET_MAXID_INSERTED_INGREDIENT); 
 			if (rs.next()) {
 				System.out.println("VUA INSERT VAO: "+ rs.getString(COLUMN_NAME));
-				IngredientModel model = new IngredientModel(rs.getString(COLUMN_ID), rs.getString(COLUMN_NAME), rs.getString(COLUMN_UNIT), rs.getDouble(COLUMN_AMOUNT), rs.getDouble(COLUMN_PRICE));
+				IngredientModel model = new IngredientModel(rs.getString(COLUMN_ID), rs.getString(COLUMN_NAME), rs.getString(COLUMN_UNIT), rs.getDouble(COLUMN_AMOUNT), rs.getDouble(COLUMN_PRICE), rs.getDate(COLUMN_NSX),rs.getDate(COLUMN_HSD),rs.getNString(COLUMN_SUPPLIER));
 				return model; 
 			}
 			
@@ -110,16 +135,14 @@ public class IngredientDAO {
 		return 0; 
 	}
 	
-	public static int updateIngredient(String id,String name, String unit, double amount, double price) {
+	public static int updateIngredient(IngredientModel model) {
 		try {
 			int check = 0; 
 			Connection c = MyDB.getInstance().getConnection();
 			PreparedStatement psUpdate = c.prepareStatement(UPDATE_INGREDIENT_INFO);
-			psUpdate.setString(1,name );
-			psUpdate.setString(2,unit); 
-			psUpdate.setDouble(3, amount);
-			psUpdate.setDouble(4, price);
-			psUpdate.setString(5, id);
+			setDataForPrepareStatement(psUpdate, model);
+			psUpdate.setString(8, model.getIngredientID());
+		
 			check = psUpdate.executeUpdate();
 			if (check >0) return 1; 
 		} catch (SQLException e) {
@@ -144,6 +167,9 @@ public class IngredientDAO {
 	            ingredient.setPrice(rs.getDouble(COLUMN_PRICE));
 	            ingredient.setAmount(rs.getDouble(COLUMN_AMOUNT));
 	            ingredient.setUnit(rs.getString(COLUMN_UNIT));
+	            ingredient.setExpDate(rs.getDate(COLUMN_HSD));
+	            ingredient.setMfDate(rs.getDate(COLUMN_NSX));
+	            ingredient.setSupplier(rs.getNString(COLUMN_SUPPLIER));
 	            return ingredient;
 	         
 	        } 
@@ -168,9 +194,8 @@ public class IngredientDAO {
 				String ingreID = rs.getString("MANL");
 				Date ieDate = rs.getDate("NGAYNX");
 				double amount = rs.getDouble("SOLUONG");
-				double money = rs.getDouble("SOTIEN"); 
 				
-				ImportExportModel ie = new ImportExportModel(id, ingreID, ieDate, amount, money);
+				ImportExportModel ie = new ImportExportModel(id, ingreID, ieDate, amount);
 				result.add(ie); 
 				
 			}

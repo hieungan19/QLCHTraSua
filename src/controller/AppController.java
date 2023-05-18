@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import constant.ConstantValueView;
 import model.DashboardOption;
 import view.AppView;
 import view.bill.BillPageView;
@@ -42,7 +44,7 @@ public class AppController {
 	public void setView( DashboardOption optionItem) {
 		JPanel jpnItem = optionItem.getjPanelOption(); 
 		optionSelectedText = optionItem.getText();
-		optionItem.getjLabelOption().setBackground(Color.white);
+		optionItem.getjLabelOption().setBackground(ConstantValueView.background);
 		optionItem.getjLabelOption().setOpaque(true);
 		view.root.removeAll();
 		view.root.add(jpnItem);		
@@ -109,7 +111,7 @@ public class AppController {
 			// TODO Auto-generated method stub
 
 			optionSelectedText = optionText;
-			optionItem.getjLabelOption().setBackground(Color.white);
+			optionItem.getjLabelOption().setBackground(ConstantValueView.background);
 			optionItem.getjLabelOption().setOpaque(true);
 		}
 
@@ -122,10 +124,10 @@ public class AppController {
 		private void setChangeBackground(String optionText) {
 			for (DashboardOption item : listItem) {
 				if (item.getText().equalsIgnoreCase(optionText)) {
-					item.getjLabelOption().setBackground(Color.white);
+					item.getjLabelOption().setBackground(ConstantValueView.background);
 					item.getjLabelOption().setOpaque(true);
 				} else {
-					item.getjLabelOption().setBackground(new Color(183, 150, 107));
+					item.getjLabelOption().setBackground(ConstantValueView.primaryColor);
 					item.getjLabelOption().setOpaque(true);
 				}
 			}

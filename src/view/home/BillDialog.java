@@ -8,10 +8,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import dao.BillController;
+import controller.BillDialogController;
 import globalComponent.AppButton;
 import globalComponent.AppLabel;
 import globalComponent.AppScrollTable;
+import model.BillModel;
 
 import java.awt.GridLayout;
 import javax.swing.SwingConstants;
@@ -31,9 +32,14 @@ public class BillDialog extends JDialog {
 	public AppLabel point;
 	public AppLabel customerPayment;
 	public AppLabel change;
-	BillController controller; 
 
-	public BillDialog() {
+	public AppLabel discountID;
+	public AppButton printButton; 
+	public BillModel bill; 
+	BillDialogController controllerDialog; 
+
+	public BillDialog(BillModel bill) {
+		this.bill = bill; 
 		String[] titleList = {
 				"STT", "Tên món", "Số lượng", "Đơn giá", "Thành tiền"};
 		Object[][] object = new Object[][] {
@@ -148,7 +154,7 @@ public class BillDialog extends JDialog {
 		{
 			JPanel panel = new JPanel();
 			contentPanel.add(panel);
-			panel.setLayout(new GridLayout(6, 0, 0, 10));
+			panel.setLayout(new GridLayout(0, 2, 0, 10));
 			{
 				AppLabel lblNewLabel_estimateAmount = new AppLabel("Tạm tính");
 				lblNewLabel_estimateAmount.setText("Tạm tính:");
@@ -157,6 +163,14 @@ public class BillDialog extends JDialog {
 			{
 				subtotal = new AppLabel("New label");
 				panel.add(subtotal);
+			}
+			{
+				AppLabel lblNewLabel = new AppLabel("Mã giảm giá:");
+				panel.add(lblNewLabel);
+			}
+			{
+				discountID = new AppLabel("");
+				panel.add(discountID);
 			}
 			{
 				AppLabel lblNewLabel_discountedPrice = new AppLabel("");
@@ -210,13 +224,14 @@ public class BillDialog extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			buttonPane.setLayout(new GridLayout(0, 1, 0, 0));
 			{
-				AppButton cancelButton = new AppButton("IN HÓA ĐƠN");
-				cancelButton.setBorder(null);
-				cancelButton.setActionCommand("Print");
-				buttonPane.add(cancelButton);
+				printButton = new AppButton("IN HÓA ĐƠN");
+				printButton.setBorder(null);
+				printButton.setActionCommand("Print");
+				buttonPane.add(printButton);
 			}
 		}
 		
+		controllerDialog = new BillDialogController(this); 
 		
 	}
 

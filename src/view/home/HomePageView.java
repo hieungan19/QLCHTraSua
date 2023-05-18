@@ -21,6 +21,7 @@ import java.awt.Insets;
 import java.awt.Rectangle;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import java.awt.Color;
 
 public class HomePageView extends JPanel {
 
@@ -39,8 +40,11 @@ public class HomePageView extends JPanel {
 		lblNewLabel_userName = new JLabel();
 		cart = new CartPanel();
 		mainMenu = new MainMenuPanel();
+		mainMenu.panel.setBackground(new Color(175, 238, 238));
+		mainMenu.setOpaque(false);
 		searchBar = new SearchBar();
 		JPanel panel_menu = new JPanel();
+		panel_menu.setOpaque(false);
 		panel_filterButton = new JPanel();
 		for (int i = 0; i<(AppValues.productTypes.length); ++i) {
 			panel_filterButton.add(new AppButton(AppValues.productTypes[i])); 
@@ -97,15 +101,13 @@ public class HomePageView extends JPanel {
 			GridBagConstraints gbc_panel_header = new GridBagConstraints();
 			gbc_panel_header.anchor = GridBagConstraints.NORTH;
 			gbc_panel_header.fill = GridBagConstraints.HORIZONTAL;
-			gbc_panel_header.insets = new Insets(0, 0, 5, 0);
 			gbc_panel_header.gridx = 0;
 			gbc_panel_header.gridy = 0;
 			panel_menuOder.add(panel_header, gbc_panel_header);
 			
 			
 			GridBagConstraints gbc_searchBarView = new GridBagConstraints();
-			gbc_searchBarView.weighty = 1.0;
-			gbc_searchBarView.insets = new Insets(0, 20, 5, 20);
+			gbc_searchBarView.insets = new Insets(0, 20, 0, 20);
 			gbc_searchBarView.fill = GridBagConstraints.BOTH;
 			gbc_searchBarView.gridx = 0;
 			gbc_searchBarView.gridy = 1;
@@ -131,11 +133,7 @@ public class HomePageView extends JPanel {
 			panel.add(scrollPane);
 			panel_filterButton.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 0));
 			
-			
-			
-
-			
-			
+		
 			panel_menu.setOpaque(false);
 			GridBagConstraints gbc_panel_menu = new GridBagConstraints();
 			gbc_panel_menu.insets = new Insets(0, 0, 5, 0);
@@ -153,7 +151,6 @@ public class HomePageView extends JPanel {
 			GridBagConstraints gbc_panel_menuOder = new GridBagConstraints();
 			gbc_panel_menuOder.weightx = 3.0;
 			gbc_panel_menuOder.fill = GridBagConstraints.BOTH;
-			gbc_panel_menuOder.insets = new Insets(0, 0, 0, 5);
 			gbc_panel_menuOder.gridx = 0;
 			gbc_panel_menuOder.gridy = 0;
 			add(panel_menuOder, gbc_panel_menuOder);

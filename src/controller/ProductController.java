@@ -133,6 +133,9 @@ public class ProductController {
 					}
 				});
 				// update sản phẩm
+				form.btn_saveProduct.setVisible(true);
+				
+				
 				form.btn_saveProduct.addActionListener(new ActionListener() {
 
 					@Override

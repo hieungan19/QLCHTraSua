@@ -15,6 +15,7 @@ import constant.AppValues;
 import java.awt.Insets;
 import java.awt.GridLayout;
 import globalComponent.AppLineBorderTextField;
+import globalComponent.DatePickerComponent;
 import globalComponent.NumberSpinner;
 import model.CustomerModel;
 import model.IngredientModel;
@@ -22,7 +23,6 @@ import globalComponent.AppButton;
 import java.awt.FlowLayout;
 
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
@@ -37,6 +37,9 @@ public class IngredientInfoForm extends JPanel {
 	public NumberSpinner spinner_amount;
 	public AppLabel lblNewLabel_ingredientID;
 	public JComboBox comboBox_unit;
+	public JTextField textField_supplier;
+	public DatePickerComponent mfDate;
+	public DatePickerComponent expDate;
 
 	
 
@@ -57,9 +60,8 @@ public class IngredientInfoForm extends JPanel {
 		this.add(contentPanel);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
 		gbl_contentPanel.columnWidths = new int[]{0, 0};
-		gbl_contentPanel.rowHeights = new int[]{0, 0, 0, 0};
 		gbl_contentPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[]{0.0, 1.0, 1.0};
 		contentPanel.setLayout(gbl_contentPanel);
 		
 		JPanel panel = new JPanel();
@@ -91,12 +93,13 @@ public class IngredientInfoForm extends JPanel {
 		
 		JPanel panel_info = new JPanel();
 		GridBagConstraints gbc_panel_info = new GridBagConstraints();
+		gbc_panel_info.weighty = 2.0;
 		gbc_panel_info.insets = new Insets(0, 0, 5, 0);
 		gbc_panel_info.fill = GridBagConstraints.BOTH;
 		gbc_panel_info.gridx = 0;
 		gbc_panel_info.gridy = 1;
 		contentPanel.add(panel_info, gbc_panel_info);
-		panel_info.setLayout(new GridLayout(5, 0, 0, 10));
+		panel_info.setLayout(new GridLayout(0, 2, 0, 10));
 		
 		AppLabel lblNewLabel_1 = new AppLabel("Họ tên khách hàng");
 		lblNewLabel_1.setText("Tên nguyên liệu");
@@ -131,6 +134,26 @@ public class IngredientInfoForm extends JPanel {
 		
 		spinner_amount = new NumberSpinner(new SpinnerNumberModel(0, 0, 1e9, 1)); 
 		panel_info.add(spinner_amount); 
+		
+		AppLabel lblNewLabel_3 = new AppLabel("New label");
+		lblNewLabel_3.setText("Nhà cung cấp");
+		panel_info.add(lblNewLabel_3);
+		
+		textField_supplier = new AppLineBorderTextField();
+		textField_supplier.setColumns(10);
+		panel_info.add(textField_supplier);
+		
+		AppLabel lblNewLabel_7 = new AppLabel("New label");
+		lblNewLabel_7.setText("Ngày sản xuất");
+		panel_info.add(lblNewLabel_7);
+		mfDate = new DatePickerComponent();
+		panel_info.add(mfDate);
+		
+		AppLabel lblNewLabel_6 = new AppLabel("New label");
+		lblNewLabel_6.setText("Hạn sử dụng");
+		panel_info.add(lblNewLabel_6);
+		expDate = new DatePickerComponent();
+		panel_info.add(expDate);
 		
 		JPanel panel_1 = new JPanel();
 		

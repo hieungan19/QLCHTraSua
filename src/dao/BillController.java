@@ -1,10 +1,21 @@
 package dao;
 
+import java.awt.AWTException;
+import java.awt.Desktop;
 import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+import javax.swing.JDialog;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -62,10 +73,11 @@ public class BillController {
 					DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 					String id = String.valueOf(tableModel.getValueAt(selectedRow, 0));
 					BillModel bill = getBillByID(id);
-					BillDialog dialog = new BillDialog();
-					setDataToBillDialog(dialog, bill);
-					dialog.show();
+					BillDialog dialog = new BillDialog(bill);
+					
+					
 
+					
 				}
 			}
 		});
@@ -100,52 +112,9 @@ public class BillController {
 		return bill;
 	}
 
-	public static void setDataToBillDialog(BillDialog dialog, BillModel bill) {
-		int count = 0;
-		CustomerModel cus = CustomerDAO.getCustomerByID(bill.getCustomerID());
-
-		String billID = bill.getBillID();
-		dialog.billID.setText(billID);
-		
-		String billDate = bill.getBillDate().toString();
-		dialog.billDate.setText(billDate);
-		
-		
-		
-		if (bill.getCustomerID() != null) {
-			dialog.cusName.setText(cus.getName());
-			dialog.cusPhoneNumber.setText(cus.getPhoneNumber());
-		}
-
-		
-		EmployeeModel emp = EmployeeDAO.getEmployeeByEmpID(bill.getEmployeeID());
-		dialog.empName.setText(emp.getName());
-		
-		
-		DefaultTableModel dtm = (DefaultTableModel) dialog.scrollPane_bill.jTable.getModel();
-		dtm.setRowCount(0);
-		for (ProductModel pro : bill.getProductList()) {
-			++count;
-			Object[] proOject = new Object[] { count, pro.getName(), pro.getAmount(), pro.getPrice(),
-					pro.getPrice() * pro.getAmount() };
-			dtm.addRow(proOject);
-			for (ProductModel topping : pro.getToppingList()) {
-				Object[] toppingObject = new Object[] { "", topping.getName(), topping.getAmount(), topping.getPrice(),
-						topping.getAmount() * pro.getAmount() * topping.getPrice() };
-				dtm.addRow(toppingObject);
-			}
-		}
-		
-		
-		dialog.subtotal.setText(String.valueOf (bill.getSubtotal()));
-		dialog.total.setText(String.valueOf(bill.getTotal()));
-		dialog.discountValue.setText(String.valueOf(bill.getDiscountValue()));
-		dialog.customerPayment.setText(String.valueOf(bill.getTenderAmount()));
-		dialog.change.setText(String.valueOf(bill.getTenderAmount() - bill.getTotal()));
-		
-		int point = (int) Math.round(bill.getTotal()/5000); 
-		dialog.point.setText(String.valueOf(point)); 
-		
-	}
+	
+	
+	
+	
 
 }

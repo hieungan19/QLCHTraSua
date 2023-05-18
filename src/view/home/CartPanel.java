@@ -27,6 +27,10 @@ import java.awt.Insets;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import java.awt.SystemColor;
+import java.awt.Color;
+import javax.swing.BoxLayout;
+import java.awt.BorderLayout;
 
 
 public class CartPanel extends JPanel {
@@ -38,7 +42,11 @@ public class CartPanel extends JPanel {
 	public AppLabel cusID;
 	public AppButton btn_confirm; 
 	public JPanel cart;
-	public AppScrollTable scrollPane_cart; 
+	public AppScrollTable scrollPane_cart;
+	public AppButton btn_calc;
+	public AppLabel subtotal;
+	public AppLabel discountValue;
+	public AppLabel total; 
 
 	/**
 	 * Create the panel.
@@ -63,7 +71,7 @@ public class CartPanel extends JPanel {
 		this.setOpaque(false);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {250};
-		gridBagLayout.rowHeights = new int[] {30, 50, 250, 50, 100, 30, 40};
+		gridBagLayout.rowHeights = new int[] {30, 50, 250, 50, 100, 40, 30};
 		gridBagLayout.columnWeights = new double[] { 1.0, 0.0 };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 1.0, 1.0, 1.0, 0.0 };
 		setLayout(gridBagLayout);
@@ -74,7 +82,7 @@ public class CartPanel extends JPanel {
 		gbc_lblNewLabel_cart.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblNewLabel_cart.gridwidth = 2;
 		gbc_lblNewLabel_cart.anchor = GridBagConstraints.NORTHWEST;
-		gbc_lblNewLabel_cart.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel_cart.insets = new Insets(5, 10, 5, 0);
 		gbc_lblNewLabel_cart.gridx = 0;
 		gbc_lblNewLabel_cart.gridy = 0;
 		add(lblNewLabel_cart, gbc_lblNewLabel_cart);
@@ -86,7 +94,7 @@ public class CartPanel extends JPanel {
 		panel.add(cusPhoneNumber);
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.insets = new Insets(0, 0, 5, 0);
+		gbc_panel.insets = new Insets(0, 10, 5, 0);
 		gbc_panel.gridwidth = 2;
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 1;
@@ -94,10 +102,8 @@ public class CartPanel extends JPanel {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setOpaque(false);
-		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
-		flowLayout.setHgap(10);
-		flowLayout.setAlignment(FlowLayout.LEFT);
 		panel.add(panel_1);
+		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		cusID = new AppLabel("New label");
 		cusID.setText("");
@@ -110,7 +116,7 @@ public class CartPanel extends JPanel {
 		
 		GridBagConstraints gbc_panel_4 = new GridBagConstraints();
 		gbc_panel_4.gridwidth = 2;
-		gbc_panel_4.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_4.insets = new Insets(0, 10, 5, 10);
 		gbc_panel_4.fill = GridBagConstraints.BOTH;
 		gbc_panel_4.gridx = 0;
 		gbc_panel_4.gridy = 2;
@@ -123,7 +129,7 @@ public class CartPanel extends JPanel {
 		panel_2.setOpaque(false);
 		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
 		gbc_panel_2.gridwidth = 2;
-		gbc_panel_2.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_2.insets = new Insets(0, 10, 5, 10);
 		gbc_panel_2.fill = GridBagConstraints.BOTH;
 		gbc_panel_2.gridx = 0;
 		gbc_panel_2.gridy = 3;
@@ -140,7 +146,7 @@ public class CartPanel extends JPanel {
 		panel_3.setOpaque(false);
 		GridBagConstraints gbc_panel_3 = new GridBagConstraints();
 		gbc_panel_3.gridwidth = 2;
-		gbc_panel_3.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_3.insets = new Insets(0, 10, 5, 10);
 		gbc_panel_3.fill = GridBagConstraints.BOTH;
 		gbc_panel_3.gridx = 0;
 		gbc_panel_3.gridy = 4;
@@ -150,14 +156,14 @@ public class CartPanel extends JPanel {
 		AppLabel lblNewLabel_1 = new AppLabel("New label");
 		lblNewLabel_1.setText("Khách hàng đưa");
 		panel_3.add(lblNewLabel_1);
-		spinner_cusPaymentAmount  = new NumberSpinner(new SpinnerNumberModel(0,0,1e9,1000)); 
+		spinner_cusPaymentAmount  = new NumberSpinner(new SpinnerNumberModel(0.0, 0.0, 1e9, 1000.0)); 
 		panel_3.add(spinner_cusPaymentAmount); 
 		
 		AppLabel lblNewLabel_2 = new AppLabel("New label");
 		lblNewLabel_2.setText("Tạm tính");
 		panel_3.add(lblNewLabel_2);
 		
-		AppLabel subtotal = new AppLabel("New label");
+		subtotal = new AppLabel("New label");
 		subtotal.setText("");
 		panel_3.add(subtotal);
 		
@@ -165,18 +171,18 @@ public class CartPanel extends JPanel {
 		lblNewLabel_4.setText("Số tiền khuyến mãi");
 		panel_3.add(lblNewLabel_4);
 		
-		AppLabel discountMoney = new AppLabel("New label");
-		discountMoney.setText("");
-		panel_3.add(discountMoney);
+		discountValue= new AppLabel("New label");
+		discountValue.setText("");
+		panel_3.add(discountValue);
 		
 		AppLabel lblNewLabel_6 = new AppLabel("Tổng cộng");
 		panel_3.add(lblNewLabel_6);
 		
-		AppLabel lblNewLabel_3 = new AppLabel("New label");
-		lblNewLabel_3.setText("");
-		panel_3.add(lblNewLabel_3);
+		total = new AppLabel("", 16, true);
+		panel_3.add(total);
 		
 		JPanel panel_4 = new JPanel();
+		panel_4.setOpaque(false);
 		GridBagConstraints gbc_panel_5 = new GridBagConstraints();
 		gbc_panel_5.gridwidth = 2;
 		gbc_panel_5.weightx = 10.0;
@@ -186,12 +192,15 @@ public class CartPanel extends JPanel {
 		add(panel_4, gbc_panel_5);
 		panel_4.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		AppButton btnNewButton = new AppButton("TẠM TÍNH");
-		panel_4.add(btnNewButton);
+		btn_calc = new AppButton("TẠM TÍNH");
+		btn_calc.setBackground(new Color(95, 158, 160));
+		btn_calc.setForeground(SystemColor.menu);
+		panel_4.add(btn_calc);
 		
 				btn_confirm = new AppButton("XÁC NHẬN");
+				btn_confirm.setEnabled(false);
 				panel_4.add(btn_confirm);
-				btn_confirm.setBackground(ConstantValueView.primaryDark);
+				btn_confirm.setBackground(new Color(128,128,128));
 		GridBagConstraints gbc_panel_6 = new GridBagConstraints();
 		gbc_panel_6.insets = new Insets(0, 0, 0, 5);
 		gbc_panel_6.fill = GridBagConstraints.BOTH;

@@ -7,17 +7,15 @@ public class ImportExportModel {
 	private String ingreID;
 	private Date ieDate;
 	private double amount;
-	private double money;
 	
 	
 	
-	public ImportExportModel(String id, String ingreID, Date ieDate, double amount, double money) {
+	public ImportExportModel(String id, String ingreID, Date ieDate, double amount) {
 		super();
 		this.id = id;
 		this.ingreID = ingreID;
 		this.ieDate = ieDate;
 		this.amount = amount;
-		this.money = money;
 	}
 
 

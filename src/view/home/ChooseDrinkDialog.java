@@ -31,6 +31,8 @@ public class ChooseDrinkDialog extends JDialog {
 	public ChooseToppingPanel toppingPanel;
 
 	public NumberSpinner spinner_amount;
+
+	public JPanel panel_1;
 	/**
 	 * Create the dialog.
 	 */
@@ -66,7 +68,7 @@ public class ChooseDrinkDialog extends JDialog {
 			
 		}
 		
-		JPanel panel_1 = new JPanel();
+		panel_1 = new JPanel();
 		panel_1.setBounds(186, 10, 314, 280);
 		getContentPane().add(panel_1);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
@@ -104,6 +106,7 @@ public class ChooseDrinkDialog extends JDialog {
 		gbc_toppingPanel.gridy = 1;
 		panel_1.add(toppingPanel, gbc_toppingPanel);
 		
+		if (pro.getType().equals("TOPPING")) panel_1.remove(1); 
 
 		
 		ArrayList<ChooseTopping> toppingList = new ArrayList<ChooseTopping>();

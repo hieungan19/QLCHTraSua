@@ -33,6 +33,7 @@ public class CustomerDAO {
 		try {
 			Connection con = MyDB.getInstance().getConnection();
             Statement state = con.createStatement();
+            state.execute(COMMIT); 
             ResultSet rs = state.executeQuery(GET_ALL_CUSTOMER);
             while(rs.next()) {
             	++test; 
@@ -65,9 +66,11 @@ public class CustomerDAO {
 			int check = psInsert.executeUpdate();
 			Statement st = c.createStatement();
 			st.execute(COMMIT); 
-			
+			Statement state = c.createStatement();
+            state.execute(COMMIT);
 			if (check >0 )
 				return 1; 
+		 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -109,6 +112,9 @@ public class CustomerDAO {
 	            customer.setRegistration(rs.getDate(COLUMN_REGISTRATION_DATE));
 	            // Set other attributes as needed
 	            System.out.println("ID+ "+customer.getName());
+	            
+	            Statement state = c.createStatement();
+	            state.execute(COMMIT); 
 	            return customer;
 	         
 	        } 
@@ -127,7 +133,10 @@ public class CustomerDAO {
 			PreparedStatement psDelete = c.prepareStatement(DELETE_CUSTOMER_BY_ID);
 			psDelete.setString(1, id);
 			check = psDelete.executeUpdate();
+			Statement state = c.createStatement();
+            state.execute(COMMIT); 
 			if (check >0) return 1; 
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

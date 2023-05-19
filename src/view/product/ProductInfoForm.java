@@ -31,20 +31,20 @@ import javax.swing.JLabel;
 public class ProductInfoForm extends JPanel {
 	public AppButton btn_chooseFile;
 	public JEditorPane editorPane_image;
-	public AppButton btn_saveProduct;
 	public AppLineBorderTextField textField_name;
 	public NumberSpinner spinner_price;
 	public String imageUri;
-	public AppButton btn_deleteProduct;
 	public AppLabel lblNewLabel_ID;
-	public JComboBox<String> comboBox_type; 
+	public JComboBox<String> comboBox_type;
+	public AppButton btn_saveProduct;
+	public AppButton btn_deleteProduct;
 	
 
 	public ProductInfoForm () {
 		lblNewLabel_ID = new AppLabel("",16,true);
-		btn_deleteProduct = new AppButton("XÓA");
-		btn_saveProduct = new AppButton("LƯU");
 		btn_chooseFile = new AppButton("Chọn file");
+		btn_chooseFile.setText("CHỌN FILE");
+		btn_chooseFile.setPreferredSize(new Dimension(100, 40));
 		editorPane_image = new JEditorPane(); 
 		editorPane_image.setEditable(false);
 		editorPane_image.setContentType("text/html");
@@ -56,9 +56,9 @@ public class ProductInfoForm extends JPanel {
 		this.add(contentPanel);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
 		gbl_contentPanel.columnWidths = new int[]{0, 0};
-		gbl_contentPanel.rowHeights = new int[]{0, 0, 0, 0};
+		gbl_contentPanel.rowHeights = new int[] {10, 20};
 		gbl_contentPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[]{1.0, 1.0, 1.0};
 		contentPanel.setLayout(gbl_contentPanel);
 		
 		
@@ -78,10 +78,8 @@ public class ProductInfoForm extends JPanel {
 		gbc_panel_form.gridy = 1;
 		contentPanel.add(panel_form, gbc_panel_form);
 		GridBagLayout gbl_panel_form = new GridBagLayout();
-		gbl_panel_form.columnWidths = new int[] {250, 350};
-		gbl_panel_form.rowHeights = new int[] {250, 0, 0};
 		gbl_panel_form.columnWeights = new double[]{0.0, 0.0};
-		gbl_panel_form.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_form.rowWeights = new double[]{0.0};
 		panel_form.setLayout(gbl_panel_form);
 		
 		JPanel panel_imagePicker = new JPanel();
@@ -120,7 +118,6 @@ public class ProductInfoForm extends JPanel {
 		
 		GridBagConstraints gbc_btn_chooseFile = new GridBagConstraints();
 		gbc_btn_chooseFile.anchor = GridBagConstraints.NORTH;
-		gbc_btn_chooseFile.weighty = 1.0;
 		gbc_btn_chooseFile.gridx = 0;
 		gbc_btn_chooseFile.gridy = 2;
 		panel_imagePicker.add(btn_chooseFile, gbc_btn_chooseFile);
@@ -169,7 +166,7 @@ public class ProductInfoForm extends JPanel {
 		AppLabel lblNewLabel_2 = new AppLabel("Loại sản phẩm");
 		panel_3.add(lblNewLabel_2);
 		String[] productTypes = new String[]{"TRÀ SỮA","TRÀ", "ĐÁ XAY","CAFE","TOPPING","KHÁC"};
-		comboBox_type = new JComboBox<String>(productTypes);
+		comboBox_type = new JComboBox<String>();
 		panel_3.add(comboBox_type);
 		
 		
@@ -187,21 +184,19 @@ public class ProductInfoForm extends JPanel {
 		panel_price.add(lblNewLabel_3);
 		panel_price.add(spinner_price);
 		
-	
+		JPanel panel = new JPanel();
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.weighty = 10.0;
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 2;
+		contentPanel.add(panel, gbc_panel);
 		
-		JPanel panel_button = new JPanel();
-		GridBagConstraints gbc_panel_button = new GridBagConstraints();
-		gbc_panel_button.gridx = 1;
-		gbc_panel_button.gridy = 1;
-		panel_form.add(panel_button, gbc_panel_button);
-		FlowLayout fl_panel_button = (FlowLayout) panel_button.getLayout();
-		fl_panel_button.setHgap(55);
-		fl_panel_button.setAlignment(FlowLayout.RIGHT);
+		btn_saveProduct = new AppButton("LƯU");
+		panel.add(btn_saveProduct);
 		
-	
-		panel_button.add(btn_deleteProduct); 
-	
-		panel_button.add(btn_saveProduct);
+		btn_deleteProduct = new AppButton("XÓA");
+		panel.add(btn_deleteProduct);
 		this.setVisible(true); 
 	}
 }

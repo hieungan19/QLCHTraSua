@@ -19,6 +19,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Rectangle;
+import java.util.Date;
+
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import java.awt.Color;
@@ -30,14 +32,15 @@ public class HomePageView extends JPanel {
 	public CartPanel cart; 
 	public HomeController controller;
 	public SearchBar searchBar;
-	public JPanel panel_filterButton; 
+	public JPanel panel_filterButton;
+	public JPanel panel_bill; 
 	/**
 	 * Create the panel.
 	 */
 	public HomePageView() {
 		this.setPreferredSize(new Dimension(840, 740));
 		this.setBackground(ConstantValueView.background);
-		lblNewLabel_userName = new JLabel();
+		lblNewLabel_userName = new JLabel(LoginController.user.getName());
 		cart = new CartPanel();
 		mainMenu = new MainMenuPanel();
 		mainMenu.panel.setBackground(new Color(175, 238, 238));
@@ -94,8 +97,8 @@ public class HomePageView extends JPanel {
 		
 			
 			//date
-			JLabel lblNewLabel_dateNow = new JLabel("Date");
-			lblNewLabel_dateNow.setFont(new Font("Tahoma", Font.BOLD, 16));
+			JLabel lblNewLabel_dateNow = new JLabel(new Date().toString());
+			lblNewLabel_dateNow.setFont(new Font("Tahoma", Font.BOLD, 12));
 			lblNewLabel_dateNow.setForeground(ConstantValueView.primaryColor); 
 			panel_info.add(lblNewLabel_dateNow);
 			GridBagConstraints gbc_panel_header = new GridBagConstraints();
@@ -155,7 +158,7 @@ public class HomePageView extends JPanel {
 			gbc_panel_menuOder.gridy = 0;
 			add(panel_menuOder, gbc_panel_menuOder);
 		//cart 
-		JPanel panel_bill = new JPanel();
+		panel_bill = new JPanel();
 	
 		GridBagLayout gridBagLayout_1 = (GridBagLayout) cart.getLayout();
 		gridBagLayout_1.columnWidths = new int[] {250};

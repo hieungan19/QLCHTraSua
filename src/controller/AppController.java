@@ -1,22 +1,24 @@
 package controller;
-
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import java.util.List;
-
-import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import constant.ConstantValueView;
 import model.DashboardOption;
 import view.AppView;
+import view.LoginView;
 import view.bill.BillPageView;
+import view.customer.CustomerPageView;
+import view.home.CartPanel;
+import view.home.HomePageView;
+import view.report.StatisticalReportPageView;
 
 import javax.swing.GroupLayout;
-import javax.swing.*;
 
 
 
@@ -24,13 +26,54 @@ public class AppController {
 	public static AppView view; 
 	private String optionSelectedText;
 	private List<DashboardOption> listItem = null;
-
+	private DashboardOption logout; 
 	public AppController(AppView view) {
 		// TODO Auto-generated constructor stub
 		this.view = view; 
 		view.root.setLayout(new GroupLayout(view.root));
+		view.logout.getjLabelOption().addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+				logout();
+
+			}
+		});
 
 
+	}
+	public static void logout() {
+		LoginView loginView = new LoginView();
+        loginView.setSize(1040, 740);
+        loginView.setLocationRelativeTo(null);
+        loginView.setVisible(true); 
+        view.setVisible(false); 
 	}
 	
 	public static void showPage(JPanel jpanel) {
@@ -64,23 +107,59 @@ public class AppController {
 		private JPanel node;
 		private String optionText;
 		private DashboardOption optionItem;
+		String oldOptionText; 
 
 		public LabelEvent(DashboardOption optionItem) {
 			super();
 
 			this.optionItem = optionItem;
 			this.optionText = optionItem.getText();
-			
 
 		}
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
-			if (optionText == "ORDERS") {
-				System.out.println("ORDERS VIEW");
+			switch(optionText) {
+			case "BILLS":
 				optionItem.setjPanelOption(new BillPageView());
+				break;
+			
+			case "KHACHHANG":
+				optionItem.setjPanelOption(new CustomerPageView());
+				break;
+
+			case "HOME":
+				HomePageView home = (HomePageView) optionItem.getjPanelOption();
+				System.out.println("APP CONTROLLER: HOME.CART - " + home.cart.spinner_cusPaymentAmount.getValue().toString());
+
+				CartPanel currentCart = home.cart; // Lưu trữ tham chiếu đến cart hiện tại
+
+				HomePageView newHome = new HomePageView(); // Tạo một HomePageView mới
+				
+				
+				JTable table = currentCart.scrollPane_cart.jTable;
+				DefaultTableModel dtm = (DefaultTableModel) newHome.cart.scrollPane_cart.jTable.getModel(); 
+				for (int i = 0; i< table.getRowCount();++i) {
+					Object[] obj = new Object[] {table.getValueAt(i, 0),table.getValueAt(i, 1),table.getValueAt(i, 2),table.getValueAt(i, 3)}; 
+					dtm.addRow(obj); 
+				}
+				
+				newHome.controller.cartProducts = home.controller.cartProducts; 
+
+				newHome.revalidate(); // Cập nhật giao diện
+				newHome.repaint();
+
+				System.out.println("APP CONTROLLER: NEW_HOME.CART - " + newHome.cart.spinner_cusPaymentAmount.getValue().toString());
+				optionItem.setjPanelOption(newHome);
+
+				optionItem.setjPanelOption(newHome);
+				break;
+			case "STATISTIC REPORT":
+				optionItem.setjPanelOption(new StatisticalReportPageView());
+				break;
 			}
+			
 			node = optionItem.getjPanelOption();
 			optionSelectedText = optionText;
 			view.root.removeAll();

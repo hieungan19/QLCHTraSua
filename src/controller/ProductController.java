@@ -135,7 +135,7 @@ public class ProductController {
 				// update sản phẩm
 				form.btn_saveProduct.setVisible(true);
 				
-				
+			
 				form.btn_saveProduct.addActionListener(new ActionListener() {
 
 					@Override
@@ -153,7 +153,6 @@ public class ProductController {
 						
 					}
 				});
-				// xóa sản phẩm
 				form.btn_deleteProduct.addActionListener(new ActionListener() {
 
 					@Override
@@ -253,9 +252,9 @@ public class ProductController {
 		form.textField_name.setText(product.getName());
 		// set type
 		form.comboBox_type.setSelectedItem(product.getType());
-		// set price
+		 //set price
 		form.spinner_price.setValue(product.getPrice());
-
+//
 		// set ID
 		form.lblNewLabel_ID.setText(product.getProductID());
 //		set image

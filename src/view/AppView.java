@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import controller.AppController;
+import controller.LoginController;
 import globalComponent.AppLabel;
 import model.DashboardOption;
 import view.bill.BillPageView;
@@ -33,6 +34,7 @@ public class AppView extends JFrame {
 	ArrayList<DashboardOption> optionList = new ArrayList<>();
 	public static  AppController appController;
 	public JPanel root;
+	public DashboardOption logout;
 
 	/**
 	 * Launch the application.
@@ -93,15 +95,26 @@ public class AppView extends JFrame {
 
 		// HOME Option
 
+		EmptyView emptyView  = new EmptyView(); 
+		DashboardOption menuOption = new DashboardOption("MENU", "/assets/menu.png", emptyView);
+		DashboardOption invetoryOption = new DashboardOption("INVETORY", "/assets/collection.png", emptyView);
+		DashboardOption employeeOption = new DashboardOption("EMPLOYEE", "/assets/users.png", emptyView);
+		DashboardOption discountOption = new DashboardOption("DISCOUNT", "/assets/ticket.png", emptyView);
+		
+		if (LoginController.user.getPosition().equals("QUẢN LÝ")) {
+			menuOption = new DashboardOption("MENU", "/assets/menu.png", new ProductPageView());
+			invetoryOption = new DashboardOption("INVETORY", "/assets/collection.png", new IngredientPageView());
+			employeeOption = new DashboardOption("EMPLOYEE", "/assets/users.png", new EmployeePageView());
+			discountOption = new DashboardOption("DISCOUNT", "/assets/ticket.png", new DiscountPageView());
+		}
 		DashboardOption homeOption = new DashboardOption("HOME", "/assets/home.png", new HomePageView());
-		DashboardOption menuOption = new DashboardOption("MENU", "/assets/menu.png", new ProductPageView());
-		DashboardOption invetoryOption = new DashboardOption("INVETORY", "/assets/collection.png", new IngredientPageView());
-		DashboardOption ordersOption = new DashboardOption("ORDERS", "/assets/shopping-cart.png", new BillPageView());
+		
+		DashboardOption ordersOption = new DashboardOption("BILLS", "/assets/shopping-cart.png", new BillPageView());
 		DashboardOption customerOption = new DashboardOption("CUSTOMER", "/assets/customer.png", new CustomerPageView());
-		DashboardOption employeeOption = new DashboardOption("EMPLOYEE", "/assets/users.png", new EmployeePageView());
 		DashboardOption statisticReportOption = new DashboardOption("STATISTIC REPORT", "/assets/chart-pie.png",
 				new StatisticalReportPageView());
-		DashboardOption discountOption = new DashboardOption("DISCOUNT", "/assets/ticket.png", new DiscountPageView());
+
+		logout = new DashboardOption("LOG OUT", "/assets/logout.png", new HomePageView()); 
 
 
 		optionList.add(homeOption);
@@ -133,8 +146,9 @@ public class AppView extends JFrame {
 		// Logout
 		JPanel panel_logout = new JPanel();
 		panel_logout.setBounds(10, 585, 180, 95);
+		
 		panel_dashboard.add(panel_logout);
-		JLabel jLabel_logoutOption = new DashboardOption("LOG OUT", "/assets/logout.png", new HomePageView())
+		JLabel jLabel_logoutOption = logout
 				.getjLabelOption();
 		panel_dashboard.add(jLabel_logoutOption);
 		panel_logout.add(jLabel_logoutOption);

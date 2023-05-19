@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -348,10 +349,11 @@ public class HomeController {
 
 	// tim kiem customer
 	public void getAndDisplayCustomer() {
-		List<CustomerModel> customerList = CustomerDAO.getCustomerList();
+		
 		cart.cusPhoneNumber.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				List<CustomerModel> customerList = CustomerDAO.getCustomerList();
 				String phoneNumber = cart.cusPhoneNumber.getText();
 				for (CustomerModel cus : customerList) {
 					if (cus.getPhoneNumber().equals(phoneNumber)) {
@@ -373,7 +375,7 @@ public class HomeController {
 	}
 
 	public BillModel getBill() {
-		BillModel bill = new BillModel("NV13", cart.cusID.getText(), cartProducts, null, 0, 0, 0, 0);
+		BillModel bill = new BillModel(LoginController.user.getEmployeeID(), cart.cusID.getText(), cartProducts, null, 0, 0, 0, 0);
 		bill.setSubtotal();
 		bill.setDiscountID(getDiscountID());
 		Object payment = cart.spinner_cusPaymentAmount.getValue();
@@ -405,8 +407,8 @@ public class HomeController {
 		});
 	}
 
-	public void setDiscountToComboBox() {
-		discountList = DiscountDAO.getDiscountList();
+	public  void setDiscountToComboBox() {
+		discountList = DiscountDAO.getAllAvailableDiscount(new Date());
 		String[] options = new String[discountList.size() + 1];
 		options[0] = null;
 		for (int i = 0; i < discountList.size(); ++i) {

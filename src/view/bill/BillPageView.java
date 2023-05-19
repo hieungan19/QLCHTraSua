@@ -40,7 +40,6 @@ public class BillPageView extends JPanel{
 
 	public SearchBar searchBar;
 	public AppScrollTable scrollPane_bill;
-	public AppButton btnNewButton;
 	public BillController controller; 
 
 	/**
@@ -58,7 +57,6 @@ public class BillPageView extends JPanel{
 		scrollPane_bill = new AppScrollTable(new DefaultTableModel(
 				object, titleList
 		));
-		btnNewButton = new AppButton("+");
 		
 		controller = new BillController(this); 
 		
@@ -103,16 +101,7 @@ public class BillPageView extends JPanel{
 		gbc_searchBar.gridx = 1;
 		gbc_searchBar.gridy = 0;
 		gbc_searchBar.weightx = 3.0;
-		panel_1.add(searchBar, gbc_searchBar); 
-		
-
-		btnNewButton.setFont(new Font("SansSerif", Font.BOLD, 32));
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.fill = GridBagConstraints.VERTICAL;
-		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton.gridx = 2;
-		gbc_btnNewButton.gridy = 0;
-		panel_1.add(btnNewButton, gbc_btnNewButton);
+		panel_1.add(searchBar, gbc_searchBar);
 		
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();

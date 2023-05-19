@@ -106,7 +106,7 @@ public class BillDialogController {
 		dialog.change.setText(String.valueOf(bill.getTenderAmount() - bill.getTotal()));
 		
 		int point = (int) Math.round(bill.getTotal()/5000); 
-		dialog.point.setText(String.valueOf(point)); 
+//		dialog.point.setText(String.valueOf(point)); 
 		
 	}
 	

@@ -121,7 +121,7 @@ public class LoginView extends JFrame {
 		jButton_login.setForeground(new Color(255, 250, 250));
 		jButton_login.setFont(new Font("SansSerif", Font.BOLD, 20));
 		jButton_login.setBorder(null);
-		jButton_login.setBackground(ConstantValueView.primaryDark);
+		jButton_login.setBackground(ConstantValueView.btnColor);
 		panel_1.add(jButton_login);
 
 		JLabel lblNewLabel = new JLabel("");

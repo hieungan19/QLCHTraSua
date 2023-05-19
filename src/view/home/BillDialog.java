@@ -29,7 +29,6 @@ public class BillDialog extends JDialog {
 	public AppLabel subtotal;
 	public AppLabel discountValue;
 	public AppLabel total;
-	public AppLabel point;
 	public AppLabel customerPayment;
 	public AppLabel change;
 
@@ -189,16 +188,6 @@ public class BillDialog extends JDialog {
 			{
 				total = new AppLabel("New label");
 				panel.add(total);
-			}
-			{
-				AppLabel lblNewLabel_point = new AppLabel("New label");
-				lblNewLabel_point.setToolTipText("");
-				lblNewLabel_point.setText("Điểm thưởng: ");
-				panel.add(lblNewLabel_point);
-			}
-			{
-				point = new AppLabel("New label");
-				panel.add(point);
 			}
 			{
 				AppLabel lblNewLabel_customerGaveMoney = new AppLabel("Tiền khách đưa");

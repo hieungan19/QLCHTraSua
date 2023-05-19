@@ -46,7 +46,8 @@ public class CartPanel extends JPanel {
 	public AppButton btn_calc;
 	public AppLabel subtotal;
 	public AppLabel discountValue;
-	public AppLabel total; 
+	public AppLabel total;
+	public JPanel panel_2; 
 
 	/**
 	 * Create the panel.
@@ -125,7 +126,7 @@ public class CartPanel extends JPanel {
 		
 	
 		
-		JPanel panel_2 = new JPanel();
+		panel_2 = new JPanel();
 		panel_2.setOpaque(false);
 		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
 		gbc_panel_2.gridwidth = 2;

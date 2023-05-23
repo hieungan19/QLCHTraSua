@@ -382,6 +382,10 @@ public class HomeController {
 		bill.setTenderAmount(Double.valueOf(String.valueOf(payment.toString())));
 		bill.setDiscountValue();
 		bill.setTotal();
+		
+		System.out.println("SUBTOTAL: "+ bill.getSubtotal());
+		System.out.println("DISCOUNT VALUE: "+bill.getDiscountValue());
+		System.out.println("TOTAL: "+bill.getTotal());
 		return bill;
 	}
 
@@ -401,6 +405,7 @@ public class HomeController {
 				bill.setBillDate(maxIDBill.getBillDate());
 				
 				BillDialog dialog = new BillDialog(bill);
+				resetCart();
 				
 				
 			}
@@ -427,6 +432,16 @@ public class HomeController {
 		dtm.setRowCount(0);
 		cart.spinner_cusPaymentAmount.setValue(0);
 		cartProducts = new ArrayList<>();
+		cart.comboBox_discount.setSelectedIndex(0);
+		cart.spinner_cusPaymentAmount.setValue(0.0);
+		cart.total.setText("0");
+		cart.subtotal.setText("0");
+		cart.discountValue.setText("0");
+		
+		cart.btn_confirm.setEnabled(false);
+		cart.btn_confirm.setBackground(new Color(128, 128, 128));
+		
+		
 	}
 
 	public CustomerModel getCustomer() {

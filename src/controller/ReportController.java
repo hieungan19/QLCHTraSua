@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,8 @@ public class ReportController {
 		
 		view.btn_report.addActionListener(new ActionListener() {
 			
+			private List<ProductModel> result = new ArrayList<>();
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -33,20 +36,22 @@ public class ReportController {
 				view.billTotal.setText(res.get("total").toString());
 				
 				//set customer
-				view.num_mem.setText(String.valueOf(ReportDAO.getNumberOfCustomer(endDate))); 
+				view.num_mem.setText(String.valueOf(ReportDAO.getNumberOfCustomer(startDate, endDate))); 
 				
 				//set ingre
-				view.ingreTotal.setText(String.valueOf(ReportDAO.getTotalAmountOfMoneySpentOnRawMaterials(endDate,startDate)));
+				view.ingreTotal.setText(String.valueOf(ReportDAO.getTotalAmountOfMoneySpentOnRawMaterials(startDate,endDate)));
 				
 				//chart
-				List<ProductModel> result = ReportDAO.getListDrinkSaleDecs(startDate, endDate); 
-				System.out.println("SAN PHAM BAN RA: ");
-				for (ProductModel pro: result) {
-					 view.dataset.setValue(pro.getAmount(), "Sales", pro.getProductID());
-					
+				for (int i = 0; i<result.size(); ++i) {
+					view.dataset.removeColumn(i); 
 				}
-				
-				 
+				result = ReportDAO.getListDrinkSaleDecs(startDate, endDate); 
+			
+				for (ProductModel pro: result) {
+					System.out.println("SP: "+pro.getName());
+					 view.dataset.setValue(pro.getAmount(), "Sales", pro.getProductID());
+				}
+					 
 			    
 			}
 		});

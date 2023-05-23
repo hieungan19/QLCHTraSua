@@ -44,9 +44,7 @@ public class EmployeeDAO {
 	public static final String DELETE_ACCOUNT_BY_EMP_ID = "DELETE FROM TAIKHOAN WHERE MANV = ?";
 	public static final String UPDATE_EMPLOYEE = "UPDATE NHANVIEN SET HOTEN = ?, CCCD = ?, SDT= ?, DIACHI= ?, NGSINH=?,GIOITINH=?,LUONGCB=?,NGVAOLAM=?,CHUCVU=? WHERE MANV = ?";
 	public static final String INSERT_ATTENDANCE = "INSERT INTO CHAMCONG (MANV, GIOBD, GIOKT, TIENTRU,LUONG) VALUES(?,?,?,?,?)";
-	public static final String GET_ATTENDANCE_BY_EMP_ID = "SELECT * FROM CHAMCONG "
-			+ "WHERE MANV = ? AND EXTRACT(DAY FROM GIOKT) <= ? AND EXTRACT(MONTH FROM GIOKT) <= ? AND EXTRACT(YEAR FROM GIOKT) <= ? "
-			+ "AND EXTRACT(DAY FROM GIOBD) >= ? AND EXTRACT(MONTH FROM GIOBD) >= ? AND EXTRACT(YEAR FROM GIOBD) >= ?";
+	public static final String GET_ATTENDANCE_BY_EMP_ID = "SELECT * FROM CHAMCONG WHERE MANV = ? AND TRUNC(GIOBD) >=? AND TRUNC(GIOKT) <= ?";
 
 	public static List<EmployeeModel> getAllEmployee() {
 		List<EmployeeModel> result = new ArrayList<>();
@@ -258,15 +256,9 @@ public class EmployeeDAO {
 		try {
 			Connection con = MyDB.getInstance().getConnection();
 			PreparedStatement psGet = con.prepareStatement(GET_ATTENDANCE_BY_EMP_ID);
-			System.out.println("TINH LUONG - ID: "+ id);
-			System.out.println("END YEAR: "+ endDate.getMonth());
 			psGet.setString(1, id);
-			psGet.setInt(2,endDate.getDate() );
-			psGet.setInt(3,endDate.getMonth()+1 );
-			psGet.setInt(4,endDate.getYear()+1900) ;
-			psGet.setInt(5,startDate.getDate() );
-			psGet.setInt(6,startDate.getMonth()+1 );
-			psGet.setInt(7,startDate.getYear()+1900) ;
+			psGet.setDate(2,new java.sql.Date(startDate.getTime())) ;
+			psGet.setDate(3, new java.sql.Date(endDate.getTime()));
 			ResultSet rs = psGet.executeQuery();
 			while (rs.next()) {
 				String attID = rs.getString(COLUMN_AID);

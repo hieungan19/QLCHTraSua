@@ -9,6 +9,7 @@ import java.awt.Font;
 
 import constant.AppValues;
 import constant.ConstantValueView;
+import constant.Utils;
 import controller.HomeController;
 import controller.LoginController;
 import globalComponent.AppButton;
@@ -97,7 +98,7 @@ public class HomePageView extends JPanel {
 		
 			
 			//date
-			JLabel lblNewLabel_dateNow = new JLabel(new Date().toString());
+			JLabel lblNewLabel_dateNow = new JLabel(Utils.getStringDate(new Date()));
 			lblNewLabel_dateNow.setFont(new Font("Tahoma", Font.BOLD, 12));
 			lblNewLabel_dateNow.setForeground(ConstantValueView.primaryColor); 
 			panel_info.add(lblNewLabel_dateNow);

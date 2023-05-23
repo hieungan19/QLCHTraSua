@@ -92,7 +92,7 @@ public class BillDialogController {
 					pro.getPrice() * pro.getAmount() };
 			dtm.addRow(proOject);
 			for (ProductModel topping : pro.getToppingList()) {
-				Object[] toppingObject = new Object[] { "", topping.getName(), topping.getAmount(), topping.getPrice(),
+				Object[] toppingObject = new Object[] { "", topping.getName(), topping.getAmount()*pro.getAmount(), topping.getPrice(),
 						topping.getAmount() * pro.getAmount() * topping.getPrice() };
 				dtm.addRow(toppingObject);
 			}

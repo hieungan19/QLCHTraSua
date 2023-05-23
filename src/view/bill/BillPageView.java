@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import constant.ConstantValueView;
-import dao.BillController;
+import controller.BillController;
 import diaglog.AppOptionPaneDialog;
 import globalComponent.AppButton;
 import globalComponent.AppLabel;

@@ -1,4 +1,4 @@
-package dao;
+package controller;
 
 import java.awt.AWTException;
 import java.awt.Desktop;
@@ -17,8 +17,14 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JDialog;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
+import dao.BillDAO;
 import model.BillModel;
 import model.CustomerModel;
 import model.EmployeeModel;
@@ -35,7 +41,38 @@ public class BillController {
 		super();
 		this.view = view;
 		this.table = view.scrollPane_bill.jTable;
+		
+		
+		// search
+		TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
+		table.setRowSorter(sorter);
 
+		// Lắng nghe sự kiện khi người dùng nhập vào ô tìm kiếm
+		view.searchBar.searchField.getDocument().addDocumentListener(new DocumentListener() {
+		    @Override
+		    public void insertUpdate(DocumentEvent e) {
+		        search(view.searchBar.searchField.getText());
+		    }
+
+		    @Override
+		    public void removeUpdate(DocumentEvent e) {
+		        search(view.searchBar.searchField.getText());
+		    }
+
+		    @Override
+		    public void changedUpdate(DocumentEvent e) {
+		        search(view.searchBar.searchField.getText());
+		    }
+
+		    private void search(String text) {
+		        if (text.trim().length() == 0) {
+		            sorter.setRowFilter(null);
+		        } else {
+		            // Tìm kiếm theo giá trị nhập vào
+		            sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+		        }
+		    }
+		});
 		// hien thi toan bo hoa don
 
 		getBillListAndDisplayToTable();

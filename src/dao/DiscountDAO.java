@@ -28,20 +28,15 @@ public class DiscountDAO {
 	public static final String GET_MAX_ID_DISCOUNT = "SELECT * FROM KHUYENMAI WHERE ROWID = (SELECT MAX(ROWID) FROM KHUYENMAI)";
 	public static final String DELETE_DISCOUNT_BY_ID = "DELETE FROM KHUYENMAI WHERE MAKM = ?"; 
 	public static final String COMMIT = "COMMIT"; 
-	public static final String GET_ALL_DISCOUNT_AVAILABLE = "SELECT * FROM KHUYENMAI WHERE "+ "EXTRACT(DAY FROM NGBATDAU) <= ? AND EXTRACT(MONTH FROM NGBATDAU) <= ? AND EXTRACT(YEAR FROM NGBATDAU) <= ? "
-			+ "AND EXTRACT(DAY FROM NGKETTHUC) >= ? AND EXTRACT(MONTH FROM NGKETTHUC) >= ? AND EXTRACT(YEAR FROM NGKETTHUC) >= ?";
+	public static final String GET_ALL_DISCOUNT_AVAILABLE = "SELECT * "
+			+ "FROM KHUYENMAI "
+			+ "WHERE NGBATDAU < SYSDATE AND NGKETTHUC > SYSDATE"; 
 	
 	public static List<DiscountModel> getAllAvailableDiscount(java.util.Date dateNow){
 		List<DiscountModel> result = new ArrayList<>();
 		try {
 			Connection con = MyDB.getInstance().getConnection();
 			PreparedStatement psGet = con.prepareStatement(GET_ALL_DISCOUNT_AVAILABLE);
-			psGet.setInt(1, dateNow.getDate());
-			psGet.setInt(2, dateNow.getMonth() + 1);
-			psGet.setInt(3, dateNow.getYear() + 1900);
-			psGet.setInt(4, dateNow.getDate());
-			psGet.setInt(5, dateNow.getMonth() + 1);
-			psGet.setInt(6, dateNow.getYear() + 1900);
 			ResultSet rs = psGet.executeQuery();
 			while (rs.next()) {
 				String discountID = rs.getString(COLUMN_ID); 

@@ -14,8 +14,11 @@ import view.AppView;
 import view.LoginView;
 import view.bill.BillPageView;
 import view.customer.CustomerPageView;
+import view.discount.DiscountPageView;
+import view.employee.EmployeePageView;
 import view.home.CartPanel;
 import view.home.HomePageView;
+import view.product.ProductPageView;
 import view.report.StatisticalReportPageView;
 
 import javax.swing.GroupLayout;
@@ -125,9 +128,19 @@ public class AppController {
 				optionItem.setjPanelOption(new BillPageView());
 				break;
 			
-			case "KHACHHANG":
+			case "CUSTOMER":
 				optionItem.setjPanelOption(new CustomerPageView());
 				break;
+				
+			case "PRODUCT":
+				optionItem.setjPanelOption(new ProductPageView());
+				break;
+			case "EMPLOYEE":
+				optionItem.setjPanelOption(new EmployeePageView());
+				break;
+			case "DISCOUNT":
+				optionItem.setjPanelOption(new DiscountPageView());
+				break; 
 
 			case "HOME":
 				HomePageView home = (HomePageView) optionItem.getjPanelOption();

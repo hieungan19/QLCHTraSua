@@ -105,11 +105,11 @@ public class HomeController {
 
 	}
 
-	public void addListenerToSpinnerNumberCustomerPayment(BillModel bill, NumberSpinner spinner) {
+	public void addListenerToSpinnerNumberCustomerPayment(BillModel bill) {
 		ChangeListener changeListener = new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				double value = spinner.getNumber();
+				double value =  Double.valueOf(cart.spinner_cusPaymentAmount.getValue().toString()) ;
 				if (value >= bill.getTotal()) {
 					cart.btn_confirm.setEnabled(true);
 					cart.btn_confirm.setBackground(ConstantValueView.primaryDark);
@@ -119,7 +119,7 @@ public class HomeController {
 				}
 			}
 		};
-		spinner.addChangeListener(changeListener);
+		cart.spinner_cusPaymentAmount.addChangeListener(changeListener);
 
 	}
 
@@ -407,6 +407,8 @@ public class HomeController {
 				BillDialog dialog = new BillDialog(bill);
 				resetCart();
 				
+				System.out.println("RESET CART");
+				System.out.println("Cart product size: "+ cartProducts.size());
 				
 			}
 		});
@@ -524,7 +526,7 @@ public class HomeController {
 				cart.total.setText(String.valueOf(bill.getTotal()));
 				cart.subtotal.setText(String.valueOf(bill.getSubtotal()));
 				cart.discountValue.setText(String.valueOf(bill.getDiscountValue()));
-				addListenerToSpinnerNumberCustomerPayment(bill, cart.spinner_cusPaymentAmount);
+				addListenerToSpinnerNumberCustomerPayment(bill);
 			}
 		});
 	}

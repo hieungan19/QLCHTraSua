@@ -166,7 +166,7 @@ public class ProductInfoForm extends JPanel {
 		AppLabel lblNewLabel_2 = new AppLabel("Loại sản phẩm");
 		panel_3.add(lblNewLabel_2);
 		String[] productTypes = new String[]{"TRÀ SỮA","TRÀ", "ĐÁ XAY","CAFE","TOPPING","KHÁC"};
-		comboBox_type = new JComboBox<String>();
+		comboBox_type = new JComboBox<String>(productTypes);
 		panel_3.add(comboBox_type);
 		
 		

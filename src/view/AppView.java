@@ -35,6 +35,7 @@ public class AppView extends JFrame {
 	public static  AppController appController;
 	public JPanel root;
 	public DashboardOption logout;
+	public static DashboardOption homeOption;
 
 	/**
 	 * Launch the application.
@@ -107,7 +108,7 @@ public class AppView extends JFrame {
 			employeeOption = new DashboardOption("EMPLOYEE", "/assets/users.png", new EmployeePageView());
 			discountOption = new DashboardOption("DISCOUNT", "/assets/ticket.png", new DiscountPageView());
 		}
-		DashboardOption homeOption = new DashboardOption("HOME", "/assets/home.png", new HomePageView());
+		homeOption = new DashboardOption("HOME", "/assets/home.png", new HomePageView());
 		
 		DashboardOption ordersOption = new DashboardOption("BILLS", "/assets/shopping-cart.png", new BillPageView());
 		DashboardOption customerOption = new DashboardOption("CUSTOMER", "/assets/customer.png", new CustomerPageView());

@@ -27,8 +27,10 @@ import javax.swing.table.TableRowSorter;
 import dao.BillDAO;
 import model.BillModel;
 import model.CustomerModel;
+import model.DashboardOption;
 import model.EmployeeModel;
 import model.ProductModel;
+import view.AppView;
 import view.bill.BillPageView;
 import view.home.BillDialog;
 
@@ -46,7 +48,10 @@ public class BillController {
 		// search
 		TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
 		table.setRowSorter(sorter);
-
+		
+		//add bill -> navigate to home
+		addActionListenerToAddBillBtn(); 
+		
 		// Lắng nghe sự kiện khi người dùng nhập vào ô tìm kiếm
 		view.searchBar.searchField.getDocument().addDocumentListener(new DocumentListener() {
 		    @Override
@@ -149,6 +154,17 @@ public class BillController {
 		return bill;
 	}
 
+	
+	public void addActionListenerToAddBillBtn() {
+		view.btnAddBill.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				AppController.setView(AppView.homeOption);
+			}
+		});
+	}
 	
 	
 	

@@ -7,7 +7,6 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
 import constant.ConstantValueView;
 import model.DashboardOption;
 import view.AppView;
@@ -27,9 +26,10 @@ import javax.swing.GroupLayout;
 
 public class AppController {
 	public static AppView view; 
-	private String optionSelectedText;
+	private static String optionSelectedText;
 	private List<DashboardOption> listItem = null;
 	private DashboardOption logout; 
+	private static DashboardOption selectedItem; 
 	public AppController(AppView view) {
 		// TODO Auto-generated constructor stub
 		this.view = view; 
@@ -87,8 +87,12 @@ public class AppController {
 		AppController.view.root.repaint();
 	}
 
-	public void setView( DashboardOption optionItem) {
+	public static void setView( DashboardOption optionItem) {
 		JPanel jpnItem = optionItem.getjPanelOption(); 
+		if (selectedItem!=null) {
+			selectedItem.getjLabelOption().setBackground(ConstantValueView.primaryColor);
+			selectedItem.getjLabelOption().setOpaque(true);
+		}
 		optionSelectedText = optionItem.getText();
 		optionItem.getjLabelOption().setBackground(ConstantValueView.background);
 		optionItem.getjLabelOption().setOpaque(true);
@@ -96,7 +100,6 @@ public class AppController {
 		view.root.add(jpnItem);		
 		view.root.validate();
 		view.root.repaint();
-
 	}
 
 	public void setEvent(List<DashboardOption> listItem) {
@@ -117,6 +120,7 @@ public class AppController {
 
 			this.optionItem = optionItem;
 			this.optionText = optionItem.getText();
+			
 
 		}
 
@@ -126,8 +130,7 @@ public class AppController {
 			switch(optionText) {
 			case "BILLS":
 				optionItem.setjPanelOption(new BillPageView());
-				break;
-			
+				break;	
 			case "CUSTOMER":
 				optionItem.setjPanelOption(new CustomerPageView());
 				break;
@@ -175,6 +178,7 @@ public class AppController {
 			
 			node = optionItem.getjPanelOption();
 			optionSelectedText = optionText;
+			selectedItem = optionItem; 
 			view.root.removeAll();
 			view.root.setLayout(new GridLayout());
 			setView(optionItem);

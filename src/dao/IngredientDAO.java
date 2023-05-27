@@ -26,7 +26,7 @@ public class IngredientDAO {
 	private static final String INSERT_INGREDIENT = "INSERT INTO NGUYENLIEU (TENNL, DONVI,SOLUONG,GIA, NSX, HSD, NHACUNGCAP) VALUES(?,?,?,?,?,?,?)";
 	private static final String GET_MAXID_INSERTED_INGREDIENT = "SELECT * FROM NGUYENLIEU WHERE ROWID = (SELECT MAX(ROWID) FROM NGUYENLIEU)";
 	private static final String COMMIT = "COMMIT"; 
-	private static final String DELETE_INGREDIENT_BY_ID = "DELETE FROM NGUYENLIEU WHERE MANL = ?"; 
+	private static final String UPDATE_INGREDIENT_BY_ID = "UPDATE NGUYENLIEU SET SOLUONG= 0 WHERE MANL = ?"; 
 	private static final String UPDATE_INGREDIENT_INFO = "UPDATE NGUYENLIEU SET TENNL = ?, DONVI = ?, SOLUONG = ?, GIA=?, NSX = ?, HSD = ?, NHACUNGCAP = ? WHERE MANL = ?"; 
 	private static final String GET_INGREDIENT_BY_ID = "SELECT * FROM NGUYENLIEU WHERE MANL = ?"; 
 	
@@ -50,7 +50,7 @@ public class IngredientDAO {
             	Date expDate = rs.getDate(COLUMN_HSD);
             	String supplier  = rs.getString(COLUMN_SUPPLIER); 
             	IngredientModel ingredient = new IngredientModel(ingredientID,name, unit, amount, price, mfDate, expDate, supplier); 
-            	result.add(ingredient); 
+            	if (amount!=0)result.add(ingredient); 
             }
             System.out.println("So luong nguyen lieu: "+test);
             return result; 
@@ -124,7 +124,7 @@ public class IngredientDAO {
 		try {
 			int check = 0; 
 			Connection c = MyDB.getInstance().getConnection();
-			PreparedStatement psDelete = c.prepareStatement(DELETE_INGREDIENT_BY_ID);
+			PreparedStatement psDelete = c.prepareStatement(UPDATE_INGREDIENT_BY_ID);
 			psDelete.setString(1, id);
 			check = psDelete.executeUpdate();
 			if (check >0) return 1; 

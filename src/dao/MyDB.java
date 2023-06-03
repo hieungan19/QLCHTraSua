@@ -10,10 +10,11 @@ import java.sql.SQLException;
 public class MyDB {
 	private static MyDB instance = null; 
     private Connection connection;
-    private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl"; 
+    private static final String URL = "jdbc:oracle:thin:@localhost:1521/doanpdb"; 
     private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
-    private static final String USER_NAME = "c##java";
-    private static final String PASSWORD = "doan";
+    private static final String USER_NAME = "admindoan";
+    private static final String PASSWORD = "adminpass";
+    
     public MyDB() throws SQLException {
     	try {
             Class.forName(DRIVER);

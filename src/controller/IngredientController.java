@@ -43,7 +43,6 @@ public class IngredientController {
 		displayIngredientListToTable();
 		displayImportTable();
 		displayExportTable();
-
 		// Khởi tạo TableRowSorter
 		TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
 		table.setRowSorter(sorter);
@@ -127,6 +126,8 @@ public class IngredientController {
 									deleteIngredient(ingredient.getIngredientID());
 									AppOptionPaneDialog dialog = new AppOptionPaneDialog("Xóa thành công", 1000);
 									AppController.showPage(view);
+									displayExportTable();
+									displayImportTable();
 
 								}
 							});
@@ -208,7 +209,7 @@ public class IngredientController {
 		double price = form.spinner_price.getNumber();
 		Date mfDate = form.mfDate.getDate();
 		Date expDate  = form.expDate.getDate();
-		String supplier = form.textField_name.getText();
+		String supplier = form.textField_supplier.getText();
 		IngredientModel i = new IngredientModel(name, unit, amount, price, mfDate, expDate, supplier);
 		return i; 
 		
@@ -324,5 +325,6 @@ public class IngredientController {
 		form.mfDate.setDate(i.getMfDate());
 		form.expDate.setDate(i.getExpDate());
 		form.textField_supplier.setText(i.getSupplier());
+	
 	}
 }

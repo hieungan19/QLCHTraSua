@@ -135,15 +135,6 @@ public class AppController {
 				optionItem.setjPanelOption(new CustomerPageView());
 				break;
 				
-			case "PRODUCT":
-				optionItem.setjPanelOption(new ProductPageView());
-				break;
-			case "EMPLOYEE":
-				optionItem.setjPanelOption(new EmployeePageView());
-				break;
-			case "DISCOUNT":
-				optionItem.setjPanelOption(new DiscountPageView());
-				break; 
 
 			case "HOME":
 				HomePageView home = (HomePageView) optionItem.getjPanelOption();

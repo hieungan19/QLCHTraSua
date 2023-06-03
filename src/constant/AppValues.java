@@ -15,7 +15,7 @@ public class AppValues {
 	public static String[] employeeAttributes =  new String[] {
 			"Mã nhân viên", "Họ tên","Số điện thoại","CCCD", "Địa chỉ","Ngày sinh","Giới tính","Lương cơ bản","Ngày vào làm","Chức vụ"};
 	public static String[] positionList = new String[] {"QUẢN LÝ","THU NGÂN","PHA CHẾ","PHỤC VỤ","BẢO VỆ","LAO CÔNG"};
-	public static String[] unit  = new String[] {"CÁI","KG","LÍT","ML","GRAM","TÚI","THÙNG","HỘP","CHAI"};
+	public static String[] unit  = new String[] {"CÁI","KG","LÍT","ML","GRAM","TÚI","THÙNG","HỘP","CHAI","GÓI"};
 	
 	
 	}

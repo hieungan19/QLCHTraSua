@@ -39,6 +39,7 @@ public class DiscountController {
 		this.table = view.scrollPane_discount.jTable;
 
 		displayDiscountListIntoTable();
+		if (!LoginController.user.getPosition().equals("QUẢN LÝ")) view.btn_addDiscount.setVisible(false); 
 		
 		// khởi tạo cho tìm kiếm
 		// search bar
@@ -249,6 +250,7 @@ public class DiscountController {
 			form.endDay.setDate(discount.getEndDate());
 			form.comboBox.setSelectedItem(discount.getCustomerType());
 		}
+		if (!LoginController.user.getPosition().equals("QUẢN LÝ")) {form.btn_deleteDiscount.setVisible(false); form.btn_saveDiscount.setVisible(false);}
 		AppController.showPage(form);
 	}
 

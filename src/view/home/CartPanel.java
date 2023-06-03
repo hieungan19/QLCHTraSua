@@ -31,6 +31,7 @@ import java.awt.SystemColor;
 import java.awt.Color;
 import javax.swing.BoxLayout;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 
 public class CartPanel extends JPanel {
@@ -198,7 +199,8 @@ public class CartPanel extends JPanel {
 		btn_calc.setForeground(SystemColor.menu);
 		panel_4.add(btn_calc);
 		
-				btn_confirm = new AppButton("XÁC NHẬN");
+				btn_confirm = new AppButton("THANH TOÁN");
+				btn_confirm.setPreferredSize(new Dimension(150, 30));
 				btn_confirm.setEnabled(false);
 				panel_4.add(btn_confirm);
 				btn_confirm.setBackground(new Color(128,128,128));

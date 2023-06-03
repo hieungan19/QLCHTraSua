@@ -97,16 +97,15 @@ public class AppView extends JFrame {
 		// HOME Option
 
 		EmptyView emptyView  = new EmptyView(); 
+		DashboardOption employeeOption = new DashboardOption("EMPLOYEE", "/assets/users.png", emptyView);
 		DashboardOption menuOption = new DashboardOption("MENU", "/assets/menu.png", emptyView);
 		DashboardOption invetoryOption = new DashboardOption("INVETORY", "/assets/collection.png", emptyView);
-		DashboardOption employeeOption = new DashboardOption("EMPLOYEE", "/assets/users.png", emptyView);
-		DashboardOption discountOption = new DashboardOption("DISCOUNT", "/assets/ticket.png", emptyView);
+		DashboardOption discountOption  =  new DashboardOption("DISCOUNT", "/assets/ticket.png", new DiscountPageView());; 
 		
 		if (LoginController.user.getPosition().equals("QUẢN LÝ")) {
 			menuOption = new DashboardOption("MENU", "/assets/menu.png", new ProductPageView());
-			invetoryOption = new DashboardOption("INVETORY", "/assets/collection.png", new IngredientPageView());
 			employeeOption = new DashboardOption("EMPLOYEE", "/assets/users.png", new EmployeePageView());
-			discountOption = new DashboardOption("DISCOUNT", "/assets/ticket.png", new DiscountPageView());
+			invetoryOption = new DashboardOption("INVETORY", "/assets/collection.png", new IngredientPageView());
 		}
 		homeOption = new DashboardOption("HOME", "/assets/home.png", new HomePageView());
 		

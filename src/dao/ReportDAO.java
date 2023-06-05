@@ -25,7 +25,7 @@ public class ReportDAO {
 
 	public static final String GET_NUM_OF_CUSTOMER = "SELECT COUNT(MAKH) FROM KHACHHANG WHERE NGDANGKY<=? OR (NGDANGKY>=? AND NGDANGKY<=?)";
 
-	public static final String GET_INGRE_ID_EXPORT = "SELECT MANL, SUM(SOLUONG) FROM XUATNHAPNL WHERE SOLUONG<0 AND NGAYNX>=? AND NGAYNX<=? GROUP BY MANL";
+	public static final String GET_INGRE_ID_IMPORT = "SELECT MANL, SUM(SOLUONG) FROM XUATNHAPNL WHERE SOLUONG>0 AND NGAYNX>=? AND NGAYNX<=? GROUP BY MANL";
 //	public static final String GET_NUMBER_OF_CUSTOMER = "SELECT * FROM "
 
 	public static Map<String, Object> getBillByDate(Date start, Date end) {
@@ -104,7 +104,7 @@ public class ReportDAO {
 		try {
 			System.out.println("getTotalAmountOfMoneySpentOnRawMaterials: ");
 			Connection con = MyDB.getInstance().getConnection();
-			PreparedStatement psGet = con.prepareStatement(GET_INGRE_ID_EXPORT); 
+			PreparedStatement psGet = con.prepareStatement(GET_INGRE_ID_IMPORT); 
 			psGet.setDate(1,new java.sql.Date(startDate.getTime())) ;
 			psGet.setDate(2, new java.sql.Date(endDate.getTime() ));
 			ResultSet rs = psGet.executeQuery();

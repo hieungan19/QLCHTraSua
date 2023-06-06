@@ -27,6 +27,8 @@
 
 - Quản lý, báo cáo thống kê doanh thu và lượng khách hàng thành viên trong 1 ngày/tháng/năm.
 
+- Quản lý nguyên liệu còn trong kho, lịch sử xuất nhập kho. 
+
 ##
 
  <br>

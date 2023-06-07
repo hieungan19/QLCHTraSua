@@ -22,15 +22,15 @@ public class IngredientDAO {
 	public static final String COLUMN_NSX = "NSX";
 	public static final String COLUMN_HSD = "HSD"; 
 	public static final String COLUMN_SUPPLIER = "NHACUNGCAP"; 
-	private static final String GET_ALL_INGREDIENTS = "SELECT * FROM NGUYENLIEU";
-	private static final String INSERT_INGREDIENT = "INSERT INTO NGUYENLIEU (TENNL, DONVI,SOLUONG,GIA, NSX, HSD, NHACUNGCAP) VALUES(?,?,?,?,?,?,?)";
-	private static final String GET_MAXID_INSERTED_INGREDIENT = "SELECT * FROM NGUYENLIEU WHERE ROWID = (SELECT MAX(ROWID) FROM NGUYENLIEU)";
+	private static final String GET_ALL_INGREDIENTS = "SELECT * FROM ADMINDOAN.NGUYENLIEU";
+	private static final String INSERT_INGREDIENT = "INSERT INTO ADMINDOAN.NGUYENLIEU (TENNL, DONVI,SOLUONG,GIA, NSX, HSD, NHACUNGCAP) VALUES(?,?,?,?,?,?,?)";
+	private static final String GET_MAXID_INSERTED_INGREDIENT = "SELECT * FROM ADMINDOAN.NGUYENLIEU WHERE ROWID = (SELECT MAX(ROWID) FROM ADMINDOAN.NGUYENLIEU)";
 	private static final String COMMIT = "COMMIT"; 
-	private static final String UPDATE_INGREDIENT_BY_ID = "UPDATE NGUYENLIEU SET SOLUONG= 0 WHERE MANL = ?"; 
-	private static final String UPDATE_INGREDIENT_INFO = "UPDATE NGUYENLIEU SET TENNL = ?, DONVI = ?, SOLUONG = ?, GIA=?, NSX = ?, HSD = ?, NHACUNGCAP = ? WHERE MANL = ?"; 
-	private static final String GET_INGREDIENT_BY_ID = "SELECT * FROM NGUYENLIEU WHERE MANL = ?"; 
+	private static final String UPDATE_INGREDIENT_BY_ID = "UPDATE ADMINDOAN.NGUYENLIEU SET SOLUONG= 0 WHERE MANL = ?"; 
+	private static final String UPDATE_INGREDIENT_INFO = "UPDATE ADMINDOAN.NGUYENLIEU SET TENNL = ?, DONVI = ?, SOLUONG = ?, GIA=?, NSX = ?, HSD = ?, NHACUNGCAP = ? WHERE MANL = ?"; 
+	private static final String GET_INGREDIENT_BY_ID = "SELECT * FROM ADMINDOAN.NGUYENLIEU WHERE MANL = ?"; 
 	
-	private static final String GET_ALL_NHAPXUAT = "SELECT * FROM XUATNHAPNL"; 
+	private static final String GET_ALL_NHAPXUAT = "SELECT * FROM ADMINDOAN.XUATNHAPNL"; 
 	
 	public static List<IngredientModel> getIngredientList (){
 		List<IngredientModel> result = new ArrayList<>();

@@ -11,9 +11,15 @@ public class MyDB {
 	private static MyDB instance = null; 
     private Connection connection;
     private static final String URL = "jdbc:oracle:thin:@localhost:1521/doanpdb"; 
-    private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
-    private static final String USER_NAME = "admindoan";
-    private static final String PASSWORD = "adminpass";
+    public static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
+    public static final String USER_NAME = "admindoan";
+    public static final String PASSWORD = "adminpass";
+    
+    public static final String USER_NAME_CASHIER = "cashier";
+    public static final String PASSWORD_CASHIER = "cashierpass";
+    
+    public static final String USER_NAME_MANAGER = "manager";
+    public static final String PASSWORD_MANAGER = "managerpass";
     
     public MyDB() throws SQLException {
     	try {
@@ -25,6 +31,18 @@ public class MyDB {
         }
     	
 	}
+    
+    public void phanquyen(String userName, String password) throws SQLException {
+    	try {
+            Class.forName(DRIVER);
+            this.connection = DriverManager.getConnection(URL, userName, password);
+            
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Database Connection Creation Failed : " + ex.getMessage());
+        }
+    }
+    
+    
     public Connection getConnection() {
         return connection;
     }

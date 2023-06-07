@@ -20,12 +20,12 @@ public class CustomerDAO {
 	public static final String COLUMN_POINT = "DIEMTICHLUY";
 	public static final String COLUMN_LEVEL = "CAPDO";
 	public static final String COLUMN_REGISTRATION_DATE = "NGDANGKY";
-	private static final String GET_ALL_CUSTOMER = "SELECT * FROM KHACHHANG";
-	private static final String INSERT_CUSTOMER = "INSERT INTO KHACHHANG (HOTEN, SDT) VALUES(?,?)";
-	private static final String GET_MAXID_INSERTED_CUSTOMER = "SELECT * FROM KHACHHANG WHERE ROWID = (SELECT MAX(ROWID) FROM KHACHHANG)";
-	private static final String GET_CUSTOMER_BY_ID = "SELECT * FROM KHACHHANG WHERE MAKH = ?"; 
-	private static final String DELETE_CUSTOMER_BY_ID = "DELETE FROM KHACHHANG WHERE MAKH = ? ";
-	private static final String UPDATE_CUSTOMER_INFO = "UPDATE KHACHHANG SET HOTEN = ?, SDT = ? WHERE MAKH = ?"; 
+	private static final String GET_ALL_CUSTOMER = "SELECT * FROM ADMINDOAN.KHACHHANG";
+	private static final String INSERT_CUSTOMER = "INSERT INTO ADMINDOAN.KHACHHANG (HOTEN, SDT) VALUES(?,?)";
+	private static final String GET_MAXID_INSERTED_CUSTOMER = "SELECT * FROM ADMINDOAN.KHACHHANG WHERE ROWID = (SELECT MAX(ROWID) FROM ADMINDOAN.KHACHHANG)";
+	private static final String GET_CUSTOMER_BY_ID = "SELECT * FROM ADMINDOAN.KHACHHANG WHERE MAKH = ?"; 
+	private static final String DELETE_CUSTOMER_BY_ID = "DELETE FROM ADMINDOAN.KHACHHANG WHERE MAKH = ? ";
+	private static final String UPDATE_CUSTOMER_INFO = "UPDATE ADMINDOAN.KHACHHANG SET HOTEN = ?, SDT = ? WHERE MAKH = ?"; 
 	private static final String COMMIT = "COMMIT"; 
 	public static List<CustomerModel> getCustomerList (){
 		List<CustomerModel> result = new ArrayList<>();

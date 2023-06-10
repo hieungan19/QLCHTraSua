@@ -14,7 +14,7 @@ import model.ProductDetail;
 public class ProductDAO {
 	//
 	public static final String COMMIT = "COMMIT";
-	// SANPHAM
+	// ADMINDOAN.SANPHAM
 	public static final String COLUMN_SPID = "MASP";
 	public static final String COLUMN_SPNAME = "TENSP";
 	public static final String COLUMN_SPPRICE = "GIA";
@@ -33,13 +33,13 @@ public class ProductDAO {
 
 	// sql query
 
-	public static final String GET_ALL_PRODUCT = "SELECT * FROM SANPHAM";
+	public static final String GET_ALL_PRODUCT = "SELECT * FROM ADMINDOAN.SANPHAM";
 	public static final String GET_ALL_PRODUCT_DETAILS = "SELECT * FROM CHITIETSP";
-	private static final String GET_MAXID_INSERTED_PRODUCT = "SELECT * FROM SANPHAM WHERE ROWID = (SELECT MAX(ROWID) FROM SANPHAM)";
-	private static final String GET_PRODUCT_BY_ID = "SELECT * FROM SANPHAM WHERE MASP = ?";
-	private static final String INSERT_PRODUCT = "INSERT INTO SANPHAM (TENSP, HINHANH, GIA, LOAISP) VALUES (?,?,?,?)";
-	private static final String DELETE_PRODUCT_BY_ID = "DELETE FROM SANPHAM WHERE MASP = ?";
-	private static final String UPDATE_PRODUCT = "UPDATE SANPHAM SET TENSP = ?, HINHANH = ?,GIA = ?, LOAISP = ? WHERE MASP = ?";
+	private static final String GET_MAXID_INSERTED_PRODUCT = "SELECT * FROM ADMINDOAN.SANPHAM WHERE ROWID = (SELECT MAX(ROWID) FROM ADMINDOAN.SANPHAM)";
+	private static final String GET_PRODUCT_BY_ID = "SELECT * FROM ADMINDOAN.SANPHAM WHERE MASP = ?";
+	private static final String INSERT_PRODUCT = "INSERT INTO ADMINDOAN.SANPHAM (TENSP, HINHANH, GIA, LOAISP) VALUES (?,?,?,?)";
+	private static final String DELETE_PRODUCT_BY_ID = "DELETE FROM ADMINDOAN.SANPHAM WHERE MASP = ?";
+	private static final String UPDATE_PRODUCT = "UPDATE ADMINDOAN.SANPHAM SET TENSP = ?, HINHANH = ?,GIA = ?, LOAISP = ? WHERE MASP = ?";
 	// get ingredient list
 
 	public static List<IngredientModel> getIngredientList() {

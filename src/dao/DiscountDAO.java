@@ -20,16 +20,16 @@ public class DiscountDAO {
 	public static final String COLUMN_END_DATE = "NGKETTHUC";
 	public static final String COLUMN_CUSTOMER = "DOITUONG"; 
 	
-	public static final String GET_ALL_DISCOUNT = "SELECT * FROM KHUYENMAI";
-	public static final String GET_DISCOUNT_BY_ID = "SELECT * FROM KHUYENMAI WHERE MAKM = ?";
+	public static final String GET_ALL_DISCOUNT = "SELECT * FROM ADMINDOAN.KHUYENMAI";
+	public static final String GET_DISCOUNT_BY_ID = "SELECT * FROM ADMINDOAN.KHUYENMAI WHERE MAKM = ?";
 	public static final String GET_DISCOUNT_BY_CUSTOMER_AND_TIME = ""; 
-	public static final String INSERT_DISCOUNT = "INSERT INTO KHUYENMAI (TENKM, TONGHD, PHANTRAMGIAM, NGBATDAU, NGKETTHUC, DOITUONG) VALUES (?,?,?,?,?,?) ";
-	public static final String UPDATE_DISCOUNT = "UPDATE KHUYENMAI SET TENKM = ?, TONGHD = ?, PHANTRAMGIAM = ?, NGBATDAU = ?, NGKETTHUC = ?, DOITUONG = ? WHERE MAKM = ?"; 
-	public static final String GET_MAX_ID_DISCOUNT = "SELECT * FROM KHUYENMAI WHERE ROWID = (SELECT MAX(ROWID) FROM KHUYENMAI)";
-	public static final String DELETE_DISCOUNT_BY_ID = "DELETE FROM KHUYENMAI WHERE MAKM = ?"; 
+	public static final String INSERT_DISCOUNT = "INSERT INTO ADMINDOAN.KHUYENMAI (TENKM, TONGHD, PHANTRAMGIAM, NGBATDAU, NGKETTHUC, DOITUONG) VALUES (?,?,?,?,?,?) ";
+	public static final String UPDATE_DISCOUNT = "UPDATE ADMINDOAN.KHUYENMAI SET TENKM = ?, TONGHD = ?, PHANTRAMGIAM = ?, NGBATDAU = ?, NGKETTHUC = ?, DOITUONG = ? WHERE MAKM = ?"; 
+	public static final String GET_MAX_ID_DISCOUNT = "SELECT * FROM ADMINDOAN.KHUYENMAI WHERE ROWID = (SELECT MAX(ROWID) FROM ADMINDOAN.KHUYENMAI)";
+	public static final String DELETE_DISCOUNT_BY_ID = "DELETE FROM ADMINDOAN.KHUYENMAI WHERE MAKM = ?"; 
 	public static final String COMMIT = "COMMIT"; 
 	public static final String GET_ALL_DISCOUNT_AVAILABLE = "SELECT * "
-			+ "FROM KHUYENMAI "
+			+ "FROM ADMINDOAN.KHUYENMAI "
 			+ "WHERE NGBATDAU < SYSDATE AND NGKETTHUC > SYSDATE"; 
 	
 	public static List<DiscountModel> getAllAvailableDiscount(java.util.Date dateNow){

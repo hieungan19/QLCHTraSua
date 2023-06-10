@@ -2,12 +2,13 @@ package controller;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
+import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import constant.ConstantValueView;
+import dao.MyDB;
 import model.DashboardOption;
 import view.AppView;
 import view.LoginView;
@@ -74,6 +75,12 @@ public class AppController {
 	public static void logout() {
 		LoginView loginView = new LoginView();
         loginView.setSize(1040, 740);
+        try {
+			MyDB.getInstance().phanquyen(MyDB.USER_NAME, MyDB.PASSWORD);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         loginView.setLocationRelativeTo(null);
         loginView.setVisible(true); 
         view.setVisible(false); 

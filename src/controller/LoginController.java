@@ -72,6 +72,8 @@ public class LoginController {
 					ResultSet rsEmp = psGetEmployee.executeQuery();
 					if (rsEmp.next()) {
 						EmployeeModel emp = EmployeeDAO.getEmployeeByEmpID(id);
+						if (emp.getPosition().equalsIgnoreCase("QUẢN LÝ")) MyDB.getInstance().phanquyen(MyDB.USER_NAME_MANAGER, MyDB.PASSWORD_MANAGER);
+						if (emp.getPosition().equalsIgnoreCase("THU NGÂN")) MyDB.getInstance().phanquyen(MyDB.USER_NAME_CASHIER, MyDB.PASSWORD_CASHIER);
 						return emp; 
 					}
 				}

@@ -28,23 +28,23 @@ public class EmployeeDAO {
 	public static final String COLUMN_PASS = "MATKHAU";
 
 
-	// CHAMCONG
+	// ADMINDOAN.CHAMCONG
 	public static final String COLUMN_AID = "MACC";
 	public static final String COLUMN_START_TIME = "GIOBD";
 	public static final String COLUMN_END_TIME = "GIOKT";
 	public static final String COLUMN_PENALTY = "TIENTRU";
 	public static final String COLUMN_SALARY_CC = "LUONG"; 
 	
-	public static final String GET_ALL_EMPLOYEE = "SELECT * FROM NHANVIEN";
-	public static final String GET_EMPLOYEE_BY_EMP_ID = "SELECT * FROM NHANVIEN WHERE MANV = ?";
-	public static final String GET_MAX_ID_EMPLOYEE = "SELECT * FROM NHANVIEN WHERE ROWID = (SELECT MAX(ROWID) FROM NHANVIEN)";
-	public static final String INSERT_EMPLOYEE = "INSERT INTO NHANVIEN (HOTEN, CCCD, SDT, DIACHI, NGSINH,GIOITINH,LUONGCB,NGVAOLAM,CHUCVU) VALUES (?,?,?,?,?,?,?,?,?)";
-	public static final String INSERT_ACCOUNT = "INSERT INTO TAIKHOAN (MANV,MATKHAU) VALUES (?,?)";
-	public static final String DELETE_EMPLOYEE_BY_EMP_ID = "DELETE FROM NHANVIEN WHERE MANV = ?";
-	public static final String DELETE_ACCOUNT_BY_EMP_ID = "DELETE FROM TAIKHOAN WHERE MANV = ?";
-	public static final String UPDATE_EMPLOYEE = "UPDATE NHANVIEN SET HOTEN = ?, CCCD = ?, SDT= ?, DIACHI= ?, NGSINH=?,GIOITINH=?,LUONGCB=?,NGVAOLAM=?,CHUCVU=? WHERE MANV = ?";
-	public static final String INSERT_ATTENDANCE = "INSERT INTO CHAMCONG (MANV, GIOBD, GIOKT, TIENTRU,LUONG) VALUES(?,?,?,?,?)";
-	public static final String GET_ATTENDANCE_BY_EMP_ID = "SELECT * FROM CHAMCONG WHERE MANV = ? AND TRUNC(GIOBD) >=? AND TRUNC(GIOKT) <= ?";
+	public static final String GET_ALL_EMPLOYEE = "SELECT * FROM ADMINDOAN.NHANVIEN";
+	public static final String GET_EMPLOYEE_BY_EMP_ID = "SELECT * FROM ADMINDOAN.NHANVIEN WHERE MANV = ?";
+	public static final String GET_MAX_ID_EMPLOYEE = "SELECT * FROM ADMINDOAN.NHANVIEN WHERE ROWID = (SELECT MAX(ROWID) FROM ADMINDOAN.NHANVIEN)";
+	public static final String INSERT_EMPLOYEE = "INSERT INTO ADMINDOAN.NHANVIEN (HOTEN, CCCD, SDT, DIACHI, NGSINH,GIOITINH,LUONGCB,NGVAOLAM,CHUCVU) VALUES (?,?,?,?,?,?,?,?,?)";
+	public static final String INSERT_ACCOUNT = "INSERT INTO ADMINDOAN.TAIKHOAN (MANV,MATKHAU) VALUES (?,?)";
+	public static final String DELETE_EMPLOYEE_BY_EMP_ID = "DELETE FROM ADMINDOAN.NHANVIEN WHERE MANV = ?";
+	public static final String DELETE_ACCOUNT_BY_EMP_ID = "DELETE FROM ADMINDOAN.TAIKHOAN WHERE MANV = ?";
+	public static final String UPDATE_EMPLOYEE = "UPDATE ADMINDOAN.NHANVIEN SET HOTEN = ?, CCCD = ?, SDT= ?, DIACHI= ?, NGSINH=?,GIOITINH=?,LUONGCB=?,NGVAOLAM=?,CHUCVU=? WHERE MANV = ?";
+	public static final String INSERT_ATTENDANCE = "INSERT INTO ADMINDOAN.CHAMCONG (MANV, GIOBD, GIOKT, TIENTRU,LUONG) VALUES(?,?,?,?,?)";
+	public static final String GET_ATTENDANCE_BY_EMP_ID = "SELECT * FROM ADMINDOAN.CHAMCONG WHERE MANV = ? AND TRUNC(GIOBD) >=? AND TRUNC(GIOKT) <= ?";
 
 	public static List<EmployeeModel> getAllEmployee() {
 		List<EmployeeModel> result = new ArrayList<>();

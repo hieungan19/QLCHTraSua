@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import controller.LoginController;
 import model.AttendanceTrackingModel;
 import model.ProductModel;
 
@@ -58,6 +59,7 @@ public class ReportDAO {
 
 	public static List<ProductModel> getListDrinkSaleDecs(Date startDate, Date endDate) {
 		List<ProductModel> result = new ArrayList<>();
+		if (LoginController.user.getPosition().equals("QUẢN LÝ"))
 		try {
 			Connection con = MyDB.getInstance().getConnection();
 			PreparedStatement psGet = con.prepareStatement(GET_LIST_DRINK_SALE);
@@ -101,8 +103,8 @@ public class ReportDAO {
 	//tinh tong so tien da tieu xai cho nguyen lieu
 	public static double getTotalAmountOfMoneySpentOnRawMaterials(Date startDate, Date endDate) {
 		double result  = 0; 
+		if (LoginController.user.getPosition().equals("QUẢN LÝ"))
 		try {
-			System.out.println("getTotalAmountOfMoneySpentOnRawMaterials: ");
 			Connection con = MyDB.getInstance().getConnection();
 			PreparedStatement psGet = con.prepareStatement(GET_INGRE_ID_IMPORT); 
 			psGet.setDate(1,new java.sql.Date(startDate.getTime())) ;

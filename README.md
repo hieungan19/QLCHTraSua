@@ -12,7 +12,7 @@
 | 21520358 | Lưu Hiếu Ngân     |
 | 21520647 | Lưu Ngọc Linh Chi |
 | 21521496 | Nguyễn Thanh Thư  |
-| 21520094 | Lê Trần Anh Quí   |
+| 21521932 | Đỗ Sĩ Đạt |
 
 <br>
 

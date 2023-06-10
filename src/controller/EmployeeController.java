@@ -7,8 +7,11 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Timestamp;
-
+import java.sql.Types;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JTable;
@@ -22,6 +25,7 @@ import javax.swing.table.TableRowSorter;
 
 import constant.AppValues;
 import dao.EmployeeDAO;
+import dao.MyDB;
 import diaglog.AppDialog;
 import diaglog.AppOptionPaneDialog;
 import model.AttendanceTrackingModel;
@@ -341,7 +345,6 @@ public class EmployeeController {
 		form.spinner_salary.setValue(emp.getSalary());
 		form.datePicker_birth.setDate(emp.getBirthday());
 		form.datePicker_start.setDate(emp.getStartDate());
-		System.out.println("START DATE: "+emp.getStartDate());
 		form.comboBox.setSelectedItem(emp.getPosition());
 		if (emp.getGender().equals(form.maleRadioButton.getText()))
 			form.maleRadioButton.setSelected(true);
@@ -438,6 +441,42 @@ public class EmployeeController {
 		double total = 0;
 		double hours = 0;
 		double pen = 0;
+		int result = 0; 
+		Connection con;
+		try {
+		    con = MyDB.getInstance().getConnection();
+		    CallableStatement cst = con.prepareCall("{ ? = call ADMINDOAN.F_TINH_LUONGNV(?,?, ?,?) }");
+		    
+		    System.out.println("ID: "+currentEmp.getEmployeeID());
+		    System.out.println("Start date : "+ start);
+		    System.out.println("Start date : "+ end);
+		    
+		    
+		    cst.registerOutParameter(1, Types.INTEGER);
+		    cst.setString(2, currentEmp.getId());
+
+		    java.sql.Date sqlStart = null;
+		    if (start != null) {
+		        sqlStart = new java.sql.Date(start.getTime());
+		    }
+		    cst.setDate(3, sqlStart);
+
+		    java.sql.Date sqlEnd = null;
+		    if (end != null) {
+		        sqlEnd = new java.sql.Date(end.getTime());
+		    }
+		    cst.setDate(4, sqlEnd);
+
+		    cst.setInt(5, 0);
+
+		    // Execute the function call
+		    cst.execute();
+		    // Get the result from the CallableStatement
+		    result = cst.getInt(1);
+		} catch (SQLException e) {
+			System.out.println(e);
+		    e.printStackTrace();
+		}
 
 		List<AttendanceTrackingModel> list = EmployeeDAO.getAttendanceByEmpID(currentEmp.getEmployeeID(), start, end);
 		for (AttendanceTrackingModel a : list) {
